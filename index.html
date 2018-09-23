@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>userChrome.css for Customizing Firefox</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo" nolink>userChrome.org</li>
+<li><a href="https://www.userchrome.org/what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="https://www.userchrome.org/how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="https://www.userchrome.org/help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header style="text-align:center; max-width: 1024px;">
+<div style="width:625px; border:1px solid #aaa; margin:1em auto; padding:1.5em 2.5em;">
+<h1><span style="vertical-align: super;">Firefox <span style="font-weight: normal">Quantum</span></span> + <span style="vertical-align: sub;">user<span style="font-weight: normal">Chrome.css</span></span></h1>
+<p style="font-size:1.5em; font-style:italic; margin:0.5em 0 0; border-top:1px solid #aaa; padding-top:0.5em">Better Together!</p>
+</div>
+</header>
+
+<article>
+<div id="main">
+<p>Firefox&nbsp;57, also known as Firefox Quantum, has a fresh look. In addition to the built-in Customize feature (see <a href="https://support.mozilla.org/kb/customize-firefox-controls-buttons-and-toolbars" rel="noopener" target="_blank">Customize Firefox controls, buttons and toolbars</a> at Mozilla Support), you can modify the appearance of Firefox using the powerful userChrome.css feature.</p>
+<p>userChrome.css holds style rules for modifying Firefox's user interface. You can find users on the web offering a wide range of ready-to-paste style recipes, and communities where you can request help with rules to make your Firefox look just the way you want. And it's all free.</p>
+<p>Ready to learn more?</p>
+<ul>
+<li><a href="https://www.userchrome.org/what-is-userchrome-css.html">What is userChrome.css and what can it do?</a></li>
+<li><a href="https://www.userchrome.org/how-create-userchrome-css.html">How to Create a userChrome.css File</a></li>
+<li><a href="https://www.userchrome.org/help-with-userchrome-css.html">Resources for Style Recipes and Tools</a></li>
+</ul>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+<p><em>This site is not maintained by or affiliated with Mozilla, the maker of Firefox. For more information on Firefox, please visit: <a href="https://www.mozilla.org/firefox/" rel="noopener" target="_blank">https://www.mozilla.org/firefox/</a></em>.</p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="https://www.userchrome.org/privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

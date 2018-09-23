@@ -1,0 +1,46 @@
+/* Colored folders for bookmark sidebar, toolbar, menu button, classic menu
+   Updated Dec. 19, 2017 */
+
+  /* Standard folder */
+#bookmarks-view treechildren::-moz-tree-image(container),
+#PlacesToolbarItems toolbarbutton[container="true"] .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"] .menu-iconic-left,
+#BMB_bookmarksPopup menu[container="true"] .menu-iconic-icon,
+#bookmarksMenu menu[container="true"] .menu-iconic-icon {
+  fill: #e8bb00 !important; /* slightly muted gold */
+}
+  /* Live Bookmark (RSS Feed) */
+#bookmarks-view treechildren::-moz-tree-image(container, livemark),
+#PlacesToolbarItems toolbarbutton[container="true"][livemark="true"] .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"][livemark="true"] .menu-iconic-left,
+#BMB_bookmarksPopup menu[container="true"][livemark="true"] .menu-iconic-icon,
+#bookmarksMenu menu[container="true"][livemark="true"] .menu-iconic-icon {
+  fill: orange !important;
+}
+  /* Smart bookmark folder */
+#bookmarks-view treechildren::-moz-tree-image(container, query),
+#PlacesToolbarItems toolbarbutton[container="true"][query="true"] .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"][query="true"] .menu-iconic-left,
+#BMB_bookmarksPopup menu[container="true"][query="true"] .menu-iconic-icon,
+#bookmarksMenu menu[container="true"][query="true"] .menu-iconic-icon {
+  fill: #69c !important; /* similar to blue smart folder color */
+}
+  /* These "containers" are SVG in the sidebar, not yet on the menu */
+#bookmarks-view treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksMenu) {
+  fill: olive !important;
+}
+#bookmarks-view treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksToolbar) {
+  fill: olive !important;
+}
+#bookmarks-view treechildren::-moz-tree-image(container, OrganizerQuery_UnfiledBookmarks) {
+  fill: olive !important;
+}
+/* Avoid overriding classic Bookmarks Toolbar and Other Bookmarks icons in menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar.menu-iconic-icon, 
+#bookmarksMenu #bookmarksToolbarFolderMenu.menu-iconic-icon {
+  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.png") !important;
+}
+#BMB_bookmarksPopup #BMB_unsortedBookmarks.menu-iconic-icon, 
+#bookmarksMenu #menu_unsortedBookmarks.menu-iconic-icon {
+  list-style-image: url("chrome://browser/skin/places/unsortedBookmarks.png") !important;
+}

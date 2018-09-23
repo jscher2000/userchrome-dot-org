@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>What is userChrome.js?</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>What is userChrome.js?</h1>
+<p>Posted by jscher2000 on November 25, 2017. Updated March 24, 2018.</p>
+</header>
+
+<article>
+<div id="main">
+<p>The subject of this site is the userChrome.<u>css</u> file and style recipes that can modify the <em>appearance</em> of Firefox's user interface. However, style rules cannot change the fundamental behavior of user interface features, and userChrome.css is not able to override certain built-in style rules, such as the appearance of scrollbars and form controls. If you are intent on making deeper changes, and you can't find a compatible extension, one option to consider would be applying scripts directly to the interface, like the Legacy extension <a href="http://userchromejs.mozdev.org/" rel="noopener" target="_blank">userChromeJS</a> made possible.</p>
+
+<p style="border:2px solid red; padding: 0.5em 1em;"><strong>SAFETY FIRST!</strong> Unlike style rules that mess up the interface a bit, scripts implemented through userChrome.js have the potential to do anything that a Legacy extension could do. Please exercise great caution in adding scripts to your Firefox as they may not have gone through any kind of review process to screen for malicious code.</p>
+
+<h2>How it Works</h2>
+
+<h3>XBL Binding</h3>
+<p>The gHacks Tech News site recently ran an article about how you can deploy the power of userChrome.js in Firefox Quantum. The featured example involves using the Firefox-specific <strong>-moz-binding</strong> style property in the userChrome.css file to sneak in the modification:</p>
+
+<pre class="codeblock">
+toolbarbutton#alltabs-button {
+  -moz-binding: url("userChrome.xml#js");
+}
+</pre>
+
+<p>The accompanying userChrome.xml file directs Firefox to load the userChrome.js file, where you would add your scripts. <em>Source:</em> <a href="https://github.com/nuchi/firefox-quantum-userchromejs" rel="noopener" target="_blank">https://github.com/nuchi/firefox-quantum-userchromejs</a> via <a href="https://www.ghacks.net/2017/11/24/run-userchrome-js-scripts-in-firefox-57-or-newer/" rel="noopener" target="_blank">Run userchrome.js scripts in Firefox 57 or newer</a>. Copyright (c) 2017 Haggai Nuchi. Available for use under the MIT License: https://opensource.org/licenses/MIT.</p>
+
+<p>I recently saw another example, but haven't tried it myself. The author of the Classic Theme Restorer extension has posted an extensive library of style rules files, and one of them binds an XML file which can restore the old search bar from before Firefox 34. In userChrome.css, you can optionally @import <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/generalui/oldsearch.css" rel="noopener" target="_blank">oldsearch.css</a> which binds <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/xml/oldsearch.xml" rel="noopener" target="_blank">oldsearch.xml</a>, which contains the structural elements and scripts. (If you don't download the whole package, you'll need to fix up the paths.)</p>
+
+<h3>Autoconfig File</h3>
+<p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named autoconfig.js, local-settings.js, or whatever.js &mdash; directs Firefox to another JavaScript file, sometimes but not always named mozilla.cfg, that contains the actual script code. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. As Mike Kaply reminds us in his 2012 series on the topic, "Autoconfig files are Javascript files that have full access to all components of Firefox." See: <a href="https://mike.kaply.com/2012/03/22/customizing-firefox-advanced-autoconfig-files/" rel="noopener" target="_blank">Customizing Firefox – Advanced Autoconfig Files</a>. Mozilla has some basic documentation on MDN: <a href="https://developer.mozilla.org/en-US/Firefox/Enterprise_deployment" rel="noopener" target="_blank">Deploying Firefox in an enterprise environment</a>.</p> 
+
+<p>By placing a config-prefs.js file in /defaults/pref, and three other files in suitable locations, Firefox can load and run the basic functionality of the userChromeJS extension. The installation procedure is set forth in German at <a href="https://github.com/Endor8/userChrome.js/tree/master/userChrome" rel="noopener" target="_blank">https://github.com/Endor8/userChrome.js/tree/master/userChrome</a>. There are existing repositories of scripts in at least two locations, and more are likely to emerge:</p>
+<ul>
+<li><a href="https://github.com/Endor8/userChrome.js/tree/master/Firefox-57">https://github.com/Endor8/userChrome.js/tree/master/Firefox-57</a></li>
+<li><a href="https://github.com/ardiman/userChrome.js">https://github.com/ardiman/userChrome.js</a></li>
+<li><a href="https://github.com/alice0775/userChrome.js">https://github.com/alice0775/userChrome.js</a></li>
+</ul>
+<p>Needless to say (but I'll say it anyway), any use of these approaches is at your own risk.</p>
+
+<h2>Share Your Experience!</h2>
+<p>If you try any of these solutions, please post comments using the FEEDBACK button in the bar at the top of the page (you can be anonymous if you like). Let me know how it went, and let others know if you recommend particular scripts.</p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

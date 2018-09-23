@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Resources for Style Recipes and Tools</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><span id="current">RESOURCES</span></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Resources for Style Recipes and Tools</h1>
+<p>Posted by jscher2000 on November 5, 2017; updated April 26, 2018</p>
+</header>
+
+<article>
+<div id="main">
+<p>You probably have a user interface tweak in mind if you are on this site. If you need help with the CSS rules, there are a variety of resources on the web to assist. You might also be interested in a decent text editor that helps you out with autocomplete and syntax coloring (applying different colors to the different parts of style rules: selectors, properties, and values). Hopefully these links will help.</p>
+
+<h2>Helpful Websites</h2>
+<h3>Style Recipe Sites</h3>
+<p>I've collected these into another page here: <a href="find-user-style-recipes.html">Where to Find Style Recipes</a>.</p>
+
+<h3>Learning CSS</h3>
+<p>The web has an abundance of resources; the hard part is where to start. I find that working with rules created by others, hopefully with helpful comments embedded, provides a great starting point. Then you can look up the style properties to get a better idea of what the rules do. MDN is a fantastic resource: <a href="https://developer.mozilla.org/docs/Web/CSS" rel="noopener" target="_blank">CSS</a>.</p>
+
+<h2 id="tools">Tools</h2>
+<p>Firefox has a built-in style editor, in the Browser Toolbox. But you may find it easier to work in an external text editor much of the time, reserving the Browser Toolbox for minor adjustments (since it allows a more or less real time preview of your adjustments to your rules). I've embedded a video demonstrating the editors and Browser Toolbar on this page: <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>.</p>
+
+<h3>Text Editors</h3>
+<p>On Windows, the Wordpad app makes a decent text editor, but it doesn't really help you out in any way. There are many free and non-free text editors that make working with CSS much easier. The following are open source editors that are being kept up-to-date:</p>
+<ul>
+<li><a href="https://notepad-plus-plus.org/" rel="noopener" target="_blank">Notepad++</a> for Windows</li>
+<li><a href="https://atom.io/" rel="noopener" target="_blank">Atom</a> for Windows, Mac and Linux (large download)</li>
+</ul>
+
+<h3>The Browser Toolbox</h3>
+<p>There is a detailed MDN page for this tool: <a href="https://developer.mozilla.org/docs/Tools/Browser_Toolbox" rel="noopener" target="_blank">Firefox Developer Tools: Browser Toolbox</a>.</p>
+
+<h2>Topics</h2>
+<p>I'll be adding more pages here, time permitting. For now, one of these may be helpful:</p>
+<ul>
+<li><a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a></li>
+<li><a href="download-userchrome-css.html">Generate Downloadable userChrome.css File</a> &mdash; if you have some CSS code and aren't handy with a text editor</li>
+<li><a href="alternatives-to-stylish.html">Alternatives to Stylish for Firefox</a></li>
+<li><a href="what-is-userchrome-js.html">What is userChrome.js?</a> &mdash; <em>Spoiler Alert: something quite different from userChrome.css</em></li>
+</ul>
+
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

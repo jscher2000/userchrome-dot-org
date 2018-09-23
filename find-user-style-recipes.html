@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Where to Find Style Recipes</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Where to Find Style Recipes</h1>
+<p>Posted by jscher2000 on November 5, 2017; updated November 12, 2017</p>
+</header>
+
+<article>
+<div id="main">
+<p>You can find style recipes, also known as user styles, on numerous sites. Two particularly rich sources are (1)&nbsp;community sites (discussion forums), and (2)&nbsp;code sharing sites. Here are a sampling of such sites.</p>
+<p>Two notes of caution. First, because Firefox&nbsp;57 made so many changes to the interface, many older user styles will need updating before they work as intended. Second, most custom styling disasters can be reversed by removing the userChrome.css file from the chrome folder so Firefox can't find it at the next startup. However, you should be very cautious about downloading any scripts, executable programs, or other kinds of files other than .txt or .css files.</p>
+
+<h2>Community Sites</h2>
+<ul>
+<li><strong>FirefoxCSS subreddit</strong> – New community of (mostly) Firefox users sharing and helping one another with custom style recipes: <a href="https://www.reddit.com/r/FirefoxCSS/" rel="noopener" target="_blank">https://www.reddit.com/r/FirefoxCSS/</a>.</li>
+<li><strong>mozillaZine forums</strong> – Longstanding community site for discussion and support of Mozilla products. You should search before posting: <a href="http://forums.mozillazine.org/viewforum.php?f=49" rel="noopener" target="_blank">http://forums.mozillazine.org/viewforum.php?f=49</a>.</li>
+<li><strong>userstyles.org</strong> – Although focused more on popular websites than on the browser interface, you still can get some decent advice on the site's forum: <a href="https://forum.userstyles.org/categories/style-requests" rel="noopener" target="_blank">https://forum.userstyles.org/categories/style-requests</a>.</li>
+<li><strong>Mozilla Support</strong> – The site’s search feature doesn’t allow for much precision, but if you run into serious problems as a result of your customizations, experienced volunteers probably can help: <a href="https://support.mozilla.org/" rel="noopener" target="_blank">https://support.mozilla.org/</a>.</li>
+</ul>
+
+<h2>Code Repositories</h2>
+<ul>
+<li><strong>userstyles.org</strong> – Even though the new Stylish for Firefox cannot run (and probably will not be able to install) user styles that modify the user interface, each style has a "Show CSS Code" button you can use to copy/paste the style recipe. Unfortunately, for styles with Advanced Style Settings, the code shown is incomplete (settings you select are not filled in). Still, it may be worth a browse/search: <a href="https://userstyles.org/styles/browse/browser" rel="noopener" target="_blank">https://userstyles.org/styles/browse/browser</a>.</li>
+<li><strong>UserChrome-Tweaks</strong> – A collection of style recipes to mix and match, but not designed to take requests: <a href="https://github.com/Timvde/UserChrome-Tweaks" rel="noopener" target="_blank">https://github.com/Timvde/UserChrome-Tweaks</a>.</li>
+<li><strong>CustomCSSforFx</strong> – A collection of style recipes by the author of the Classic Theme Restorer extension to help users of Firefox&nbsp;57+ to retain many of their familiar tweaks: <a href="https://github.com/Aris-t2/CustomCSSforFx" rel="noopener" target="_blank">https://github.com/Aris-t2/CustomCSSforFx</a>.</li>
+</ul>
+
+<h2>Roll Your Own?</h2>
+<p>If you do not find what you're looking for, or if you are unable to convince anyone to create a style recipe for you, you can write your own. You will need to learn a little CSS, and it will be very helpful to discover the Browser Toolbox. Check out:</p>
+<ul>
+<li><a href="help-with-userchrome-css.html">Resources for Style Recipes and Tools</a></li>
+<li><a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a></li>
+</ul> 
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2017 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

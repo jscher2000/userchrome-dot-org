@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Alternatives to Stylish for Firefox</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Alternatives to Stylish for Firefox</h1>
+<p>Posted by jscher2000 on November 5, 2017; updated July 25, 2018</p>
+</header>
+
+<article>
+<div id="main">
+<p>The Stylish for Firefox extension provided a convenient way to style both web pages and Firefox's user interface. Starting in Firefox&nbsp;57, Stylish for Firefox loses its ability to style Firefox's user interface. Here are some options for what to do now. Check the last section on how to extract your saved user styles if automatic migration didn't meet your needs.</p>
+
+<h2>Styling Web Pages</h2>
+<p>If you have been using Stylish 2 for Firefox 56 or earlier, please see the <a href="#migration">Stylish Migration</a> section below.</p>
+<p>On July 3, 2018, Stylish was removed from the Add-ons site due to violations of data privacy policy: <a href="https://blocked.cdn.mozilla.net/c635229f-7aa0-44c5-914f-80c590949071.html">Notice</a>. Later versions have been appearing on the <a href="https://addons.mozilla.org/firefox/addon/stylish/versions/">versions page</a>, but whether they present that same issue is not clear.</p>
+<p>During 2017, several new extensions sprang up to apply custom style rules to web pages. Similarly to Stylish for Firefox, these extensions allow you to install style rules from userstyles.org or create your own styles. Here are links to two of the more popular extensions as of this writing. Please read the descriptions and reviews before installing any extension to make sure you know what you're getting.</p>
+<ul>
+<li><a href="https://addons.mozilla.org/firefox/addon/styl-us/" rel="noopener" target="_blank">Stylus</a> (works well)<br>Data migration steps: <a href="stylish-to-stylus.html">Moving User Styles (Themes) from Stylish 3.x to Stylus</a></li>
+<li><a href="https://github.com/openstyles/stylus/wiki/Stylish-Alternatives" rel="noopener" target="_blank">Many others catalogued here</a></li>
+</ul>
+<p>Firefox also supports a file named userContent.css to contain rules to apply to websites. You may need this page to style "about" pages, such as the new tab page and built-in home page. For more information on that file, see the article &#8220;<a href="http://kb.mozillazine.org/UserContent.css" rel="noopener" target="_blank">UserContent.css</a>&#8221; on the MozillaZine Knowledge Base (an unofficial site maintained by users of Mozilla software).</p>
+<p><strong>Note:</strong> Stylish 3 and Stylus do not work if you have enabled automatic private browsing on the Options/Preferences page, Privacy &amp; Security panel. That is set by using either "Never remember history" or checking the box for "Always use private browsing mode."</p>
+
+<h2>Styling Firefox's User Interface</h2>
+<p>At startup, Firefox reads a file named userChrome.css and applies the style rules in that file globally. Stylish for Firefox was more convenient, but this method can do nearly everything Stylish could do. The main exception is that a few areas of the user interface, such as scroll bars, are off limits to the userChrome.css file (rules in Firefox's built-in files will override your custom rules).</p>
+<p>For more information, see:</p>
+<ul>
+<li><a href="what-is-userchrome-css.html">What is userChrome.css and what can it do?</a></li>
+<li><a href="how-create-userchrome-css.html">How to Create a userChrome.css File</a></li>
+</ul>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+<h2 id="migration">Stylish Migration (from version 2.x to another version/extension)</h2>
+<p>Stylish 2 saved your user styles in a file named stylish.sqlite. This file will continue to rest in your Firefox profile folder indefinitely, so you have the opportunity to migrate it to Stylish 3 or your other choice of extension. Firefox&nbsp;57 extensions can't extract your style rules, so some tricks are involved.</p>
+
+<h3>Stylish 3: Semi-Automatic Migration</h3>
+<p>If your Stylish was updated to Stylish 2.1.1 while you still had Firefox 56, before you got Stylish 3.0, your user styles were copied to a file here: [profile folder]\browser-extension-data\{46551EC9-40F0-4e47-8E18-8E5CF550CFB8}\storage.js. Stylish 3 then migrated <em>some</em> of your user styles from that file to its new database. As far as I can tell, the chosen few:</p>
+<ol>
+<li>Were installed from userstyles.org</li>
+<li>Apply to web pages, not Firefox's interface</li>
+</ol>
+<p>Where are the others? Styles missing from the Manage All Styles page can be found by clicking the "About this version" link. That launches a page which shows your full set of old user styles, and instructions for adding them to the set recognized by Stylish 3 through a manual copy/paste process. (This is also how you could preserve your own edits to styles you installed from userstyles.org.)</p>
+<p><img src="img/stylish-3-menu.png"></p>
+<p>That's a pain. If you have a lot of personal (also known as local) user styles to re-create, you may want to try generating an importable file using the tool mentioned in the next section. Browser UI styles will need to be migrated to a userChrome.css file (which is the subject of the rest of this site).</p>
+
+<h3>Manual Migration</h3>
+<p>If the Stylish 2.1.1 migration did not work, or if you are changing extensions, or if you want to extract styles that apply to the user interface, or if you need to rescue your personal styles, you first need to extract your user styles from the sylish.sqlite database. You can use this extractor (large file load): <a href="https://www.jeffersonscher.com/res/stylishextract.html">User Style Extractor</a>. There are several different options for how to generate usable files. For styles modifying the UI, you can copy/paste according to the rules of the userChrome.css file. For Stylish or Stylus, you can use the Export JSON option.</p>
+<p><img src="img/stylish-extract-personal.png"></p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

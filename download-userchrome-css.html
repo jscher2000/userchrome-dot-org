@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Generate Downloadable userChrome.css File</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Generate Downloadable userChrome.css File</h1>
+<p>Posted by jscher2000 on April 26, 2018 <em>beta</em></p>
+</header>
+
+<article>
+<div id="main">
+<p>You can paste CSS into this lightweight editor (<a href="https://ace.c9.io/" target="_blank">Ace</a>) and then generate a userChrome.css file for download. All text entry and file generation is done within the page without sending any code to my server. This page is <strong>not</strong> backed up as you work. <em>The editor may object to some CSS selectors and properties not used on the web. That's normal.</em></p>
+<pre id="editor">/* Replace this SAMPLE CONTENT with your own CSS */
+
+/* No blue swipe on tabs when loaded */
+.tabbrowser-tab .tab-loading-burst {
+  display: none !important;
+}
+</pre>
+
+<form id="filemaker" action="javascript:void(0);">
+<p><button onclick="saveCSS()" id="btnSave">Generate CSS file</button> using file name:<br>
+<label><input type="radio" name="fname" value="plain" checked> userChrome.css</label><br>
+<label><input type="radio" name="fname" value="time"> userChrome-<em>timestamp</em>.css</label><br>
+<label><input type="radio" name="fname" value="text"> userChrome-<input type="text" name="fnametext" size="100" maxlength="100" placeholder="give_purpose_of_rules" onfocus="this.previousElementSibling.checked=true; return false;">.css</label> <input type="reset" value="Reset Name"></p>
+</form>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a>. Ace (Ajax.org Cloud9 Editor) v1.3.3 &copy; 2018 Ajax.org B.V. (<a href="https://github.com/ajaxorg/ace-builds/blob/master/LICENSE" target="_blank">BSD-3-Clause License</a>). FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<!-- Ace Editor CSS and Scripts -->
+<style>
+#editor {
+	margin: 1em 0;
+	height: 400px;
+}
+</style>
+<script type="text/javascript" src="src-noconflict/ace.js" charset="utf-8"></script>
+<script>
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/cobalt");
+editor.session.setMode("ace/mode/css");
+editor.session.setUseWrapMode(true);
+</script>
+<!-- Other Scripts -->
+<script type="text/javascript" src="uc.js"></script>
+<script type="text/javascript" src="FileSaver.min.js"></script>
+<script>
+function saveCSS(){
+	var rads = document.querySelectorAll('#filemaker input[type="radio"]');
+	for (var i=0; i<rads.length; i++){
+		if (rads[i].checked){
+			switch (rads[i].value){
+				case 'time':
+					var fname = 'userChrome-' + Date.now() + '.css';
+					break;
+				case 'text':
+					var ftext = document.querySelector('input[name="fnametext"]').value;
+					// Clean illegal characters
+					ftext.replace(/^(?=[\S])[^\\ \/ : * ? " < > | ]+$/g, '_');
+					if (fname.length > 0) var fname = 'userChrome-' + ftext + '.css';
+					else var fname = 'userChrome-your_text_was_blank.css';
+					break;
+				default:
+					var fname = 'userChrome.css';
+			}
+		}
+	}
+	saveAs(
+		  new Blob(
+			  [editor.getValue().replace(/\x0a/g, "\x0d\x0a")]
+			, {type: 'text/css;charset=UTF-8'}
+		)
+		, fname
+		, true
+	);
+}
+</script>
+</body>
+</html>
+

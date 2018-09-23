@@ -1,0 +1,121 @@
+/* Colored folders for Bookmarks Menus, Bookmarks Sidebar, Bookmarks Toolbar, Library window, Add/Edit Bookmarks dialog
+   Original: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20171219.css
+   Updated for Firefox 60: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20180510.css
+   Uses mods for Firefox 62 from cor-el's Sept. 15, 2018 post:
+   https://support.mozilla.org/questions/1232447#answer-1151074
+*/
+
+/* Standard folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"] .toolbarbutton-icon,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu) menu[container="true"] > .menu-iconic-left > .menu-iconic-icon,
+/* Standard folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container), 
+#editBMPanel_folderMenuList > .menulist-label-box > .menulist-icon,
+#editBMPanel_folderMenuList menupopup menuitem {
+  fill: #e8bb00 !important; /* slightly muted gold */
+}
+
+/* Live Bookmark -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"][livemark="true"] .toolbarbutton-icon,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu) menu[container="true"][livemark="true"] > .menu-iconic-left > .menu-iconic-icon,
+/* Live Bookmark -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, livemark) {
+  fill: orange !important;
+}
+
+/* Smart bookmark folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"][query="true"] .toolbarbutton-icon,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu) menu[container="true"][query="true"] > .menu-iconic-left > .menu-iconic-icon,
+/* Smart bookmark folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, query) {
+  fill: #69c !important; /* similar to blue smart folder color */
+}
+
+/*** Top-level "container" icons (otherwise would be Standard folder color) ***/
+/* Bookmarks Menu -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksMenu),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_menu________),
+#editBMPanel_bmRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="1"] > .menulist-label-box > .menulist-icon {
+  fill: olive !important;
+}
+
+/* Bookmarks Toolbar -- on Menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #bookmarksToolbarFolderMenu  > .menu-iconic-left > .menu-iconic-icon,
+/* Bookmarks Toolbar -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksToolbar),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_toolbar_____),
+#editBMPanel_toolbarFolderItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="0"] > .menulist-label-box > .menulist-icon {
+  fill: olive !important;
+}
+
+/* Other Bookmarks -- on Menus */
+#BMB_bookmarksPopup #BMB_unsortedBookmarks > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #menu_unsortedBookmarks  > .menu-iconic-left > .menu-iconic-icon,
+/* Other Bookmarks -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_UnfiledBookmarks),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_unfiled_____),
+#editBMPanel_unfiledRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="2"] > .menulist-label-box > .menulist-icon {
+  fill: olive !important;
+}
+
+/* (Older Firefox) Avoid overriding classic Bookmarks Toolbar and Other Bookmarks icons in menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar.menu-iconic-icon, 
+#bookmarksMenu #bookmarksToolbarFolderMenu.menu-iconic-icon {
+  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.png") !important;
+}
+#BMB_bookmarksPopup #BMB_unsortedBookmarks.menu-iconic-icon, 
+#bookmarksMenu #menu_unsortedBookmarks.menu-iconic-icon {
+  list-style-image: url("chrome://browser/skin/places/unsortedBookmarks.png") !important;
+}

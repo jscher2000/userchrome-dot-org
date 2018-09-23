@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>How to Create a userChrome.css File</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><span id="current">HOW</span></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>How to Create a userChrome.css File</h1>
+<p>Posted by jscher2000 on November 5, 2017; updated April 26, 2018</p>
+</header>
+
+<article>
+<div id="main">
+<p>Creating your userChrome.css file is the first step on your quest to make over Firefox's interface. It takes a couple of minutes, but it's important to take your time and get it right so Firefox loads and applies your style recipes on the first try.</p>
+<p>At startup, Firefox will check for the userChrome.css file in a particular location: a folder named chrome inside your currently active profile folder. The profile folder is where all of your current settings and add-ons are stored. (If you want to learn more about that folder, see "<a href="https://support.mozilla.org/kb/profiles-where-firefox-stores-user-data">Profiles &mdash; Where Firefox stores your bookmarks, passwords and other user data</a>" on Mozilla Support.)</p>
+<p>Here's how you set that up (full details below):</p>
+<ol>
+<li>Open your currently active profile folder</li>
+<li>Create a new folder named chrome</li>
+<li>Create a desktop shortcut (alias) to the chrome folder for easier future access</li>
+<li>Make sure your OS is set to show you file extensions like .txt and .css</li>
+<li>Create a new text file inside the chrome folder named userChrome.css</li>
+</ol>
+<p>This video provides an overview; the detailed steps follow.</p>
+<div id="vidframes">
+	<div id="vidtabs"><span class="current" tgt="vidwin">Windows</span> <span tgt="vidmac">Mac</span></div>
+	<div id="vidwin" style="display:block" dtype="vid">
+		<iframe src="https://player.vimeo.com/video/241645477" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p style="margin-top:3px;"><a href="https://vimeo.com/241645477" target="_blank">Demo - How to Create a userChrome.css File</a> on Vimeo</p>
+	</div>
+	<div id="vidmac" style="display:none" dtype="vid">
+		<iframe src="https://player.vimeo.com/video/245560075" width="640" height="400" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+		<p><a href="https://vimeo.com/245560075">How to Set Up userChrome.css on Mac</a> from <a href="https://vimeo.com/user73872986">Jefferson Scher</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+	</div>
+</div>
+<h3>(1) Open your currently active profile folder</h3>
+<p>The quickest way to open the profile folder in Firefox <em>right now</em> is to launch it from the Troubleshooting Information page. To access that page, you can use any of these methods:</p>
+<ul>
+<li>Click the menu button (what I call the "3-bar" menu button), then Help ("?" button), then Troubleshooting Information</li>
+<li>On the top menu bar, click Help, then Troubleshooting Information. To activate a hidden menu bar on Windows, tap the Alt key or the F10 function key.</li>
+<li>Type or paste <code>about:support</code> in the address bar and press Enter/Return to load it.</li>
+</ul>
+<p>In the first table on the page, find the <strong>Profile Folder</strong> row and click the button to the right, which will say "Open Folder", "Show in Finder" or "Open Directory" on Windows, Mac or Linux, respectively. This should launch a new window with your system's file browser (e.g., Windows Explorer). You should see numerous files and folders. On Mac, if Finder shows you a semi-randomly-named folder, double-click that folder to view its contents.</p>
+
+<h3>(2) Create a new folder named chrome</h3>
+<p>Normally, your profile does not contain a chrome folder unless you've been running Firefox for a very, very long time. To create a chrome folder, you can use the standard method provided by your file browser. For example, on Windows:</p>
+<ul>
+<li>Right-click a blank area of the list, click New, then Folder. Type <code>chrome</code> (all lower case) as the name of the new folder, then press Enter or click away to complete the edit.</li>
+<li>Click the New Folder button.  Type <code>chrome</code> (all lower case) as the name of the new folder, then press Enter or click away to complete the edit.</li>
+</ul>
+<p>On Mac:</p>
+<ul>
+<li>Right-click (or Ctrl+click) a blank area of the list, click New Folder. Type <code>chrome</code> (all lower case) as the name of the new folder, then press Return or click away to complete the edit.</li>
+<li>On the menu bar, click File, then New Folder.  Type <code>chrome</code> (all lower case) as the name of the new folder, then press Return or click away to complete the edit.</li>
+</ul>
+<h3>(3) Create a desktop shortcut (alias) to the chrome folder for easier future access</h3>
+<p>It is very likely that you will need to add or modify files to the chrome folder in the future. I recommend adding a shortcut to the folder on your desktop for easier access. To create a shortcut, you can use the standard method provided by your file browser. On Windows, right-click the chrome folder, click Send To, then click Desktop (as shortcut). On Mac, Ctrl+click / two-finger-click the chrome folder, then click Make Alias. Drag the new chrome alias item to the Desktop.</p>
+
+<h3>(4) Make sure your OS is set to show you file extensions like .txt and .css</h3>
+<p>Out of the box, Windows and MacOS hide certain common file extensions to reduce the appearance of clutter. However, this makes it difficult to change a file extension when you want to. Since both .txt and .css are common file extensions, we need to (at least temporarily) turn off this feature. </p>
+<p>In newer visions of Windows, where Windows Explorer has a "ribbon" at the top with a View tab, you can click View, then find the checkbox for "File name extensions" and check the box. In older versions of Windows, one of these methods should work:</p>
+<ul>
+<li>Activate the top menu bar by tapping the Alt key or F10 key, click Tools, then Folder Options, then the View tab. Uncheck the checkbox for "Hide extensions for known file types."</li>
+<li>If Windows Explorer has an Organize button on the toolbar, click Organize, then Folder and Search options, then the View tab. Uncheck the checkbox for "Hide extensions for known file types."</li>
+</ul>
+<p>On Mac, click Finder > Preferences, then on the Advanced panel, check the box for "Show all filename extensions".</p>
+
+<h3>(5) Create a new text file inside the chrome folder named userChrome.css (or download a blank one)</h3>
+<p>Double-click chrome to open the chrome folder. The method you use to create the userChrome.css file may vary depending on the features provided by your file browser. Here's how you can do it in Windows: Right-click a blank area of the list, click New, then Text Document. Type <code>userChrome.css</code> &mdash; with only the C capitalized &mdash; in place of New Text Document.txt, then press Enter or click away to finish the edit.</p>
+<p>For either Mac or Windows, you can use the following link to save the file into your chrome folder (or if it goes into Downloads, move it to the chrome folder): <a href="samples/userChrome.css">userChrome.css (blank file)</a>.</p>
+<p>Congratulations, you're done creating the file. It's currently empty and awaiting a purpose in life. Firefox will learn about it the next time you exit out of Firefox and start it up again.</p>
+<p>Alternately, if you have some CSS code ready to paste into a userChrome.css file, you can do that using the following page and download your userChrome.css file from there: <a href="download-userchrome-css.html">Generate Downloadable userChrome.css File</a>.</p>
+
+<h2>Adding Style Recipes to userChrome.css</h2>
+<p>When you're ready to add rules to the file, you may want to use a good text editor. There are suggestions for open source editors as well as information about using Firefox's Browser Toolbox, on these pages:</p>
+<ul>
+<li><a href="help-with-userchrome-css.html">Resources for Style Recipes and Tools</a></li>
+<li><a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a></li>
+</ul> 
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

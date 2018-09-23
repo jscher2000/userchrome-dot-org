@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Adding Style Recipes to userChrome.css</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Adding Style Recipes to userChrome.css</h1>
+<p>Posted by jscher2000 on March 15, 2018</p>
+</header>
+
+<article>
+<div id="main">
+<p>Generally speaking, there are two ways to incorporate style recipes into userChrome.css:</p>
+<ol>
+<li><strong>Inline:</strong> You can paste new style recipes one after the next. Note that in the case of a conflict between different rules that otherwise have equal <em>precedence</em>, the last rule wins. In order to keep track of what is going on the file, it's a good idea to add comments above each different recipe explaining what it is for and including the URL where you found it, in case you have questions or need to check for updates later. In CSS, comments look like this:<br>
+<pre class="codeblock">/* This is a comment! */</pre>Note:<br>
+<ul><li>Be careful not to include comments within other comments; that doesn't work.</li>
+<li>If you include any <code>@namespace</code> lines, place them at the top of the file and do not repeat them at other points in the file. (However, I recommend you do not include namespaces, as discussed in the next section.)</li>
+<li>A good editor that recognizes CSS will color comments differently from other parts of the file, making it easier to spot them. For suggestions on editors, see: <a href="help-with-userchrome-css.html#tools">Tools</a>.</li>
+</ul></li>
+<li><strong>Imported Files:</strong> When Firefox reads userChrome.css at startup, it also will load other files you reference in userChrome.css. For example, imagine that you have a set of rules for the address bar that runs a couple of screens. In order to simplify working with userChrome.css, you could save your address bar rules in a <em>separate file</em> inside your chrome folder. Let's call it addressbar.css. Then at the very top of your userChrome.css file, you can import that file using this line:<br>
+<pre class="codeblock">@import url("addressbar.css") screen;</pre>Note:<br>
+<ul><li>If you include any <code>@namespace</code> lines, place them <em>after</em> your @import lines.</li>
+<li>When you use the Style Editor in the Browser Toolbox, userChrome.css and addressbar.css will have separate entries in the list of loaded style sheets in the left column. (More about this useful tool can be found in the MDN article <a href="https://developer.mozilla.org/docs/Tools/Browser_Toolbox" rel="noopener" target="_blank">Firefox Developer Tools: Browser Toolbox</a>.)</li>
+</ul></li>
+</ol>
+<p>You may want to use a combination of those approaches, using @import for large complex style recipes, and pasting short ones directly into your userChrome.css file. This video demonstrates both approaches:</p>
+<div style="text-align:center">
+<iframe src="https://player.vimeo.com/video/242513527" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p style="margin-top:3px;"><a href="https://vimeo.com/242513527" target="_blank">Demo - Editing userChrome.css</a> on Vimeo</p>
+</div>
+
+<h2 id="namespaces">Is there only XUL? To @namespace or Not to @namespace.</h2>
+<p>In older articles about userChrome.css, you will read that you <em>must</em> include this line of code at the top of your file:</p>
+<pre class="codeblock">@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);</pre>
+<p>But is that really true? What does it do?</p>
+<p><strong>tl;dr</strong> - You do not need to use it, and if you do, there might be some unexpected glitches.</p>
+<p>XUL stands for XML User Interface Language (<a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL" rel="noopener" target="_blank">according to MDN</a>), and has long been the foundation of Firefox's user interface code. XML looks similar to HTML in that it consists of tags, but you won't find tags like toolbar, menubutton, or richlistitem in any HTML tutorials. In fact, today's Firefox user interface is a mix of XUL tags and HTML tags, and over time, the interface will gradually use more and more HTML, and less and less XUL.</p>
+<p>Here's the problem: when you specify the XUL namespace, style rules for non-XUL elements such as HTML elements are ignored. For example:</p>
+<p><img src="img/xul-namespace-html-spans.png"></p>
+<h3>Recommendation</h3>
+<p>It probably is possible to write style rules to apply to HTML elements when only the XUL namespace is specified, but it's simpler not to create this situation in the first place and omit all mention of namespaces. What harm might be done by omitting the XUL namespace? Some of your user interface rules <em>might</em> have unintended consequences beyond the confines of the user interface, for example, in the developer tools panel. However, those issues can be avoided by using an @-moz-document rule to limit how your style recipes are applied:</p>
+<pre class="codeblock">@-moz-document url(chrome://browser/content/browser.xul) {
+  /* Your style rules for the user interface go here */
+}
+</pre>
+<p>Also, if you find yourself in a situation where one style recipe needs the XUL namespace, but that namespace causes problems with another, you can put them in separate files and use the @import method described earlier on this page to apply both files.</p>
+
+<h2 id="agentsheet">Will your userChrome.css file do more as an AGENT_SHEET?</h2>
+<p>If you've viewed style rules on userstyles.org or other sites, you may have seen this comment line at the beginning of some older user styles:</p>
+<pre class="codeblock">/* AGENT_SHEET */</pre>
+<p>You'll also see that in contemporary style recipes, including files under <a href="https://github.com/Aris-t2/CustomCSSforFx" rel="noopener" target="_blank">CustomCSSforFx</a>. What did or does it do? Should you use it?</p>
+<p>Not all elements can be styled in a "user sheet". Normally, rules in userChrome.css will override built-in rules, particularly if your rules are declared !important. However, some elements, such as the "native anonymous elements" that make up scroll bars, are off limits to user sheets and can only be overridden by an agent sheet. Stylish 2.11 and earlier could use a legacy function available to extensions to load a user style as an agent sheet (documentation archived at <a href="https://developer.mozilla.org/en-US/docs/Archive/Add-ons/Using_the_Stylesheet_Service#Using_the_API" rel="noopener" target="_blank">Using the Stylesheet Service</a>). The WebExtensions API has nothing like that, or you would not be reading this site.</p>
+<p>Firefox has always loaded the userChrome.css file as a user sheet regardless of comments in the file, and this is very unlikely to change. Therefore, adding /*&nbsp;AGENT_SHEET&nbsp;*/ at the top does not make any difference. If you have observed otherwise, please tell me how you did it.</p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>

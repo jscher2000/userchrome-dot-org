@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Moving User Styles (Themes) from Stylish 3.x to Stylus</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+</div>
+</nav>
+<header>
+<h1>Moving User Styles (Themes) from Stylish 3.x to Stylus</h1>
+<p>Posted by jscher2000 on July 9, 2018</p>
+</header>
+
+<article>
+<div id="main">
+<p>On July 3, 2018, Stylish 3.1.1 and all earlier versions were removed from the Mozilla Add-ons site due to violations of data privacy policy (<a href="https://blocked.cdn.mozilla.net/c635229f-7aa0-44c5-914f-80c590949071.html">Notice</a>). If you are adopting Stylus instead, this page describes how to move your user styles from Stylish to Stylus.</p>
+<p><em>If you are using Stylish 2.0.7 - 2.1.1 &ndash; the Legacy extension &ndash; Steps 1-3 on this page are not applicable to you. Please see <a href="https://www.userchrome.org/alternatives-to-stylish.html#migration">Stylish Migration (from version 2.x to another version/extension)</a> instead.</em></p>
+
+<p>Here’s the process:</p>
+<div style="page-break-inside: avoid;">
+	<p><strong>(1) Call up Stylish’s “Manage All Styles” page</strong></p>
+	<p><em>Note: You might need to re-enable Stylish on the Add-ons page first.</em></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-01.png"></p>
+	<hr>
+</div>
+<div style="page-break-inside: avoid;">
+	<p><strong>(2) Click the “Backup all Installed” button and then Save the file</strong></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-02.png"></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-03.png"></p>
+	<hr>
+</div>
+<div style="page-break-inside: avoid;">
+	<p><strong>(3) Open the Downloads folder to the backup file using the “Open Containing Folder” button on the Downloads panel</strong></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-04.png"></p>
+	<hr>
+</div>
+<div style="page-break-inside: avoid;">
+	<p><strong>(4) If you haven’t already, install the Stylus extension</strong> <a href="https://addons.mozilla.org/firefox/addon/styl-us/" rel="noopener">from the Add-ons site</a></p>
+	<hr>
+</div>
+<div style="page-break-inside: avoid;">
+	<p><strong>(5) Call up Stylus’s Manage page</strong></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-05.png"></p>
+	<hr>
+</div>
+<div style="page-break-inside: avoid;">
+	<p><strong>(6) Position the window with the Downloads folder so you can drag and drop the Stylish backup file onto the Stylus Manage page to import your styles</strong></p>
+	<p style="text-align: center"><img src="img/Fx61-Stylish-to-Stylus-06.png"></p>
+	<hr>
+</div>
+<p>That’s it. You can disable (or remove) Stylish now.</p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+</body>
+</html>
