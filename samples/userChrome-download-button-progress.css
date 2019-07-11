@@ -1,0 +1,11 @@
+/* Replace tiny progress bar with tall one */
+#downloads-button[progress] > #downloads-indicator-anchor > #downloads-indicator-progress-outer {
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3crect x='0' y='3' width='16' height='10' stroke='%23888' fill='%23f4f4f4' stroke-width='1'/%3e%3c/svg%3e") center no-repeat !important;
+}
+#downloads-indicator-progress-inner {
+  background: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3crect x='0' y='3' width='16' height='10' stroke='%233c9af8' fill='%233c9af8' stroke-width='1' style='opacity:0.7' /%3e%3c/svg%3e") left no-repeat !important;
+}
+/* Hide arrow icon behind the progress bar */
+#downloads-button[progress] > #downloads-indicator-anchor > #downloads-indicator-icon {
+  opacity: 0 !important;
+}

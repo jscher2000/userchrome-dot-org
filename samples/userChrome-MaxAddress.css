@@ -1,0 +1,64 @@
+/**** MaxAddress 2019-04-28 ****/
+
+/*** Reduce width of identity area ***/
+#identity-box {
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+  margin-right: 3px !important;
+}
+/* Hide the site owner, extension name */
+#identity-box.verifiedIdentity #identity-icon-labels, 
+#identity-box.extensionPage #identity-icon-labels {
+  visibility: collapse !important;
+}
+/* Hide i-in-a-circle with padlock... */
+#identity-box.verifiedIdentity #identity-icon, 
+#identity-box.verifiedDomain #identity-icon {
+  width: 0px !important;
+  transition: width 125ms ease-in-out 250ms;
+}
+/* ...but show on hover to enable drop-panel */
+#identity-box.verifiedIdentity:hover #identity-icon, 
+#identity-box.verifiedDomain:hover #identity-icon {
+  width: 16px !important;
+  transition: width 125ms ease-in-out 125ms;
+}
+
+/*** Shrink page actions, Show on Hover ***/
+#pageActionSeparator {
+  display: none !important;
+}
+#urlbar-zoom-button {
+  margin: 0 !important;
+}
+.urlbar-page-action .urlbar-icon, 
+.urlbar-page-action.urlbar-icon, 
+.urlbar-history-dropmarker {
+  width: 20px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+
+/* Create page actions hover "button" */
+#page-action-buttons:not(:hover) {
+  width: 0 !important;
+  border-left: 10px solid #ddd;
+  border-radius: 15px;
+  margin-left: 2px !important;
+  overflow-x: hidden;
+}
+
+/*** Narrow the spacing between toolbar buttons ***/
+#nav-bar .toolbarbutton-icon {
+  width: 20px !important;
+  padding-left: 2px !important;
+  padding-right: 2px !important;
+}
+#PanelUI-button {
+  margin-left: 0 !important;
+  border-left: none !important;
+}
+#PanelUI-menu-button, .toolbarbutton-badge-stack {
+  padding-left: 0 !important;
+  padding-right: 1px !important;
+}

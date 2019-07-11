@@ -1,4 +1,7 @@
-/* Tab bar below Navigation & Bookmarks Toolbars */
+/* Tab bar below Navigation & Bookmarks Toolbars 
+   For Firefox 57-64 -- No longer works in Firefox 65
+   See https://www.userchrome.org/what-is-userchrome-css.html#movetabbar
+*/
 #nav-bar { /* main toolbar */
   -moz-box-ordinal-group: 1 !important;
   box-shadow: none !important;

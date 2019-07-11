@@ -1,0 +1,84 @@
+/* 
+    https://www.userchrome.org/samples/userChrome-oldStyleURLbarDropdown.css
+    Adapted from: https://www.jeffersonscher.com/gm/url-bar-tweaks.html
+    April 17, 2019
+*/
+/* Oldbar flex layout based on 
+     https://userstyles.org/styles/131235/firefox-autocomplete-prioritize-url 
+     used with permission, new errors my own */
+
+    .autocomplete-richlistitem[type="favicon"],
+    .autocomplete-richlistitem[type="bookmark"],
+    .autocomplete-richlistitem[type="switchtab"] {
+      display: flex;
+    }
+
+    .autocomplete-richlistitem[type="favicon"] .ac-title,
+    .autocomplete-richlistitem[type="bookmark"] .ac-title,
+    .autocomplete-richlistitem[type="switchtab"] .ac-title {
+      order: 3;
+    }
+
+    .autocomplete-richlistitem[type="favicon"] .ac-separator,
+    .autocomplete-richlistitem[type="bookmark"] .ac-separator,
+    .autocomplete-richlistitem[type="switchtab"] .ac-separator {
+      order: 2;
+      -moz-margin-start: 2px;
+      -moz-margin-end: 4px;
+    }
+    .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-separator {
+      visibility: hidden !important;
+      -moz-margin-start: 0;
+      -moz-margin-end: 0;
+    }
+
+    .autocomplete-richlistitem[type="favicon"] .ac-url,
+    .autocomplete-richlistitem[type="bookmark"] .ac-url,
+    .autocomplete-richlistitem[type="switchtab"] .ac-url {
+      order: 1;
+      display: block !important; /* Force URL for Switch to Tab */
+    }
+
+    .autocomplete-richlistitem[type="switchtab"] .ac-action,
+    .autocomplete-richlistitem .ac-tags {
+      order: 4;
+    }
+
+  /* Overall Layout of the "Oldbar" style at 65/35 */
+    /* Drop-down width */
+    #PopupAutoCompleteRichResult {
+      max-width: 1000px !important;
+    }
+    /* Space allocated to URL and title */
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-url-text {
+      min-width: calc(0.65 * (1000px - 200px)) !important;
+      max-width: calc(0.65 * (1000px - 200px)) !important;
+    }
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-title-text {
+      min-width: calc(0.35 * (1000px - 200px)) !important;
+      max-width: calc(0.35 * (1000px - 200px)) !important;
+    }
+
+    .autocomplete-richlistitem .ac-type-icon, 
+    .autocomplete-richlistitem .ac-site-icon,
+    .autocomplete-richlistitem .ac-tags {
+      margin-top: 6px;
+    }
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem [anonid="type-icon-spacer"] { /* Beta 57 */
+      display: none !important; 
+    } 
+    #PopupAutoCompleteRichResult { /* Nightly 58 */
+      --item-padding-start: 0 !important;
+    }
+    /* Font-sizes */
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-title,
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-url,
+    #PopupAutoCompleteRichResult .autocomplete-richlistitem:not([actiontype="searchengine"]) .ac-action {
+      font-size: 14px !important;
+    }
+    .autocomplete-richlistitem .ac-title,
+    .autocomplete-richlistitem .ac-separator,
+    .autocomplete-richlistitem .ac-url,
+    .autocomplete-richlistitem .ac-action {
+        margin-top: 4px;
+    }
