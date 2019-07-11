@@ -39,16 +39,19 @@
 </pre>
 
 <form id="filemaker" action="javascript:void(0);">
-<p><button onclick="saveCSS()" id="btnSave">Generate CSS file</button> using file name:<br>
-<label><input type="radio" name="fname" value="plain" checked> userChrome.css</label><br>
+<p><button onclick="saveCSS()" id="btnSave">Generate CSS file</button> using file name:</p>
+<p><label><input type="radio" name="fname" value="plain" checked> userChrome.css</label><br>
 <label><input type="radio" name="fname" value="time"> userChrome-<em>timestamp</em>.css</label><br>
-<label><input type="radio" name="fname" value="text"> userChrome-<input type="text" name="fnametext" size="100" maxlength="100" placeholder="give_purpose_of_rules" onfocus="this.previousElementSibling.checked=true; return false;">.css</label> <input type="reset" value="Reset Name"></p>
+<label><input type="radio" name="fname" value="text"> userChrome-<input type="text" name="fnametext" size="100" maxlength="100" placeholder="give_purpose_of_rules" onfocus="this.previousElementSibling.checked=true; return false;">.css</label> <input type="reset" value="Reset Form"></p>
+<label><input type="radio" name="fname" value="plainContent"> userContent.css</label><br>
+<label><input type="radio" name="fname" value="timeContent"> userContent-<em>timestamp</em>.css</label><br>
+<label><input type="radio" name="fname" value="textContent"> userContent-<input type="text" name="fnametext" size="100" maxlength="100" placeholder="give_purpose_of_rules" onfocus="this.previousElementSibling.checked=true; return false;">.css</label> <input type="reset" value="Reset Form"></p>
 </form>
 </div>
 </article>
 
 <footer>
-<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a>. Ace (Ajax.org Cloud9 Editor) v1.3.3 &copy; 2018 Ajax.org B.V. (<a href="https://github.com/ajaxorg/ace-builds/blob/master/LICENSE" target="_blank">BSD-3-Clause License</a>). FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
+<p>Copyright &copy; 2019 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a>. Ace (Ajax.org Cloud9 Editor) v1.3.3 &copy; 2018 Ajax.org B.V. (<a href="https://github.com/ajaxorg/ace-builds/blob/master/LICENSE" target="_blank">BSD-3-Clause License</a>). FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
 <!-- Ace Editor CSS and Scripts -->
 <style>
@@ -82,6 +85,19 @@ function saveCSS(){
 					ftext.replace(/^(?=[\S])[^\\ \/ : * ? " < > | ]+$/g, '_');
 					if (fname.length > 0) var fname = 'userChrome-' + ftext + '.css';
 					else var fname = 'userChrome-your_text_was_blank.css';
+					break;
+				case 'plainContent':
+					var fname = 'userContent.css';
+					break;
+				case 'timeContent':
+					var fname = 'userContent-' + Date.now() + '.css';
+					break;
+				case 'textContent':
+					var ftext = document.querySelector('input[name="fnametext"]').value;
+					// Clean illegal characters
+					ftext.replace(/^(?=[\S])[^\\ \/ : * ? " < > | ]+$/g, '_');
+					if (fname.length > 0) var fname = 'userContent-' + ftext + '.css';
+					else var fname = 'userContent-your_text_was_blank.css';
 					break;
 				default:
 					var fname = 'userChrome.css';

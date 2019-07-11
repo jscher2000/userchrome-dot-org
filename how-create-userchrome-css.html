@@ -24,7 +24,7 @@
 </nav>
 <header>
 <h1>How to Create a userChrome.css File</h1>
-<p>Posted by jscher2000 on November 5, 2017; updated April 26, 2018</p>
+<p>Posted by jscher2000 on November 5, 2017; updated May 24, 2019</p>
 </header>
 
 <article>
@@ -38,6 +38,7 @@
 <li>Create a desktop shortcut (alias) to the chrome folder for easier future access</li>
 <li>Make sure your OS is set to show you file extensions like .txt and .css</li>
 <li>Create a new text file inside the chrome folder named userChrome.css</li>
+<li><strong><em>Firefox 69 (Beta/Developer):</em></strong> Change a preference in Firefox so it looks for your files at startup</li>
 </ol>
 <p>This video provides an overview; the detailed steps follow.</p>
 <div id="vidframes">
@@ -85,8 +86,17 @@
 <h3>(5) Create a new text file inside the chrome folder named userChrome.css (or download a blank one)</h3>
 <p>Double-click chrome to open the chrome folder. The method you use to create the userChrome.css file may vary depending on the features provided by your file browser. Here's how you can do it in Windows: Right-click a blank area of the list, click New, then Text Document. Type <code>userChrome.css</code> &mdash; with only the C capitalized &mdash; in place of New Text Document.txt, then press Enter or click away to finish the edit.</p>
 <p>For either Mac or Windows, you can use the following link to save the file into your chrome folder (or if it goes into Downloads, move it to the chrome folder): <a href="samples/userChrome.css">userChrome.css (blank file)</a>.</p>
-<p>Congratulations, you're done creating the file. It's currently empty and awaiting a purpose in life. Firefox will learn about it the next time you exit out of Firefox and start it up again.</p>
+<p>Congratulations, you're done creating the file. It's currently empty and awaiting a purpose in life. Firefox will learn about it the next time you exit out of Firefox and start it up again. (For Firefox 69, see step 6.)</p>
 <p>Alternately, if you have some CSS code ready to paste into a userChrome.css file, you can do that using the following page and download your userChrome.css file from there: <a href="download-userchrome-css.html">Generate Downloadable userChrome.css File</a>.</p>
+
+<h3>(6) Set Firefox to look for userChrome.css at startup (updated 5/24/2019)</h3>
+<p>To make startup faster for most users, Firefox 69 will no longer look for this file automatically. You need to tell it to look. Here's how:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box above the list, type or paste <strong>userprof</strong> and pause while the list is filtered. <em>If you do not see anything on the list, please ignore the rest of these instructions. You can close this tab now.</em></li>
+	<li>Double-click the <strong>toolkit.legacyUserProfileCustomizations.stylesheets</strong> preference to switch the value from false to true.</li>
+</ol>
+<p>That change should take effect on your next startup.</p>
 
 <h2>Adding Style Recipes to userChrome.css</h2>
 <p>When you're ready to add rules to the file, you may want to use a good text editor. There are suggestions for open source editors as well as information about using Firefox's Browser Toolbox, on these pages:</p>
@@ -98,7 +108,7 @@
 </article>
 
 <footer>
-<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+<p>Copyright &copy; 2019 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
 <script type="text/javascript" src="uc.js"></script>
 </body>

@@ -24,7 +24,7 @@
 </nav>
 <header>
 <h1>What is userChrome.css? What can it do?</h1>
-<p>Posted by jscher2000 on November 5, 2017; updated Oct. 13, 2018</p>
+<p>Posted by jscher2000 on November 5, 2017; updated Mar. 23, 2019</p>
 </header>
 
 <article>
@@ -192,7 +192,8 @@
 <h3 id="movetabbar">Move the Tab Bar Below the Other Toolbars (like Firefox 1.0-3.6)</h3>
 <p><img src="img/tabs-below-bookmarks-toolbar.png" style="width:900px; height:426px"></p>
 </div>
-<p>CSS (<a href="samples/userChrome-tabs_on_bottom.css">download</a>) (updated 6 Mar 2018):</p>
+<p><strong>Firefox 65+</strong>: The structure of the toolbar area has changed. You can use the rules from Aris: <a href="https://github.com/Aris-t2/CustomCSSforFx/" rel="noopener" target="_blank">Custom CSS tweaks for Firefox Quantum</a> (extract for Windows updated Feb. 22, 2019: <a href="samples/userChrome-tabs_on_bottom_Fx65.css">download</a>; Mac users, see the original source because there are multiple choices).</p>
+<p>CSS for Firefox 57-64 (<a href="samples/userChrome-tabs_on_bottom.css">download</a>) (updated 6 Mar 2018):</p>
 <pre class="codeblock notranslate">/* Tab bar below Navigation & Bookmarks Toolbars */
 #nav-bar { /* main toolbar */
   -moz-box-ordinal-group: 1 !important;
@@ -259,21 +260,30 @@ toolbarbutton.bookmark-item {
 #TabsToolbar[movingtab] + #nav-bar {
   margin-top: 0 !important;
 }</pre>
-<p>There are multiple style recipes to change the order of these toolbars, including:</p>
-<ul>
-<li><a href="https://www.reddit.com/r/firefox/comments/6x2tmz/can_i_have_tabs_on_bottom_and_bookmarks_above/" rel="noopener" target="_blank">Can I have tabs on bottom and bookmarks above them in Firefox 57?</a> (bare bones version)</li>
-<li><a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/tabs/tabs_below_navigation_toolbar.css" rel="noopener" target="_blank">tabs_below_navigation_toolbar.css</a> (by the author of Classic Theme Restorer)</li>
-</ul>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="multirowbookmarks">Expand the Bookmarks Toolbar to Multiple Rows</h3>
-<p><img src="img/multi-row-bookmarks-toolbar.png" style="width:900px; height:442px"></p>
+<p><img src="img/multi-row-bookmarks-toolbar_66.png" style="width:900px; height:372px"></p>
 </div>
+<p>CSS:</p>
+<pre class="codeblock notranslate">/* Multi-row Bookmarks Toolbar For Firefox 66 */
+/* From https://www.reddit.com/r/FirefoxCSS/comments/b346fz/firefox_66_destroyed_my_more_toolbars_fix/eix109b/ */
+
+#PersonalToolbar {
+  min-height: unset !important;
+  max-height: unset !important;
+}
+
+#PersonalToolbar #PlacesToolbarItems {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  display: inline-block !important;
+}</pre>
 <p>There are multiple style recipes to "wrap" the bookmarks toolbar, including:</p>
 <ul>
-<li><a href="https://www.reddit.com/r/firefox/comments/75wya9/multiple_row_bookmark_toolbar_for_firefox_5758/" rel="noopener" target="_blank">Multiple row bookmark toolbar for Firefox 57/58?</a> (pictured)</li>
-<li><a href="https://github.com/Aris-t2/CustomCSSforFx/blob/83523527201532a7aef7a4be4b259722daf97e44/classic/css/toolbars/bookmarks_toolbar_multiple_lines.css" rel="noopener" target="_blank">bookmarks_toolbar_multiple_lines.css</a> (by the author of Classic Theme Restorer)</li>
+<li><a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/toolbars/bookmarks_toolbar_multiple_lines.css" rel="noopener" target="_blank">bookmarks_toolbar_multiple_lines.css</a> (by the author of Classic Theme Restorer)</li>
+<li><a href="https://www.reddit.com/r/firefox/comments/75wya9/multiple_row_bookmark_toolbar_for_firefox_5758/" rel="noopener" target="_blank">Multiple row bookmark toolbar for Firefox 57/58?</a> (for Firefox 57-65)</li>
 </ul>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
