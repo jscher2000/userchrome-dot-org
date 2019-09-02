@@ -6,7 +6,7 @@ header p {
 	font-style: italic;
 	font-size: 0.8em;
 }
-article ul li {
+article ul li, article ol[type="A"] li {
 	margin-bottom: 0.75em;
 }
 #logo {
@@ -80,12 +80,24 @@ article ul li {
 	#rightnav {
 		position: absolute;
 		right: 1em;
-		top: 14px;
+		top: 6px;
+	}
+	#hotnews {
+		width: 100%;
+		background: #f00;
+		text-align: center;
+		border-radius: 6px;
+	}
+	#hotnews a {
+		color: #ff0;
+	}
+	#hotnews a:hover {
+		border-color: transparent;
 	}
 	.yesno {
 		position:absolute;
 		top:0;
-		margin-top: -10px;
+		margin-top: -2px;
 		left:0;
 		background-color: cyan;
 		height: 44px;
@@ -162,6 +174,7 @@ article ul li {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
+  font-display: fallback;
   src: local('Open Sans'), local('Open Sans Regular'), local('OpenSans-Regular'), url(fonts/opensans.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
@@ -169,6 +182,7 @@ article ul li {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
+  font-display: fallback;
   src: local('Open Sans Bold'), local('OpenSans-Bold'), url(fonts/opensansbold.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
@@ -176,6 +190,7 @@ article ul li {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 400;
+  font-display: fallback;
   src: local('Open Sans Italic'), local('OpenSans-Italic'), url(fonts/opensansitalic.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
