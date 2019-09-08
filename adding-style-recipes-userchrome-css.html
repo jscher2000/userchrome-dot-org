@@ -20,12 +20,12 @@
 <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
 <div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
 <div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
-<div id="hotnews"><a href="how-create-userchrome-css.html#aboutconfig">Firefox 69 about:config preference</a></div>
+<div id="hotnews"><a href="firefox-changes-userchrome-css.html#fx69">Firefox 69 Broke It!</a></div>
 </div>
 </nav>
 <header>
 <h1>Adding Style Recipes to userChrome.css</h1>
-<p>Posted by jscher2000 on March 15, 2018</p>
+<p>Posted by jscher2000 on March 15, 2018, updated Sept. 5, 2019</p>
 </header>
 
 <article>
@@ -59,8 +59,9 @@
 <p>Here's the problem: when you specify the XUL namespace, style rules for non-XUL elements such as HTML elements are ignored. For example:</p>
 <p><img src="img/xul-namespace-html-spans.png"></p>
 <h3>Recommendation</h3>
-<p>It probably is possible to write style rules to apply to HTML elements when only the XUL namespace is specified, but it's simpler not to create this situation in the first place and omit all mention of namespaces. What harm might be done by omitting the XUL namespace? Some of your user interface rules <em>might</em> have unintended consequences beyond the confines of the user interface, for example, in the developer tools panel. However, those issues can be avoided by using an @-moz-document rule to limit how your style recipes are applied:</p>
-<pre class="codeblock">@-moz-document url(chrome://browser/content/browser.xul) {
+<p>It probably is possible to write style rules to apply to HTML elements when only the XUL namespace is specified, but it's simpler not to create this situation in the first place and omit all mention of namespaces. What harm might be done by omitting the XUL namespace? Some of your user interface rules <em>might</em> have unintended consequences beyond the confines of the user interface, for example, in the developer tools panel. However, those issues can be avoided by using an @-moz-document rule to limit how your style recipes are applied (updated for Firefox 69):</p>
+<pre class="codeblock">@-moz-document url(chrome://browser/content/browser.xul),
+               url(chrome://browser/content/browser.xhtml) {
   /* Your style rules for the user interface go here */
 }
 </pre>
