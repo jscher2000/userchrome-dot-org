@@ -36,15 +36,15 @@
 
 <h2 id="fx69">Firefox 69 (Released Sept. 3, 2019)</h2>
 <p>Here are some headline changes (and fixes) for broken userChrome.css styles in Firefox 69:</p>
-<h3><strong>Preference:</strong> Firefox won't look for userChrome.css/userContent.css at startup unless told to do so</h3>
+<h3>(1) [Preference] Firefox won't look for userChrome.css/userContent.css at startup unless told to do so</h3>
 <p>To make startup faster for most users, Firefox 69 will no longer look for this file automatically. You need to tell it to look. Here's how:</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box above the list, type or paste <strong>userprof</strong> and pause while the list is filtered. <em>If you do not see anything on the list, please ignore the rest of these instructions. You can close this tab now.</em></li>
-	<li>Double-click the <strong>toolkit.legacyUserProfileCustomizations.stylesheets</strong> preference to switch the value from false to true.</li>
+	<li>If the <strong>toolkit.legacyUserProfileCustomizations.stylesheets</strong> preference is not already set to <strong>true</strong>, double-click it to switch the value from false to true.</li>
 </ol>
 <p>That change should take effect on your next startup.</p>
-<h3><strong>Code Edit:</strong> browser.xul file renamed browser.xhtml</h3>
+<h3>(2) [Code Edit] browser.<em>xul</em> file renamed browser.<em>xhtml</em></h3>
 <p>Many style rules were "scoped" to browser.xul to avoid leaking over to other aspects of the browser. If you have instances of this --</p>
 <pre class="codeblock notranslate">@-moz-document url(chrome://browser/content/browser.xul) {</pre>
 <p>-- you can update them to either of the following (the first is simpler, the second is for backwards and forwards compatibility):</p>
@@ -54,14 +54,14 @@
 
 <h2 id="fx68">Firefox 68 (Released July 9, 2019; basis for ESR)</h2>
 <p>This is one of the more significant changes affecting userChrome.css files in Firefox 68:</p>
-<h3>The Quantumbar (new address bar drop-down)</h3>
+<h3>(1) [Preference or Code Edit] The Quantumbar (new address bar drop-down)</h3>
 <p>Firefox 68 saw the debut of a visually identical drop-down with all new code (mostly HTML) and all new CSS selectors. The rule updates required to modify the Quantumbar are very extensive, so if you don't have the patience, or the source you used for your rules hasn't released an update yet, you can postpone the day of reckoning using the following preference to turn off the Quantumbar for now.</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box above the list, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
 	<li>Double-click the <strong>browser.urlbar.quantumbar</strong> preference to switch the value from true to false.</li>
 </ol>
-<h3>ESR Users: Cumulative changes in Firefox 61-67</h3>
+<h3>(2) ESR Users: Cumulative changes in Firefox 61-67</h3>
 <p>Wow, too many to remember at this point, sorry. <a href="https://www.reddit.com/r/FirefoxCSS/" rel="noopener" target="_blank">/r/FirefoxCSS/</a> would be a good resource.</p>
 </div>
 </article>
