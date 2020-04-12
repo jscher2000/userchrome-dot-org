@@ -1,0 +1,89 @@
+/*
+Generated from: https://www.jeffersonscher.com/gm/search-bar-names.html
+*/
+@-moz-document url(chrome://browser/content/browser.xul), url(chrome://browser/content/browser.xhtml) {
+  /* Make the one-off buttons span the full width */
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item[tooltiptext] {
+    width: 100% !important;
+    height: 24px !important;
+    background-image: none !important;
+    padding-left: 6px !important;
+    box-sizing: content-box !important;
+    line-height: 1em !important;
+  }
+  /* Hide the empties */
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item:not([tooltiptext]) {
+    display: none !important;
+  }
+  /* Fix up borders */
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item[tooltiptext], 
+  #PopupSearchAutoComplete .addengine-item {
+    border-bottom: 1px solid #ccc !important;
+  }
+  #PopupSearchAutoComplete .search-setting-button.search-panel-header, 
+  #PopupSearchAutoComplete .addengine-item,
+  #PopupSearchAutoComplete .search-panel-header.search-panel-current-input {
+    border-top: none !important;
+    max-height: 26px !important;
+    min-height: 16px !important;
+    padding-top: 1px !important;
+  }
+  /* Drop Settings button back into place (Fx69) */
+  #PopupSearchAutoComplete .search-panel-one-offs {
+    height: auto !important;
+    display: block !important;
+  }
+  /* Insert descriptive name for search engine plugin */
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item[tooltiptext]::after {
+    content: attr(tooltiptext);
+    margin: 5px 6px 0px !important;
+    display: block !important;
+  }
+  /* Fix icon positioning */
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item[tooltiptext] > .button-box {
+    display: inline-flex !important;
+    width: 16px !important;
+    max-width: 16px !important;
+    border: none !important;
+    padding: 0 0 !important;
+  }
+  #PopupSearchAutoComplete .searchbar-engine-one-off-item[tooltiptext] > .button-box > .button-icon {
+    display: block !important;
+    margin-top: 4px !important;
+    margin-left: -1px !important;
+  }
+  /* Lock in space for 5 search suggestions with scroll bar */
+/* DISABLED FOR FIREFOX 69
+  #PopupSearchAutoComplete .autocomplete-tree.plain.search-panel-tree .tree-bodybox,
+  #PopupSearchAutoComplete .autocomplete-tree.plain.search-panel-tree .autocomplete-treebody {
+    display: flex !important;
+    flex: 1 1 auto !important;
+  }
+  #PopupSearchAutoComplete .autocomplete-tree.plain.search-panel-tree .autocomplete-treebody {
+    max-height: calc(5 * 1.5em) !important;
+    min-height: calc(5 * 1.5em) !important;
+  }
+  #PopupSearchAutoComplete .autocomplete-tree.plain.search-panel-tree .tree-scrollbar[collapsed="true"] {
+    visibility: visible !important;
+  }
+*/
+  /* Tweak height for Firefox 61 */
+/* DISABLED FOR FIREFOX 69
+  #PopupSearchAutoComplete .autocomplete-richlistbox.search-panel-tree {
+    max-height: 106px !important;
+    min-height: 106px !important;
+  }
+*/
+  /* User style options */
+    /* One column - standard spacing (built-in above) */
+    /* Hiding "Search for ..."/"This time, search with" */
+  #PopupSearchAutoComplete .search-panel-header.search-panel-current-input,
+  #PopupSearchAutoComplete .search-panel-header.search-panel-one-offs-header {
+    display: none !important;
+  }
+    /* Not hiding "Add ..." engine */
+    /* Not hiding "Change Search Settings" */
+    /* Search bar tooltip text only visible on mouseover */
+    /* No color scheme */
+    /* No color scheme for hover */
+} 
