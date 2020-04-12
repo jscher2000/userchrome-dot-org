@@ -1,4 +1,4 @@
-/*** Megabar Styler Two-Row Flex Layout - version 2020-04-11 ***/
+/*** Megabar Styler Two-Row Flex Layout - version 2020-04-12 ***/
 
   /* !!! Requires variables from Megabar Styler General !!! */
 
@@ -30,5 +30,28 @@
   .urlbarView.megabar .urlbarView-row[type=remotetab]:-moz-any(:hover, [selected]) .urlbarView-title-separator {
     display: none !important;
   }
+
+  /* Move Switch Tab info to URL line :: added 2020-04-12 */
+
+    /* Make sure URL is always visible */
+    .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-url {
+      visibility: visible !important;
+    }
+    /* Show Switch to Tab or Open depending on [actionoverride] */
+    .urlbarView:not([actionoverride]) .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-url::before {
+      content: "Switch to Tab: ";
+      font-style: italic;
+      color: var(--urlbar-popup-action-color);
+    }
+    .urlbarView[actionoverride] .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-url::before {
+      content: "Open: ";
+      font-style: italic;
+      color: var(--urlbar-popup-action-color);
+    }
+    /* Hide the existing Action phrase and separator */
+    .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-action,
+    .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-title-separator {
+      display: none !important;
+    }
 
 /*** End of: Megabar Styler Two-Row Flex Layout ***/
