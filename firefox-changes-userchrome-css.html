@@ -18,21 +18,25 @@
 <a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
 <a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
 <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
-<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
-<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+<div id="hotnews"><a href="megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
 </div>
 </nav>
 <header>
 <h1>Firefox Changes Breaking userChrome.css</h1>
-<p>Posted by jscher2000 on September 7, 2019</p>
+<p>Posted by jscher2000 on September 7, 2019; updated Dec. 6, 2019</p>
 </header>
 
 <article>
 <div id="main">
 <p>Firefox's UI is gradually shedding its XUL heritage and being replaced by HTML (including some modern constructs that can be challenging to style). This page collects a few significant changes for quick reference; admittedly it's not comprehensive, these are the changes that have affected me the most. Please use the Feedback button at upper right to alert me (and other readers) to things I've missed, and check <a href="https://www.reddit.com/r/FirefoxCSS/" rel="noopener" target="_blank">https://www.reddit.com/r/FirefoxCSS/</a> for more solutions.</p>
 
-<h2 id="fx70">Firefox 70 (Beta/Developer)</h2>
-<p>Bookmark and History menus have been extensively revised. Will post updates when available.</p>
+<h2 id="fx71">Firefox 71 (Released Dec. 3, 2019)</h2>
+<p>Your "tabs on bottom" code will need a tweak (if you use such code).</p>
+
+<h2 id="fx70">Firefox 70 (Released Oct. 22, 2019)</h2>
+<p>Bookmark and History menus have been extensively revised.</p>
 
 <h2 id="fx69">Firefox 69 (Released Sept. 3, 2019)</h2>
 <p>Here are some headline changes (and fixes) for broken userChrome.css styles in Firefox 69:</p>
@@ -58,7 +62,7 @@
 <p>Firefox 68 saw the debut of a visually identical drop-down with all new code (mostly HTML) and all new CSS selectors. The rule updates required to modify the Quantumbar are very extensive, so if you don't have the patience, or the source you used for your rules hasn't released an update yet, you can postpone the day of reckoning using the following preference to turn off the Quantumbar for now.</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box above the list, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
+	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
 	<li>Double-click the <strong>browser.urlbar.quantumbar</strong> preference to switch the value from true to false.</li>
 </ol>
 <h3>(2) ESR Users: Cumulative changes in Firefox 61-67</h3>

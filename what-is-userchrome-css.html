@@ -20,12 +20,12 @@
 <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
 <div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
 <div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
-<div id="hotnews"><a href="firefox-changes-userchrome-css.html#fx69">Firefox 69 Broke It!</a></div>
+<div id="hotnews"><a href="megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
 </div>
 </nav>
 <header>
 <h1>What is userChrome.css? What can it do?</h1>
-<p>Posted by jscher2000 on November 5, 2017; updated Sept. 12, 2019</p>
+<p>Posted by jscher2000 on November 5, 2017; updated Mar. 13, 2020</p>
 </header>
 
 <article>
@@ -191,11 +191,17 @@
 
 <div style="page-break-inside: avoid;">
 <h3 id="movetabbar">Move the Tab Bar Below the Other Toolbars (like Firefox 1.0-3.6)</h3>
-<p><img src="img/tabs-below-bookmarks-toolbar.png" style="width:900px; height:426px"></p>
+<p><img src="img/tabs-below-bookmarks-toolbar-71.png" style="width:900px; height:380px"></p>
 </div>
-<p><strong>Firefox 65+</strong>: The structure of the toolbar area has changed. You can use the rules from Aris: <a href="https://github.com/Aris-t2/CustomCSSforFx/" rel="noopener" target="_blank">Custom CSS tweaks for Firefox Quantum</a> (extract for Windows updated Feb. 22, 2019: <a href="samples/userChrome-tabs_on_bottom_Fx65.css">download</a>; Mac users, see the original source because there are multiple choices).</p>
-<p>CSS for Firefox 57-64 (<a href="samples/userChrome-tabs_on_bottom.css">download</a>) (updated 6 Mar 2018):</p>
-<pre class="codeblock notranslate">/* Tab bar below Navigation & Bookmarks Toolbars */
+<p><strong>Firefox 65+</strong>: The structure of the toolbar area has changed. You can use the rules from Aris: <a href="https://github.com/Aris-t2/CustomCSSforFx/" rel="noopener" target="_blank">Custom CSS tweaks for Firefox Quantum</a>. I have created extracts, but these may not work on every system:
+<ul>
+	<li><a href="samples/userChrome-tabs_on_bottom_Fx68-71_WindowsLinux.css">Firefox 68-71 on Windows and Linux</a> (updated Dec. 22, 2019)<br>
+		<a href="samples/userChrome-tabs_on_bottom_Fx72-74_WindowsLinux.css">Firefox 72-74 on Windows and Linux</a> (updated Feb. 13, 2020)</li>
+	<li><a href="samples/userChrome-tabs_on_bottom_Fx68-74_MacOS.css">Firefox 68-74 on MacOS</a> (updated Dec. 7, 2019)</li>
+</ul>
+<p>In case of problems, please visit the source.</p>
+<p>Legacy CSS for Firefox 57-64: <a href="samples/userChrome-tabs_on_bottom.css">download</a> (updated 6 Mar 2018).</p>
+<!--<pre class="codeblock notranslate">/* Tab bar below Navigation & Bookmarks Toolbars */
 #nav-bar { /* main toolbar */
   -moz-box-ordinal-group: 1 !important;
   box-shadow: none !important;
@@ -260,15 +266,16 @@ toolbarbutton.bookmark-item {
 }
 #TabsToolbar[movingtab] + #nav-bar {
   margin-top: 0 !important;
-}</pre>
+}</pre>-->
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="multirowbookmarks">Expand the Bookmarks Toolbar to Multiple Rows</h3>
 <p><img src="img/multi-row-bookmarks-toolbar_66.png" style="width:900px; height:372px"></p>
 </div>
+<p><strong><em>Update (3/13/2020):</em></strong> For Firefox 74, please refer to this thread on the Firefox subreddit: <a href="https://www.reddit.com/r/firefox/comments/fgozre/multiple_bookmark_toolbar_rows_in_ff_74/" target="_blank">https://www.reddit.com/r/firefox/comments/fgozre/multiple_bookmark_toolbar_rows_in_ff_74/</a>
 <p>CSS:</p>
-<pre class="codeblock notranslate">/* Wrap Bookmarks Toolbar -- Unlimited Multi-row for Firefox 66 */
+<pre class="codeblock notranslate">/* Wrap Bookmarks Toolbar -- Unlimited Multi-row for Firefox 66-73 */
 /* From https://www.reddit.com/r/FirefoxCSS/comments/b346fz/firefox_66_destroyed_my_more_toolbars_fix/eix109b/ */
 
 #PersonalToolbar {
