@@ -1,0 +1,22 @@
+/*** Megabar Styler One-Offs - version 2020-05-31 ***/
+
+  /*** One-Off Search Button Preferences ***/
+  :root {
+    /* One-Offs Display or Not */
+    --mbarstyler-oneoffs-display: /*[[oneoffs]]*/; /* [flex,none] */
+  }
+
+  /* Show or Hide the One-Offs Search Icon Bar */
+  #urlbar .search-one-offs:not([hidden]) {
+    display: var(--mbarstyler-oneoffs-display) !important;
+  }
+  /* Shorten the One-Offs Search Icon Bar Vertically */
+  #urlbar .search-one-offs:not([hidden]) {
+    padding-block: unset !important;
+  }
+  /* We don't need the text */
+  #urlbar .search-one-offs .search-panel-header {
+    display: none !important;
+  }
+
+/*** End of: Megabar Styler One-Offs ***/

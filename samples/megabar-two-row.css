@@ -1,4 +1,4 @@
-/*** Megabar Styler Two-Row Flex Layout - version 2020-04-12 ***/
+/*** Megabar Styler Two-Row Flex Layout - version 2020-06-03 ***/
 
   /* !!! Requires variables from Megabar Styler General !!! */
 
@@ -25,9 +25,9 @@
   }
 
   /* Hide the separator if there's a URL */
-  .urlbarView.megabar[actionoverride] .urlbarView-row[has-url] .urlbarView-title-separator,
-  .urlbarView.megabar .urlbarView-row[has-url]:not([type$=tab]) .urlbarView-title-separator,
-  .urlbarView.megabar .urlbarView-row[type=remotetab]:-moz-any(:hover, [selected]) .urlbarView-title-separator {
+  .urlbarView[actionoverride] .urlbarView-row[has-url] .urlbarView-title-separator,
+  .urlbarView .urlbarView-row[has-url]:not([type$=tab]) .urlbarView-title-separator,
+  .urlbarView .urlbarView-row[type=remotetab]:-moz-any(:hover, [selected]) .urlbarView-title-separator {
     display: none !important;
   }
 
@@ -43,15 +43,27 @@
       font-style: italic;
       color: var(--urlbar-popup-action-color);
     }
+    .urlbarView:not([actionoverride]) .urlbarView-row[type="switchtab"][has-url="true"][selected] .urlbarView-url::before {
+      color: HighlightText; /* 2020-05-31 improve visibility when selected */
+    }
     .urlbarView[actionoverride] .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-url::before {
       content: "Open: ";
       font-style: italic;
       color: var(--urlbar-popup-action-color);
+    }
+    .urlbarView[actionoverride] .urlbarView-row[type="switchtab"][has-url="true"][selected] .urlbarView-url::before {
+      color: HighlightText; /* 2020-05-31 improve visibility when selected */
     }
     /* Hide the existing Action phrase and separator */
     .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-action,
     .urlbarView-row[type="switchtab"][has-url="true"] .urlbarView-title-separator {
       display: none !important;
     }
+
+  /* A little more room for the address bar when drop-down is open :: added 2020-06-02 */
+
+  .urlbarView {
+    margin-block-start: 0 !important;
+  }
 
 /*** End of: Megabar Styler Two-Row Flex Layout ***/
