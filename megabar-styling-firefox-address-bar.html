@@ -18,6 +18,8 @@
 .popout-5px { background-position: -490px -250px; width: 490px; height: 125px; }
 .popout-6px { background-position: -0px -375px; width: 490px; height: 125px; }
 .popout-7px { background-position: -490px -375px; width: 490px; height: 125px; }
+#toc {margin-left: 18px; list-style-type: "▶";}
+#toc li {margin-top: 2px; margin-bottom: 2px; padding-left: 6px;}
 </style>
 </head>
 <body>
@@ -38,8 +40,8 @@
 </div>
 </nav>
 <header>
-<h1>Megabar &ndash; Configuring and Styling the Firefox 75 Address Bar</h1>
-<p>Posted by jscher2000 on April 11, 2020; updated April 12, 2020</p>
+<h1>Megabar &ndash; Configuring and Styling the Firefox 75+ Address Bar</h1>
+<p>Updated June 10, 2020; Originally posted by jscher2000 on April 11, 2020.</p>
 </header>
 
 <article>
@@ -47,28 +49,24 @@
 <p>The "focused" address bar in Firefox 75 has been controversial in the days since it debuted. Some users do not recognize or want to see the list of sites that drops
 down automatically when you click in the bar, while others object to the way it bulges and casts a shadow over the Bookmarks Toolbar. This page provides information and tools for 
 managing the behavior and appearance of the bar and its drop-down.</p>
-
-<h3 id="update1">Temporary Preference to Disable Megabar</h3>
-<p>If you're not ready to work with it, Firefox&nbsp;75 includes a preference to disable the new "enlarging" design and revert to the Firefox&nbsp;74 design. 
-This option is expected to be removed in a few versions, but you can use it for the time being and return to this page for additional styling-related suggestions in the future.</p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
-	<li>Double-click the <strong>browser.urlbar.update1</strong> preference to switch the value from true to false.</li>
-</ol>
-<p>This change doesn't take effect in currently open windows, but you will see the old bar in new windows or after exiting/quitting out of Firefox and starting it up again.</p>
-<p style="border-top:1px solid #aaa;">&nbsp;</p>
+<ul id="toc">
+	<li><a href="#topsites" onclick="window.setTimeout(pgshow, 100);">Switch the automatically dropping list from showing 8 Top Sites to classic Show History list (or neither)</a></li>
+	<li><a href="#showhistory" onclick="window.setTimeout(pgshow, 100);">The Show History button is gone!</a></li>
+	<li><a href="#standardfeatures" onclick="window.setTimeout(pgshow, 100);">Change the types of suggested matches Firefox shows as you type</a></li>
+	<li><a href="#mbarstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling the bar to reduce the bulging, URL on its own row, other modifications (userChrome.css rules)</a></li>
+	<li><a href="#update1" onclick="window.setTimeout(pgshow, 100);">Firefox 75-76 roll back option</a></li>
+</ul>
 
 <div style="page-break-inside: avoid;">
-<h3 id="topsites">Are those really *my* Top Sites? Where is "Show History"?</h3>
+<h3 id="topsites">Top Sites versus Frequently Visited URLs</h3>
 <p><img src="img/Fx75-megabar-top-sites.png" style="width:800px"></p>
 <p>The Firefox Home page (internal address <strong>about:home</strong>) and New Tab page (internal address <strong>about:newtab</strong>) share a Top Sites section containing 
-a combination of pre-pinned search shortcuts, popular sites, and URLs from your history. In Firefox&nbsp;75, the first eight Top Sites appears on the drop-down. If 
+a combination of pre-pinned search shortcuts, popular sites, and URLs from your history. In Firefox&nbsp;75+, the first eight Top Sites appears on the drop-down. If 
 you have been ignoring this section, it's probably confusing to see this list. For information on how to add, remove, and rearrange those sites, see the Mozilla Support article: 
 <a href="https://support.mozilla.org//kb/customize-new-tab-page" target="_blank">Customize the New Tab page</a>.</p>
 </div>
 <p>If you want to prevent the Top Sites list from automatically dropping down, you have two choices using preference changes:</p>
-<p>(1) <em>Switch back to showing sites from history when clicking in the address bar:</em></p>
+<p>(1) <em>Switch back to showing frequently visited URLs from history when clicking in the address bar:</em></p>
 <p>You can do this by disabling the Top Sites section on the Firefox Home / new tab page, as described in the Mozilla Support article <a 
 href="https://support.mozilla.org/kb/hide-or-display-content-new-tab" target="_blank">Hide or display content in New Tab</a>. On the 
 Options/Preferences page, Home panel, uncheck the box for Top Sites:</p>
@@ -79,14 +77,21 @@ Options/Preferences page, Home panel, uncheck the box for Top Sites:</p>
 	<li>In the search box in the page, type or paste <strong>topsi</strong> and pause while the list is filtered.</li>
 	<li>Double-click the <strong>browser.newtabpage.activity-stream.feeds.topsites</strong> preference to switch the value from true to false.</li>
 </ol>
-<p>(2) <em>Don't open the drop-down at all when first clicking in an empty address bar:</em></p>
+<p>(2) <em>Don't open the drop-down at all when first clicking in the address bar:</em></p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
-	<li>Double-click the <strong>browser.urlbar.openViewOnFocus</strong> preference to switch the value from true to false.</li>
+	<li>(Firefox 75-77) Double-click the <strong>browser.urlbar.openViewOnFocus</strong> preference to switch the value from true to false.</li>
+	<li>(Firefox 78-79) Double-click the <strong>browser.urlbar.suggest.topsites</strong> preference to switch the value from true to false.</li>
 </ol>
-<p>With that change, you can delete the current page URL or, if the bar is empty, press the down arrow to display the "Show History" list.</p>
+<p>With that change, you can type a space in the address bar or, if the bar is empty, press the down arrow key on the keyboard to display the classic "Show History" list.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+<div style="page-break-inside: avoid;">
+<h3 id="showhistory">Where is my "Show History" arrow/triangle button?</h3>
+<p>You can access the classic frequent sites list in an empty address bar by typing a space or pressing the down arrow. If you don't want to disable the Top Sites section of the new tab page and need a purely mouse-based method to access your frequently visited URLs list, I created an extension called <a href="https://addons.mozilla.org/en-US/firefox/addon/show-history-top-sites-button/" target="_blank">Show History Frequent Sites Button</a>. Its list looks like the following. You can configure the number of items and how the URLs open (for example, in a new tab, in a background tab, etc.), but it has some limitations noted in the description on the Mozilla Add-ons site.</p>
+<p><img src="img/popup-v1.0.png" style="width:800px"></p>
+</div>
 
 <div style="page-break-inside: avoid;">
 <h3 id="standardfeatures">Managing Standard Address Bar / Drop-down Features</h3>
@@ -111,22 +116,24 @@ Search your bookmarks, history and tabs</a>.</p>
 	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
 	<li><em>To stop showing autofill suggestions in the address bar:</em> Double-click the <strong>browser.urlbar.autoFill</strong> preference to 
 	switch the value from true to false. (To re-enable this feature, double-click again, or use the reset arrow icon at the far right of the row.)</li>
-	<li><em>To stop showing the one-off search buttons at the bottom of the drop-down:</em> Double-click the <strong>browser.urlbar.oneOffSearches</strong> preference to 
-	switch the value from true to false. (To re-enable this feature, double-click again, or use the reset arrow icon at the far right of the row.)</li>
+	<li><em>To stop showing the one-off search buttons at the bottom of the drop-down (through Firefox 77):</em> Double-click the <strong>browser.urlbar.oneOffSearches</strong> 
+	preference to switch the value from true to false. (To re-enable this feature, double-click again, or use the reset arrow icon at the far right of the row.)</li>
 </ol>
 
 <h4>What about the informational "blue bar"?</h4>
-<p>The top row always provides information about what Firefox will do if you press the Enter/Return key, or click the Go arrow, right now. In the above screenshot, when there 
+<p>The top row always provides information about what Firefox will do if you press the Enter/Return key, or click the Go arrow, right now. When there 
 is an autofill match, the bar shows what URL will be loaded. If there isn't an autofill match but instead one or more search terms, Firefox will inform you what search 
 engine it will use. If you are using a search engine keyword or bookmark keyword, the top row should indicate where that leads. Here's what those look like:</p>
-<p><img src="img/Fx75-blue-bar.png" style="width:800px"></p>
+<p><img src="img/Fx75-blue-bar-2.png" style="width:800px"></p>
 <p>It's handy, but some people prefer not to see it. There is no checkbox or preference to hide the top row, but you can do it with a custom style rule 
 in a userChrome.css file. More on that below.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <h2 id="mbarstyler">Megabar Styler &ndash; Rules for userChrome.css</h2>
 <p>You can use these controls to generate a rules file to restyle the Firefox 75 URL bar and drop-down. The rules can be incorporated directly into a userChrome.css file, 
-or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>.</p>
+or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. 
+The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
+<p><em>As a shortcut to get rules simply to prevent the bar from expanding when you click in it, you can download the following file: <a href="samples/userChrome-ZeroEnlargement.css">userChrome-ZeroEnlargement.css</a>. If you do not have a userChrome.css file yet, you can shorten that name by removing -ZeroEnlargement from the middle of it, and place that in your chrome folder (the one you create using the steps in <a href="how-create-userchrome-css.html" target="_blank">How to Create a userChrome.css File</a>). If you already have a userChrome.css file, you can copy paste rules from the download into yours.</em></p>
 <table id="mbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%">
 	<tbody>
 		<tr><td colspan="2"><p>Amount of URL bar enlargement: <br>
@@ -150,25 +157,32 @@ or you could include them by reference as described in <a href="adding-style-rec
 			</select></p>
 			<p>Use a two-row layout? <br>
 			<select id="rows" name="rows" size="2">
-				<option value="1row" selected>No, keep the 1 row layout (default)</option>
-				<option value="2row">Yes, put the URL below the title</option>
+				<option value="1row" selected>Let Firefox decide (1 row unless too narrow) (default)</option>
+				<option value="2row">Yes, always put the URL below the title</option>
 			</select></p>
 			<p>Show a thin line between suggestions ? <br>
 			<select id="borderwidth" name="borderwidth" size="2">
 				<option value="0px">No thanks (default)</option>
 				<option value="1px" selected>Sure, good idea</option>
 			</select></p>
-			<p>Rows visible on the drop-down without a scroll bar:<br>
+			<p>Show a scroll bar when there are more than X rows on the drop-down:<br>
 			<select id="maxrows" name="maxrows" size="6">
-				<option value="8">up to 8</option>
-				<option value="10" selected>up to 10 (default in Fx48+)</option>
-				<option value="12">up to 12</option>
-				<option value="15">up to 15</option>
-				<option value="18">up to 18</option>
-				<option value="20">up to 20</option>
+				<option value="8">more than 8</option>
+				<option value="10" selected>more than 10 (typical max. rows)</option>
+				<option value="12">more than 12</option>
+				<option value="15">more than 15</option>
+				<option value="18">more than 18</option>
+				<option value="20">more than 20</option>
 			</select><br>
 			<span style="font-size:0.9em"><em>Note: If you set </em><code>browser.urlbar.maxRichResults</code><em> to a higher value, a scroll bar will appear. 
-			The additional suggestions can be reached using the mouse, but not the down arrow key.</em></span></p></td>
+			The additional suggestions can be reached using the mouse, but not the down arrow key.</em></span></p>
+			<p>One-off Search Button row: <br>
+			<select id="oneoffs" name="oneoffs" size="3">
+				<option value="full" selected>Show the bar full-height with header (default)</option>
+				<option value="flex">Minimum height, just buttons, no header</option>
+				<option value="none">Hide the row (down/up arrows still go in)</option>
+			</select>
+			</p></td>
 			<td><div id="top-rows" style="background-image: url(img/topyes-1row.png); width: 540px; height: 480px; background-size: contain; margin-bottom: 1em"></div></td>
 		</tr>
 		<tr>
@@ -205,8 +219,18 @@ or you could include them by reference as described in <a href="adding-style-rec
 <h4>CSS based on above options: <button onclick="selectel('currentCSS'); this.blur();" style="margin-left:4em">Select CSS</button> 
 	<button id="savecss" onclick="saveCSS(this);">Save below as .css File</button></h4>
 <div id="currentCSS" style="width:100%; font-family:monospace; font-size:0.8em; white-space:pre-wrap; border:1px solid #00f; padding:1em; background-color:#f8f8f8; min-height:300px;">
-<p>CSS to be shown here</p>
+<p>CSS to be shown here, assuming JavaScript is not disabled.</p>
 </div>
+
+<h3 id="update1">Temporary Preference to Disable Enlargement Feature</h3>
+<p>If you're not ready for all that, Firefox&nbsp;75 and 76 include a preference to disable the new "enlarging" design and revert to the Firefox&nbsp;74 design. You can use it temporarily and return to this page for additional styling-related suggestions in the future.</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
+	<li>Double-click the <strong>browser.urlbar.update1</strong> preference to switch the value from true to false.</li>
+</ol>
+<p>This change doesn't take effect in currently open windows, but you will see the old bar in new windows or after exiting/quitting out of Firefox and starting it up again.</p>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
 </div>
 </article>
 
@@ -217,11 +241,11 @@ target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.<
 </footer>
 <script type="text/javascript" src="uc.js"></script>
 <script>
-var cssGeneral = '', cssTwoRow = '';
+var cssGeneral = '', cssTwoRow = '', cssOneOffs = '', d = new Date(), ms = d.getTime();
 function init(){
 	document.getElementById('popout').selectedIndex = 1;
-	// fetch CSS files
-	var myRequest = new Request('samples/megabar-general.css');
+	// fetch CSS files; bypass caching by adding time
+	var myRequest = new Request('samples/megabar-general.css?' + ms);
 	fetch(myRequest)
 	.then(function(response) {
 		if (!response.ok) {
@@ -236,7 +260,22 @@ function init(){
 		console.log('Error: ' + error.message);
 	});
 
-	myRequest = new Request('samples/megabar-two-row.css');
+	myRequest = new Request('samples/megabar-oneoffs.css?' + ms);
+	fetch(myRequest)
+	.then((response) => {
+		if (!response.ok) {
+			throw new Error("HTTP error, status = " + response.status);
+		}
+		return response.text();
+	})
+	.then((text) => {
+		cssOneOffs += text;
+	})
+	.catch(function(error) {
+		console.log('Error: ' + error.message);
+	});
+
+	myRequest = new Request('samples/megabar-two-row.css?' + ms);
 	fetch(myRequest)
 	.then((response) => {
 		if (!response.ok) {
@@ -289,6 +328,12 @@ function buildCSS(evt){
 				break;
 			case 'rows':
 				if (ctrls[i].value == '2row') cssTemp += '\n\n' + cssTwoRow;
+			case 'oneoffs':
+				if (ctrls[i].value == 'flex' || ctrls[i].value == 'none'){
+					cssTemp += '\n\n' + cssOneOffs;
+					// Apply user selection
+					cssTemp = cssTemp.replace('/*[[' + ctrls[i].id + ']]*/', ctrls[i].value);
+				}
 			default:
 				cssTemp = cssTemp.replace('/*[[' + ctrls[i].id + ']]*/', ctrls[i].value);
 		}

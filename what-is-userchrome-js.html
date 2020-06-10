@@ -25,19 +25,29 @@
 </nav>
 <header>
 <h1>What is userChrome.js?</h1>
-<p>Posted by jscher2000 on November 25, 2017. Updated March 24, 2018.</p>
+<p>Updated April 18, 2020; Originally posted by jscher2000 on November 25, 2017.</p>
 </header>
 
 <article>
 <div id="main">
-<p>The subject of this site is the userChrome.<u>css</u> file and style recipes that can modify the <em>appearance</em> of Firefox's user interface. However, style rules cannot change the fundamental behavior of user interface features, and userChrome.css is not able to override certain built-in style rules, such as the appearance of scrollbars and form controls. If you are intent on making deeper changes, and you can't find a compatible extension, one option to consider would be applying scripts directly to the interface, like the Legacy extension <a href="http://userchromejs.mozdev.org/" rel="noopener" target="_blank">userChromeJS</a> made possible.</p>
+<p>The subject of this site is the userChrome.<u>css</u> file and style recipes that can modify the <em>appearance</em> of Firefox's user interface. However, style rules cannot change the fundamental behavior of user interface features, and historically userChrome.css has not been able to override certain built-in style rules marked !important. If you are intent on making deeper changes, and you can't find a compatible extension, one option to consider would be applying scripts directly to the interface, like the Legacy extension <a href="http://userchromejs.mozdev.org/" rel="noopener" target="_blank">userChromeJS</a> made possible before Firefox&nbsp;57.</p>
 
 <p style="border:2px solid red; padding: 0.5em 1em;"><strong>SAFETY FIRST!</strong> Unlike style rules that mess up the interface a bit, scripts implemented through userChrome.js have the potential to do anything that a Legacy extension could do. Please exercise great caution in adding scripts to your Firefox as they may not have gone through any kind of review process to screen for malicious code.</p>
 
 <h2>How it Works</h2>
+<h3>Autoconfig File</h3>
+<p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named autoconfig.js, local-settings.js, or whatever.js &mdash; directs Firefox to another JavaScript file, sometimes but not always named mozilla.cfg, that contains the actual script code. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. As Mike Kaply reminds us in his 2012 series on the topic, "Autoconfig files are Javascript files that have full access to all components of Firefox." See: <a href="https://mike.kaply.com/2012/03/22/customizing-firefox-advanced-autoconfig-files/" rel="noopener" target="_blank">Customizing Firefox – Advanced Autoconfig Files</a>. Mozilla Support has some documentation here: <a href="https://support.mozilla.org/kb/customizing-firefox-using-autoconfig" rel="noopener" target="_blank">Customizing Firefox Using AutoConfig</a>.</p> 
 
-<h3>XBL Binding</h3>
-<p>The gHacks Tech News site recently ran an article about how you can deploy the power of userChrome.js in Firefox Quantum. The featured example involves using the Firefox-specific <strong>-moz-binding</strong> style property in the userChrome.css file to sneak in the modification:</p>
+<p>By placing a config-prefs.js file in /defaults/pref, and three other files in suitable locations, Firefox can load and run the basic functionality of the userChromeJS extension. The installation procedure is set forth at <a href="https://github.com/xiaoxiaoflood/firefox-scripts" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts</a>. There are existing repositories of scripts in at least three locations, and more are likely to emerge:</p>
+<ul>
+<li><a href="https://github.com/xiaoxiaoflood/firefox-scripts">https://github.com/xiaoxiaoflood/firefox-scripts</a></li>
+<li><a href="https://github.com/alice0775/userChrome.js">https://github.com/alice0775/userChrome.js</a></li>
+<li><a href="https://github.com/Endor8/userChrome.js/tree/master/Firefox-57">https://github.com/Endor8/userChrome.js/tree/master/Firefox-57</a></li>
+<li><a href="https://github.com/ardiman/userChrome.js">https://github.com/ardiman/userChrome.js</a></li>
+</ul>
+
+<h3>XBL Binding (obsolete in Firefox 72+)</h3>
+<p>The gHacks Tech News site ran an article in November 2017 about how you can deploy the power of userChrome.js in Firefox Quantum. The featured example involves using the Firefox-specific <strong>-moz-binding</strong> style property in the userChrome.css file to sneak in the modification:</p>
 
 <pre class="codeblock">
 toolbarbutton#alltabs-button {
@@ -49,15 +59,6 @@ toolbarbutton#alltabs-button {
 
 <p>I recently saw another example, but haven't tried it myself. The author of the Classic Theme Restorer extension has posted an extensive library of style rules files, and one of them binds an XML file which can restore the old search bar from before Firefox 34. In userChrome.css, you can optionally @import <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/generalui/oldsearch.css" rel="noopener" target="_blank">oldsearch.css</a> which binds <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/xml/oldsearch.xml" rel="noopener" target="_blank">oldsearch.xml</a>, which contains the structural elements and scripts. (If you don't download the whole package, you'll need to fix up the paths.)</p>
 
-<h3>Autoconfig File</h3>
-<p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named autoconfig.js, local-settings.js, or whatever.js &mdash; directs Firefox to another JavaScript file, sometimes but not always named mozilla.cfg, that contains the actual script code. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. As Mike Kaply reminds us in his 2012 series on the topic, "Autoconfig files are Javascript files that have full access to all components of Firefox." See: <a href="https://mike.kaply.com/2012/03/22/customizing-firefox-advanced-autoconfig-files/" rel="noopener" target="_blank">Customizing Firefox – Advanced Autoconfig Files</a>. Mozilla has some basic documentation on MDN: <a href="https://developer.mozilla.org/en-US/Firefox/Enterprise_deployment" rel="noopener" target="_blank">Deploying Firefox in an enterprise environment</a>.</p> 
-
-<p>By placing a config-prefs.js file in /defaults/pref, and three other files in suitable locations, Firefox can load and run the basic functionality of the userChromeJS extension. The installation procedure is set forth in German at <a href="https://github.com/Endor8/userChrome.js/tree/master/userChrome" rel="noopener" target="_blank">https://github.com/Endor8/userChrome.js/tree/master/userChrome</a>. There are existing repositories of scripts in at least two locations, and more are likely to emerge:</p>
-<ul>
-<li><a href="https://github.com/Endor8/userChrome.js/tree/master/Firefox-57">https://github.com/Endor8/userChrome.js/tree/master/Firefox-57</a></li>
-<li><a href="https://github.com/ardiman/userChrome.js">https://github.com/ardiman/userChrome.js</a></li>
-<li><a href="https://github.com/alice0775/userChrome.js">https://github.com/alice0775/userChrome.js</a></li>
-</ul>
 <p>Needless to say (but I'll say it anyway), any use of these approaches is at your own risk.</p>
 
 <h2>Share Your Experience!</h2>
@@ -66,7 +67,7 @@ toolbarbutton#alltabs-button {
 </article>
 
 <footer>
-<p>Copyright &copy; 2018 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+<p>Copyright &copy; 2020 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
 <script type="text/javascript" src="uc.js"></script>
 </body>
