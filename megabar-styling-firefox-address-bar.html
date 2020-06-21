@@ -41,7 +41,7 @@
 </nav>
 <header>
 <h1>Megabar &ndash; Configuring and Styling the Firefox 75+ Address Bar</h1>
-<p>Updated June 10, 2020; Originally posted by jscher2000 on April 11, 2020.</p>
+<p>Updated June 21, 2020; Originally posted by jscher2000 on April 11, 2020.</p>
 </header>
 
 <article>
@@ -53,6 +53,7 @@ managing the behavior and appearance of the bar and its drop-down.</p>
 	<li><a href="#topsites" onclick="window.setTimeout(pgshow, 100);">Switch the automatically dropping list from showing 8 Top Sites to classic Show History list (or neither)</a></li>
 	<li><a href="#showhistory" onclick="window.setTimeout(pgshow, 100);">The Show History button is gone!</a></li>
 	<li><a href="#standardfeatures" onclick="window.setTimeout(pgshow, 100);">Change the types of suggested matches Firefox shows as you type</a></li>
+	<li><a href="#enlargement" onclick="window.setTimeout(pgshow, 100);">Reduce automatic address bar enlargement (Firefox 78+)</a></li>
 	<li><a href="#mbarstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling the bar to reduce the bulging, URL on its own row, other modifications (userChrome.css rules)</a></li>
 	<li><a href="#update1" onclick="window.setTimeout(pgshow, 100);">Firefox 75-76 roll back option</a></li>
 </ul>
@@ -65,8 +66,18 @@ a combination of pre-pinned search shortcuts, popular sites, and URLs from your 
 you have been ignoring this section, it's probably confusing to see this list. For information on how to add, remove, and rearrange those sites, see the Mozilla Support article: 
 <a href="https://support.mozilla.org//kb/customize-new-tab-page" target="_blank">Customize the New Tab page</a>.</p>
 </div>
-<p>If you want to prevent the Top Sites list from automatically dropping down, you have two choices using preference changes:</p>
-<p>(1) <em>Switch back to showing frequently visited URLs from history when clicking in the address bar:</em></p>
+<p>If you want to prevent the Top Sites list from automatically dropping down when the cursor enters the bar, you have two choices using preference changes:</p>
+<p>(1) <em>Don't open the drop-down at all when first clicking in the address bar:</em></p>
+<p>Starting in Firefox 78 there will be a checkbox for this in the "Address Bar" section of the Privacy &amp; Security panel on the Options/Preferences page. Until then or alternately,  you can make the change using about:config:</p>
+<p><img src="img/Fx78-options-privacy-security-address-bar-top-sites.png" style="width:584px"></p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
+	<li>(Firefox 75-77) Double-click the <strong>browser.urlbar.openViewOnFocus</strong> preference to switch the value from true to false.</li>
+	<li>(Firefox 78-79) Double-click the <strong>browser.urlbar.suggest.topsites</strong> preference to switch the value from true to false.</li>
+</ol>
+<p>With that change, you can type a space in the address bar to display the classic "Show History" list.</p>
+<p>(2) (Firefox 75-77) <em>Switch back to showing frequently visited URLs from history when clicking in the address bar:</em></p>
 <p>You can do this by disabling the Top Sites section on the Firefox Home / new tab page, as described in the Mozilla Support article <a 
 href="https://support.mozilla.org/kb/hide-or-display-content-new-tab" target="_blank">Hide or display content in New Tab</a>. On the 
 Options/Preferences page, Home panel, uncheck the box for Top Sites:</p>
@@ -77,20 +88,12 @@ Options/Preferences page, Home panel, uncheck the box for Top Sites:</p>
 	<li>In the search box in the page, type or paste <strong>topsi</strong> and pause while the list is filtered.</li>
 	<li>Double-click the <strong>browser.newtabpage.activity-stream.feeds.topsites</strong> preference to switch the value from true to false.</li>
 </ol>
-<p>(2) <em>Don't open the drop-down at all when first clicking in the address bar:</em></p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
-	<li>(Firefox 75-77) Double-click the <strong>browser.urlbar.openViewOnFocus</strong> preference to switch the value from true to false.</li>
-	<li>(Firefox 78-79) Double-click the <strong>browser.urlbar.suggest.topsites</strong> preference to switch the value from true to false.</li>
-</ol>
-<p>With that change, you can type a space in the address bar or, if the bar is empty, press the down arrow key on the keyboard to display the classic "Show History" list.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="showhistory">Where is my "Show History" arrow/triangle button?</h3>
-<p>You can access the classic frequent sites list in an empty address bar by typing a space or pressing the down arrow. If you don't want to disable the Top Sites section of the new tab page and need a purely mouse-based method to access your frequently visited URLs list, I created an extension called <a href="https://addons.mozilla.org/en-US/firefox/addon/show-history-top-sites-button/" target="_blank">Show History Frequent Sites Button</a>. Its list looks like the following. You can configure the number of items and how the URLs open (for example, in a new tab, in a background tab, etc.), but it has some limitations noted in the description on the Mozilla Add-ons site.</p>
-<p><img src="img/popup-v1.0.png" style="width:800px"></p>
+<p>You can access the classic frequent sites list by typing a space in the address bar, or by pressing the down arrow if the bar is empty. If you need a purely mouse-based method to access your frequently visited URLs list, I created an extension called <a href="https://addons.mozilla.org/en-US/firefox/addon/show-history-top-sites-button/" target="_blank">Show History Frequent Sites Button</a>. Its list looks like the following. You can configure the number of items and how the URLs open (for example, in a new tab, in a background tab, etc.), but it has some limitations noted in the description on the Mozilla Add-ons site.</p>
+<p><img src="img/popup-v1.2.png" style="width:800px"></p>
 </div>
 
 <div style="page-break-inside: avoid;">
@@ -128,6 +131,25 @@ engine it will use. If you are using a search engine keyword or bookmark keyword
 <p>It's handy, but some people prefer not to see it. There is no checkbox or preference to hide the top row, but you can do it with a custom style rule 
 in a userChrome.css file. More on that below.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+<h2 id="enlargement">How to Tame the Enlarging Address Bar (Firefox 78+)</h2>
+<p>Having the address bar enlarge immediately upon the cursor entering has been unpopular, and advocates for people affected by animations asked that an option be added to 
+honor their system settings for preferring reduced motion. This option is coming in Firefox&nbsp;78. When the cursor enters the bar automatically, for example, on a new tab, 
+with this setting in place, there will not be any enlargement animation or auto-opening of the drop-down. You can interact with the page and other toolbar controls without 
+distraction. As soon as you start interacting with the address bar, which opens the drop-down, then it will expand at that point. If you don't want any enlargement ever, 
+please see the following section on <a href="mbarstyler">userChrome.css rules</a>.</p>
+<p>If you do not want to change this preference at the system level, you can trigger this feature by creating a preference in Firefox. Note that this affects various other types 
+of animation meant to communicate updated states, such as the blue swipe across a tab that just finished loading. If you're worried you'll miss something, this might not be the 
+best option for you. But if you want to try it, here's how:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>ui.prefersReducedMotion</strong> and pause while the list is filtered.<br><em>If this preference was already 
+	created and shows a value of 0, skip to step D.</em></li>
+	<li>On the bar with the preference name, click the radio button next to Number and click the + button to add the preference. Then Firefox should display the new value.</li>
+	<li>Set the value to 1 (double-click to edit if necessary) and click the blue checkmark button to save the change.</li>
+</ol>
+<p>For the visually oriented, here is a sequence of screenshots of the above:</p>
+<p><img src="img/Fx77-prefers-reduced-motion.png" style="width:719px"></p>
 
 <h2 id="mbarstyler">Megabar Styler &ndash; Rules for userChrome.css</h2>
 <p>You can use these controls to generate a rules file to restyle the Firefox 75 URL bar and drop-down. The rules can be incorporated directly into a userChrome.css file, 
