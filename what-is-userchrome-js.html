@@ -3,72 +3,207 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
-<title>What is userChrome.js?</title>
+<title>What is Autoconfig Startup Scripting (AKA userChrome.js)?</title>
 <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
 <nav>
-<ul>
-<li id="logo">userChrome.org</li>
-<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
-<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
-<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
-</ul>
-<div id="rightnav">
-<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
-<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
-<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
-<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
-<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
-<div id="hotnews"><a href="megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
-</div>
+  <ul>
+    <li id="logo">userChrome.org</li>
+    <li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+    <li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+    <li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+  </ul>
+  <div id="rightnav">
+  <a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+  <a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+  <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+  <div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+  <div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+  <div id="hotnews"><a href="firefox-89-styling-proton-ui.html">Firefox 89 OMG: the Proton UI</a></div>
+  </div>
 </nav>
 <header>
-<h1>What is userChrome.js?</h1>
-<p>Updated April 18, 2020; Originally posted by jscher2000 on November 25, 2017.</p>
+  <h1>What is Autoconfig Startup Scripting (AKA userChrome.js)?</h1>
+  <p>Updated May 30, 2020; Originally posted by jscher2000 on November 25, 2017.</p>
 </header>
 
 <article>
-<div id="main">
-<p>The subject of this site is the userChrome.<u>css</u> file and style recipes that can modify the <em>appearance</em> of Firefox's user interface. However, style rules cannot change the fundamental behavior of user interface features, and historically userChrome.css has not been able to override certain built-in style rules marked !important. If you are intent on making deeper changes, and you can't find a compatible extension, one option to consider would be applying scripts directly to the interface, like the Legacy extension <a href="http://userchromejs.mozdev.org/" rel="noopener" target="_blank">userChromeJS</a> made possible before Firefox&nbsp;57.</p>
+  <div id="main">
+  <p>While custom style rules in a userChrome.css file can modify the <em>appearance</em> of Firefox's user interface, they cannot change the fundamental <em>behavior</em> of user interface features or restore ones that have been removed. In some cases, extensions can resolve the issue of missing functionality, but in other cases, you might need to turn to a higher level of hackery: Autoconfig startup scripts.</p>
+  
+  <h3>How it Works</h3>
+  <p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named config-prefs.js, local-settings.js, or whatever.js &mdash; directs Firefox to load a JavaScript file (placed at the top level of the program folder) that contains the actual script code. That second file can contain script code, and also can load and run other scripts, which load and run other scripts, and so on. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. Mozilla Support has some documentation here: <a href="https://support.mozilla.org/kb/customizing-firefox-using-autoconfig" rel="noopener" target="_blank">Customizing Firefox Using AutoConfig</a>.</p>
+  
+  <p><strong><em>Note:</em></strong> Like userChrome.css, your Autoconfig files are read only at startup. To make sure that edits to scripts are reflected after startup, it may be best to restart Firefox using the button on the right side of the <a href="https://support.mozilla.org/kb/use-troubleshooting-information-page-fix-firefox" rel="noopener" target="_blank">Troubleshooting Information page</a> under "Try clearing the startup cache."</p>
+  
+  <h3>userChrome.js</h3>
+  <p>Autoconfig allows users to run powerful code that extensions are no longer allowed to run in Firefox 57+. The scripts the community is sharing have inherited code and terminology from the userChrome.js legacy extension. Just like userChrome.js would load and run individual scripts, the Autoconfig-based loaders can run a variety of individual scripts directed toward specific changes you would like to make to Firefox. After installing a main "loader" script, you can add a wide variety of task-specific script files (<em>somefunction.uc.js</em>) to your chrome folder where the loader will find and run them.</p>
+  
+  <p style="border:2px solid red; padding: 0.5em 1em;"><strong>SAFETY FIRST!</strong> userChrome.js scripting requires disabling a safety mechanism that limits what startup scripts can do. Unlike style rules that mess up the interface a bit, unrestricted startup scripts have broad ranging powers. They can modify Firefox in almost any way, and beyond the browser itself, they can reach parts of the system and take actions that are off limits to extensions. Please exercise great caution in adding scripts to your Firefox as they may not have gone through any kind of review process to screen for malicious code. Also, consider routinely checking your chrome folder for any user scripts that might have been dropped in by someone else.</p>
+  
+  <h2>Getting Started</h2>
+  <h3 id="installloader">Installing a userChrome.js Loader &mdash; or Not</h3>
+  <p>If you are looking for one simple, targeted, quick fix, you may not need to install a full userChrome.js loader. The advantage of a quick fix script is that it is self-contained and raises the fewest security concerns. (You can find an example <a href="#combinedloader" onclick="window.setTimeout(pgshow, 100);">here</a>.) However, a quick fix script may be difficult to expand with additional functions. If you plan to experiment more broadly, you probably will need a userChrome.js loader eventually. That doesn't mean you need to start there, but like the killer app for iOS or Android, or the program that only runs on MacOS or Windows, the script you need will tend to guide you toward using the platform needed to run it. That means you might not have a completely free choice of loaders, but I think it's still helpful to have an overview.</p>
 
-<p style="border:2px solid red; padding: 0.5em 1em;"><strong>SAFETY FIRST!</strong> Unlike style rules that mess up the interface a bit, scripts implemented through userChrome.js have the potential to do anything that a Legacy extension could do. Please exercise great caution in adding scripts to your Firefox as they may not have gone through any kind of review process to screen for malicious code.</p>
+  <p>First, set up your chrome folder in your profile, as described on <a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File" target="_blank">the HOW page</a>. I suggest testing that with a userChrome.css file to make sure Firefox is finding it. Then you will need to drop the loader files into three locations:</p>
+  
+  <ul>
+    <li>Firefox program/installation folder (I will use the 64-bit Windows path as an example, but you can find the specific folder in the first table of the <a href="https://support.mozilla.org/kb/use-troubleshooting-information-page-fix-firefox" rel="noopener" target="_blank">Troubleshooting Information page</a>, "Application Binary" row):<br>&nbsp; <ul>
+      <li>C:\Program Files\Mozilla Firefox\defaults\pref: <em>Most loaders place a single file named</em> config-prefs.js <em>in this folder</em>. For the three loaders I tested, these files are identical (other than a few comments).</li>
+      <li>C:\Program Files\Mozilla Firefox: <em>Most loaders place a single file named</em> config.js <em>in this folder</em>. The contents of this file vary considerably between loaders, so they are not interchangeable and if you switch loaders, you need to remember to change out this file</li>
+    </ul></li>
+    <li>The chrome folder you created in your currently active profile folder. The setup varies between the loaders.</li>
+  </ul>
+  
+  <p><strong><em>Note:</em></strong> When setting up Autoconfig files, you may be surprised to find startup script files you did not create yourself. It is normal to find Firefox's channel-prefs.js file in the defaults\pref folder, but any other file is worth investigating. In a business environment, files may have been placed by your IT department. Otherwise, the source may have been security software or malware modifying how Firefox runs.</p>
+  
+  <p>Here are three options for loader scripts. Does it matter which one you use? There are important technical differences between these loaders, but I have not studied them closely myself. Compatbility with the script you need may be the dominant factor for most users.</p>
+  <ul>
+    <li><a href="https://github.com/alice0775/userChrome.js" rel="noopener" target="_blank">https://github.com/alice0775/userChrome.js</a> &mdash; as of May 23, 2021. I suggest using the green "Code" button to download a ZIP archive of the files for easier copy/pasting. (Github makes it a bit difficult to download individual .js files.)<br>&nbsp; <ul>
+      <li>The loader files for the program folder were last updated for Firefox 72 and can be found in <a href="https://github.com/alice0775/userChrome.js/tree/master/72/install_folder" rel="noopener" target="_blank">https://github.com/alice0775/userChrome.js/tree/master/72/install_folder</a>. If you prefer not to download the Zip file, to save a JavaScript file from Github without added formatting, view the file contents, right-click the "Raw" button, click Save Link As. It's normal for Firefox to add .txt to the file name, so you'll need to rename it after downloading.</li>
+      <li>The userChrome.js file for the chrome folder was last updated for Firefox 73 and can be found in <a href="https://github.com/alice0775/userChrome.js/tree/master/73" rel="noopener" target="_blank">https://github.com/alice0775/userChrome.js/tree/master/73</a>. If you prefer not to download the Zip file, to save a JavaScript file from Github without added formatting, view the file contents, right-click the "Raw" button, click Save Link As. It's normal for Firefox to add .txt to the file name, so you'll need to rename it after downloading.</li>
+    </ul></li>
+    <li><a href="https://github.com/MrOtherGuy/fx-autoconfig">https://github.com/MrOtherGuy/fx-autoconfig</a> &mdash; as of May 23, 2021. I suggest using the green "Code" button to download a ZIP archive of the files for easier copy/pasting. (Github makes it a bit difficult to download individual .js files.)<br>&nbsp; <ul>
+      <li>The loader files for the program folder can be found in <a href="https://github.com/MrOtherGuy/fx-autoconfig/tree/master/program" rel="noopener" target="_blank">https://github.com/MrOtherGuy/fx-autoconfig/tree/master/program</a></li>
+      <li>There are three folders to drop into the chrome folder (online at <a href="https://github.com/MrOtherGuy/fx-autoconfig/tree/master/profile/chrome" rel="noopener" target="_blank">https://github.com/MrOtherGuy/fx-autoconfig/tree/master/profile/chrome</a>, but it's much easier to get them from the ZIP archive).</li>
+    </ul></li>
+    <li><a href="https://github.com/xiaoxiaoflood/firefox-scripts" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts</a> &mdash; as of May 23, 2021:<br>&nbsp; <ul>
+      <li>The loader files for the program folder are available for download as a ZIP archive from the instructions on the main page (or you can find them at <a href="https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts/tree/master/installation-folder</a>).</li>
+      <li>The utils folder for the chrome folder is available for download as a ZIP archive from the instructions on the main page, with different options available depending on the types of scripts you expect to run (I'm not familiar with the pros and cons).</li>
+    </ul></li>
+  </ul>
+    
+  <h2 id="findingscripts">Finding Scripts</h2>
+  <p>There are numerous repositories for user scripts, but since it can be difficult to know what a file does from its name, you may want to seek guidance from the Reddit community on <a href="https://www.reddit.com/r/FirefoxCSS/" rel="noopener" target="_blank">r/FirefoxCSS</a> or <a href="https://www.reddit.com/r/Firefox/" rel="noopener" target="_blank">r/Firefox</a>. Here are some recently updated repositories you could check out:</p>
+  
+  <ul>
+    <li><a href="https://github.com/alice0775/userChrome.js" rel="noopener" target="_blank">https://github.com/alice0775/userChrome.js</a> &mdash; compatible with the alice0775/userChrome.js loader, others unknown</li>
+    <li><a href="https://github.com/aminomancer/uc.css.js/" rel="noopener" target="_blank">https://github.com/aminomancer/uc.css.js/</a> &mdash; compatible with the MrOtherGuy/fx-autoconfig loader and many may be compatible with the alice0775/userChrome.js loader</li>
+    <li><a href="https://github.com/xiaoxiaoflood/firefox-scripts" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts</a> &mdash; compatible with the xiaoxiaoflood/firefox-scripts loader, others unknown</li>
+    <li><a href="https://github.com/Endor8/userChrome.js" rel="noopener" target="_blank">https://github.com/Endor8/userChrome.js</a> &mdash; compatibility unknown</li>
+  </ul>
+  
+  <p>As with custom style rules, an extra burden of modifying Firefox this way is that scripts are not updated automatically to keep up with changes in Firefox. It's a good practice to bookmark the specific page where you found a script in case it stops working correctly and you need to find the author's latest update.</p>
+  
+  <h3 id="accesskey">Sample Script: Menu Access Key Edits</h3>
+  <p>In recent versions of Firefox, menu wording has changed to be less technical and more consistent with other browsers. For example, rather than "Copy Link Loc<u>a</u>tion", the menu now refers to "Copy <u>L</u>ink". One result of this was that the access key &mdash; the key you press to select the menu item (also known as an accelerator key, hotkey, or shortcut) &mdash; had to be changed. Users who relied on a right-click then tap key pattern, now had to learn a new key or adopt a right-click then click pattern. This can't be fixed with style rules, but can be fixed with a .uc.js file.</p>
+  
+  <p>Here is an example of a user script that modifies the menu wording and accelerator keys. You can download this as <a href="samples/CopyLinkLocation.uc.js">CopyLinkLocation.uc.js</a>. For the alice0775/userChrome.js and xiaoxiaoflood/firefox-scripts loaders, the script goes into the chrome folder in your profile. For the MrOtherGuy/fx-autoconfig loader, the script goes into the JS subfolder in the chrome folder in your profile.</p>
+  
+  <pre class="codeblock notranslate">
+  // ==UserScript==
+  // @name           Copy Link Location
+  // @version        1.0
+  // @description	   Restore old label and accelerator key
+  // ==/UserScript==
+  
+  /* 
+    Compatibility Testing Results May 22-23, 2021 
+      alice0775/userChrome.js - working
+      MrOtherGuy/fx-autoconfig - working
+      xiaoxiaoflood/firefox-scripts - working
+  */
+  
+  (function(){
+    let myKeyChanges = [
+      {
+        id: 'context-copylink', 
+        newkey: 'a',
+        newlabel: 'Copy Link Location'
+      },
+      {
+        id: 'context-copyemail', 
+        newkey: 'A',
+        newlabel: 'Copy Email Address'
+      }
+    ];
+  
+    for (var i=0; i&lt;myKeyChanges.length; i++){
+      var menuitem = window.document.getElementById(myKeyChanges[i].id);
+      if (menuitem){
+        if (myKeyChanges[i].newkey.length == 1){
+          menuitem.setAttribute('accesskey', myKeyChanges[i].newkey);
+        }
+        if (myKeyChanges[i].newlabel.length > 0){
+          menuitem.setAttribute('label', myKeyChanges[i].newlabel);
+        }
+      }
+    }
+  })();
+  </pre>
+  
+  <h3 id="combinedloader">Combining a Script with a Compact Loader</h3>
+  <p>What if you wanted to apply the access key changes using a simpler two-file solution rather than a full userChrome.js loader? We can follow the lead of Reddit user AveYo in <a href="https://www.reddit.com/r/firefox/comments/kilmm2/restore_ctrlshiftb_library_by_setting_configjs/" rel="noopener" target="_blank">Restore Ctrl+Shift+B = Library by setting config.js</a> and include all the necessary code in a config1.js file so that no files need to be placed in the chrome folder. Here is an example (the files are available for download in <a href="samples/autoconfig-context-menu-items.zip">autoconfig-context-menu-items.zip</a>):</p>
+  
+  <pre class="codeblock notranslate">
+  // config-prefs.js file for [Firefox program folder]\defaults\pref
+  pref("general.config.obscure_value", 0);
+  // the file named in the following line must be in [Firefox program folder]
+  pref("general.config.filename", "config1.js");
+  // disable the sandbox to run unsafe code in Autoconfig
+  pref("general.config.sandbox_enabled", false);
+  </pre>
 
-<h2>How it Works</h2>
-<h3>Autoconfig File</h3>
-<p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named autoconfig.js, local-settings.js, or whatever.js &mdash; directs Firefox to another JavaScript file, sometimes but not always named mozilla.cfg, that contains the actual script code. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. As Mike Kaply reminds us in his 2012 series on the topic, "Autoconfig files are Javascript files that have full access to all components of Firefox." See: <a href="https://mike.kaply.com/2012/03/22/customizing-firefox-advanced-autoconfig-files/" rel="noopener" target="_blank">Customizing Firefox – Advanced Autoconfig Files</a>. Mozilla Support has some documentation here: <a href="https://support.mozilla.org/kb/customizing-firefox-using-autoconfig" rel="noopener" target="_blank">Customizing Firefox Using AutoConfig</a>.</p> 
+  <pre class="codeblock notranslate">
+  // config1.js file for [Firefox program folder]
+  // file name must match the name in [Firefox program folder]\defaults\pref
+  function applyCustomScriptToNewWindow(win){
+    /*** Context menu changes ***/ 
+    let myKeyChanges = [
+      {
+        id: 'context-copylink', 
+        newkey: 'a',
+        newlabel: 'Copy Link Location'
+      },
+      {
+        id: 'context-copyemail', 
+        newkey: 'A',
+        newlabel: 'Copy Email Address'
+      }
+    ];
+    for (var i=0; i&lt;myKeyChanges.length; i++){
+      var menuitem = win.document.getElementById(myKeyChanges[i].id);
+      if (menuitem){
+        if (myKeyChanges[i].newkey.length == 1){
+          menuitem.setAttribute('accesskey', myKeyChanges[i].newkey);
+        }
+        if (myKeyChanges[i].newlabel.length > 0){
+          menuitem.setAttribute('label', myKeyChanges[i].newlabel);
+        }
+      }
+    }
+    /*** Other changes ***/ 
+  }
+  /* Single function userChrome.js loader to run the above init function (no external scripts)
+    derived from https://www.reddit.com/r/firefox/comments/kilmm2/ */
+  try {
+    let { classes: Cc, interfaces: Ci, manager: Cm  } = Components;
+    const {Services} = Components.utils.import('resource://gre/modules/Services.jsm');
+    function ConfigJS() { Services.obs.addObserver(this, 'chrome-document-global-created', false); }
+    ConfigJS.prototype = {
+      observe: function (aSubject) { aSubject.addEventListener('DOMContentLoaded', this, {once: true}); },
+      handleEvent: function (aEvent) {
+        let document = aEvent.originalTarget; let window = document.defaultView; let location = window.location;
+        if (/^(chrome:(?!\/\/(global\/content\/commonDialog|browser\/content\/webext-panels)\.x?html)|about:(?!blank))/i.test(location.href)) {
+          if (window._gBrowser) applyCustomScriptToNewWindow(window);
+        }
+      }
+    };
+    if (!Services.appinfo.inSafeMode) { new ConfigJS(); }
+  } catch(ex) {};
+  </pre>
 
-<p>By placing a config-prefs.js file in /defaults/pref, and three other files in suitable locations, Firefox can load and run the basic functionality of the userChromeJS extension. The installation procedure is set forth at <a href="https://github.com/xiaoxiaoflood/firefox-scripts" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts</a>. There are existing repositories of scripts in at least three locations, and more are likely to emerge:</p>
-<ul>
-<li><a href="https://github.com/xiaoxiaoflood/firefox-scripts">https://github.com/xiaoxiaoflood/firefox-scripts</a></li>
-<li><a href="https://github.com/alice0775/userChrome.js">https://github.com/alice0775/userChrome.js</a></li>
-<li><a href="https://github.com/Endor8/userChrome.js/tree/master/Firefox-57">https://github.com/Endor8/userChrome.js/tree/master/Firefox-57</a></li>
-<li><a href="https://github.com/ardiman/userChrome.js">https://github.com/ardiman/userChrome.js</a></li>
-</ul>
+  <p>If you do adopt this approach and you want to add more tweaks, you may need to do some coding to adapt the additional script to this approach. If you find it simpler to install a full userChrome.js loader at that point, you can remove the config1.js file to avoid conflicts.</p>
 
-<h3>XBL Binding (obsolete in Firefox 72+)</h3>
-<p>The gHacks Tech News site ran an article in November 2017 about how you can deploy the power of userChrome.js in Firefox Quantum. The featured example involves using the Firefox-specific <strong>-moz-binding</strong> style property in the userChrome.css file to sneak in the modification:</p>
-
-<pre class="codeblock">
-toolbarbutton#alltabs-button {
-  -moz-binding: url("userChrome.xml#js");
-}
-</pre>
-
-<p>The accompanying userChrome.xml file directs Firefox to load the userChrome.js file, where you would add your scripts. <em>Source:</em> <a href="https://github.com/nuchi/firefox-quantum-userchromejs" rel="noopener" target="_blank">https://github.com/nuchi/firefox-quantum-userchromejs</a> via <a href="https://www.ghacks.net/2017/11/24/run-userchrome-js-scripts-in-firefox-57-or-newer/" rel="noopener" target="_blank">Run userchrome.js scripts in Firefox 57 or newer</a>. Copyright (c) 2017 Haggai Nuchi. Available for use under the MIT License: https://opensource.org/licenses/MIT.</p>
-
-<p>I recently saw another example, but haven't tried it myself. The author of the Classic Theme Restorer extension has posted an extensive library of style rules files, and one of them binds an XML file which can restore the old search bar from before Firefox 34. In userChrome.css, you can optionally @import <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/generalui/oldsearch.css" rel="noopener" target="_blank">oldsearch.css</a> which binds <a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/xml/oldsearch.xml" rel="noopener" target="_blank">oldsearch.xml</a>, which contains the structural elements and scripts. (If you don't download the whole package, you'll need to fix up the paths.)</p>
-
-<p>Needless to say (but I'll say it anyway), any use of these approaches is at your own risk.</p>
-
-<h2>Share Your Experience!</h2>
-<p>If you try any of these solutions, please post comments using the FEEDBACK button in the bar at the top of the page (you can be anonymous if you like). Let me know how it went, and let others know if you recommend particular scripts.</p>
-</div>
-</article>
-
-<footer>
-<p>Copyright &copy; 2020 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
-</footer>
-<script type="text/javascript" src="uc.js"></script>
-</body>
-</html>
+  <h2>Share Your Experience!</h2>
+  <p>If you try any of these solutions, please post comments using the FEEDBACK button in the bar at the top of the page (you can be anonymous if you like). Let me know how it went, and let others know if you recommend particular scripts.</p>
+  </div>
+  </article>
+  
+  <footer>
+  <p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" rel="noopener">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+  </footer>
+  <script type="text/javascript" src="uc.js"></script>
+  </body>
+  </html>

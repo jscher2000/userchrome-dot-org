@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
+<title>Firefox 89 &ndash; Styling the New Proton UI</title>
+<link rel="stylesheet" href="styles.css" type="text/css">
+<style>
+#tbarsettings td { vertical-align: top; }
+#tbarsettings td p { margin-top: 0; }
+#tbarsettings select { margin-left: 0.25in; min-width: 200px; }
+.bradius-0px > div { border-radius: 0px 0px 0px 0px; }
+.bradius-4px > div { border-radius: 4px 4px 0px 0px; }
+.bradius-6px > div { border-radius: 6px 6px 0px 0px; }
+.bradius-8px > div { border-radius: 8px 8px 0px 0px; }
+#tabbar-demo { color: #000; background-color: #eee; margin: 1em 0; padding: 4px 0; width: 100%; border-bottom: 2px solid #888; float: left; }
+#tabbar-demo > div { width: 200px; height: 29px; float: left; margin-left: 2px; margin-right: 2px; text-align: center; cursor: default; }
+#tabbar-demo.connected { padding-top: 1px; padding-bottom: 0px; }
+.backdemo:hover { background-color: rgba(0, 0, 0, 0.11); }
+#tabbar-demo.outline > .backdemo {
+	border: 1px solid rgba(0, 0, 0, .20) !important;
+	border-bottom-color: transparent !important;
+	height: 27px;
+	margin-top: 1px;
+}
+#tabbar-demo.outline > div {
+	margin-left: 0 !important;
+}
+#tabbar-demo.bar > #back1-demo {
+	border-right: 1px solid rgba(0, 0, 0, .20) !important;
+}
+#tabbar-demo.bar > .backdemo {
+	border-radius: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+#toc {margin-left: 18px; list-style-type: "▶";}
+#toc li {margin-top: 2px; margin-bottom: 2px; padding-left: 6px;}
+</style>
+</head>
+<body>
+<nav>
+<ul>
+<li id="logo">userChrome.org</li>
+<li><a href="what-is-userchrome-css.html" title="What is userChrome.css and what can it do?">WHAT</a></li>
+<li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
+<li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
+</ul>
+<div id="rightnav">
+<a href="javascript:void(0);" title="Load AddToAny" onclick="document.getElementById('confa2a').style.display='block';return false;">SHARE</a>
+<a href="javascript:void(0);" title="Load Google Translate" onclick="document.getElementById('confgt').style.display='block';return false;">TRANSLATE</a>
+<a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
+<div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
+<div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
+<div id="hotnews"><a href="https://www.userchrome.org/megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
+</div>
+</nav>
+<header>
+<h1>Firefox 89 &ndash; Styling the New Proton UI</h1>
+<p>Originally posted by jscher2000 on May 30, 2021.</p>
+</header>
+
+<article>
+<div id="main">
+<p>Before the "Photon" user interface design reached its fourth anniversary, Firefox&nbsp;89 has brought us the "Proton" user interface. The design of the tab bar has been particularly controversial due to its greater height, and the way tabs float. The feeling of spaciousness also extends to the menus. Here are some ideas for modifying these changes if they bother you, and of course you can find additional suggestions on the usual sites (especially r/FirefoxCSS).</p>
+<ul id="toc">
+	<li><a href="#compactmode" onclick="window.setTimeout(pgshow, 100);">Restoring Compact mode to the density selector</a></li>
+	<li><a href="#menuspacing" onclick="window.setTimeout(pgshow, 100);">Tightening up the menu spacing</a></li>
+	<li><a href="#tabstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling tab buttons as connected tabs</a></li>
+</ul>
+
+<h3 id="compactmode">Enabling "Compact" Toolbar Density</h3>
+<p>Do you miss having "compact" toolbars? The developers have reduced support for Compact mode so if you would like to select it from the Density popup on the Customize screen, you need to change a preference so it appears there:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>compact</strong> and pause while the list is filtered.</li>
+	<li>Double-click the <strong>browser.compactmode.show</strong> preference to switch the value from false to true.</li>
+</ol>
+<p>Alternately, if you don't plan to use the Density selector frequently, you can modify the density preference directly:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>browser.uidensity</strong> and pause while the list is filtered.</li>
+	<li>Double-click the preference to display an editing field, change the value as desired, then press Enter or click the blue check mark button to save the change. These are the available values:
+		<br>&nbsp;<br>
+		0 =&gt; Normal density (default)<br>
+		1 =&gt; Compact density<br>
+		2 =&gt; Touch density
+	</li>
+</ol>
+<div style="page-break-inside: avoid;">
+<p>This screenshot illustrates the difference in heights:</p>
+<p><img src="img/Fx90-about-config-browser-uidensity.png"></p>
+</div>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+<h3 id="menuspacing">Reducing vertical spacing in menus</h3>
+<p>Most of the menus in Firefox 89 are shorter, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. There is no built-in preference to modify the padding, but you can use custom style rules in a userChrome.css file. For example ():</p>
+
+<pre class="codeblock notranslate">
+/*** Tighten up drop-down/context/popup menu spacing ***/
+
+menupopup > menuitem, menupopup > menu {
+  padding-block: 4px !important;
+}
+:root {
+  --arrowpanel-menuitem-padding: 4px 8px !important;
+}
+</pre>
+
+<div style="page-break-inside: avoid;">
+<p>This makes the spacing similar to Firefox 88:</p>
+
+<p><img src="img/Fx90-menu-item-padding.png"></p>
+</div>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+
+<h2 id="tabstyler">Restyling tab buttons</h2>
+<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. Numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. You can use these controls to generate a rules file to restyle the Firefox 89 tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
+
+<table id="tbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%">
+	<tbody>
+		<tr><td colspan="3"><div id="tabbar-demo" class="connected bradius-4px">
+				<div id="back1-demo" class="backdemo">Tab Title</div>
+				<div id="back2-demo" class="backdemo">Tab Title</div>
+				<div id="bradius-demo" style="background-color: #fff;">Tab Title</div>
+			</div></td>
+		</tr>
+		<tr><td><p>Upper corner rounding: <br>
+			<select id="bradius" name="bradius" size="4">
+				<option value="0px">None</option>
+				<option value="4px" selected>4 pixels</option>
+				<option value="6px">6 pixels</option>
+				<option value="8px">8 pixels</option>
+			</select></p></td>
+			<td><p>Tabs floating or connected: <br>
+			<select id="floatflush" name="floatflush" size="2">
+				<option value="floating">Let them float (default style)</option>
+				<option value="connected" selected>Connect them to the toolbar</option>
+			</select></p></td>
+			<td><p>Show inactive tab boundaries: <br>
+			<select id="backtabs" name="backtabs" size="3">
+				<option value="none" selected>Only on hover (default style)</option>
+				<option value="bar">Using a vertical bar</option>
+				<option value="outline">Using a tab outline</option>
+			</select></p></td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>CSS based on above options: <button onclick="selectel('currentCSS'); this.blur();" style="margin-left:4em">Select CSS</button> 
+	<button id="savecss" onclick="saveCSS(this);">Save below as .css File</button></h4>
+<div id="currentCSS" style="width:100%; font-family:monospace; font-size:0.8em; white-space:pre-wrap; border:1px solid #00f; padding:1em; background-color:#f8f8f8; min-height:300px;">
+<p>CSS to be shown here, assuming JavaScript is not disabled.</p>
+</div>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+</div>
+</article>
+
+<footer>
+<p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or 
+<a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" 
+target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
+</footer>
+<script type="text/javascript" src="uc.js"></script>
+<script>
+function init(){
+	// reset selects on reload
+	document.getElementById('bradius').selectedIndex = 1;
+	document.getElementById('floatflush').selectedIndex = 1;
+	document.getElementById('backtabs').selectedIndex = 0;
+	// create initial CSS
+	buildCSS();
+}
+
+// update demo bar and call buildCSS()
+function updateDemo(evt){
+	var tgt = evt.target;
+	console.log(tgt);
+	var demobar = document.getElementById('tabbar-demo');
+	switch (tgt.id){
+		case 'bradius':
+			for (var i=0; i<tgt.options.length; i++){
+				if (tgt.options[i].selected) demobar.classList.add('bradius-' + tgt.options[i].value);
+				else demobar.classList.remove('bradius-' + tgt.options[i].value);
+			}
+			break;
+		case 'floatflush':
+			if (tgt.value == 'connected') demobar.classList.add('connected');
+			else demobar.classList.remove('connected');
+			break;
+		case 'backtabs':
+			for (var i=0; i<tgt.options.length; i++){
+				if (tgt.options[i].selected) demobar.classList.add(tgt.options[i].value);
+				else demobar.classList.remove(tgt.options[i].value);
+			}
+			break;
+		default:
+			// no action
+	}
+	window.setTimeout(buildCSS, 200);
+}
+
+// CSS div
+function buildCSS(evt){
+	var ctrls = document.querySelectorAll('#tbarsettings select');
+	var cssTemp = '';
+	for(var i=0; i<ctrls.length; i++){
+		switch (ctrls[i].id){
+			case 'bradius':
+				cssTemp += `/*** Proton Tabs Tweaks ***/
+
+/* Adjust tab corner shape, optionally remove space below tabs */
+
+#tabbrowser-tabs {
+    --user-tab-rounding: ${ctrls[i].value};
+}
+@media (-moz-proton) {
+    .tab-background {
+        border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important;`;
+				break;
+			case 'floatflush':
+				if (ctrls[i].value == 'connected') {
+					cssTemp += `
+        margin-block: 1px 0 !important;`;
+				}
+				cssTemp += `
+    }
+}
+`;
+				break;
+			case 'backtabs':
+				if (ctrls[i].value == 'bar'){
+					cssTemp += `
+/* Inactive tabs: Separator line style */
+
+@media (-moz-proton) {
+    .tab-background:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) {
+        border-right: 1px solid rgba(0, 0, 0, .20) !important;
+    }
+    /* For dark backgrounds */
+    [brighttext="true"] .tab-background:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) {
+        border-right: 1px solid var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
+    }
+    .tab-background:not([selected=true]):not([multiselected=true]) {
+        border-radius: 0 !important;
+    }
+    /* Remove padding between tabs */
+    .tabbrowser-tab {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+`;
+				} else if (ctrls[i].value == 'outline'){
+					cssTemp += `
+/* Inactive tabs: Outline style */
+
+@media (-moz-proton) {
+    .tab-background:not([selected=true]):not([multiselected=true]) {
+        border: 1px solid rgba(0, 0, 0, .20) !important;
+        border-bottom-color: transparent !important;
+    }
+    /* For dark backgrounds */
+    [brighttext="true"] .tab-background:not([selected=true]):not([multiselected=true]) {
+        border: 1px solid var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
+    }
+    /* Remove extra padding between tabs */
+    .tabbrowser-tab {
+        padding-left: 0 !important;
+    }
+}
+`;
+				}
+				break;
+			default:
+				// ?
+		}
+	}
+	var d = new Date();
+	document.getElementById('currentCSS').textContent = cssTemp + `
+/* Tweak Options as of 5/30/2021; Generated ${d.toString()} */`;
+}
+
+function selectel(elid){
+	var el=document.getElementById(elid);
+	if (el){
+		var sel = window.getSelection();
+		sel.removeAllRanges();
+		var rng = document.createRange();
+		rng.selectNode(el);
+		sel.addRange(rng);
+	}
+	return false;
+}
+function saveCSS(btn){
+	var dummy = document.createElement('div');
+	dummy.innerHTML = document.getElementById('currentCSS').innerHTML.replace(/\<br\>/gi, '<br>\n');
+	saveAs(
+		  new Blob(
+			  [dummy.textContent.replace(/\x0a/g, "\x0d\x0a")]
+			, {type: 'text/css;charset=UTF-8'}
+		)
+		, 'proton-tab-tweaks.css'
+		, true
+	);
+}
+document.getElementById('tbarsettings').addEventListener('change', updateDemo, false);
+window.addEventListener('load', init, false);
+</script>
+<script type="text/javascript" src="FileSaver.min.js"></script>
+</body>
+</html>

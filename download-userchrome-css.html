@@ -20,12 +20,12 @@
 <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
 <div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
 <div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
-<div id="hotnews"><a href="megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
+<div id="hotnews"><a href="firefox-89-styling-proton-ui.html">Firefox 89 OMG: the Proton UI</a></div>
 </div>
 </nav>
 <header>
 <h1>Generate Downloadable userChrome.css File</h1>
-<p>Posted by jscher2000 on April 26, 2018 <em>beta</em></p>
+<p>Originally posted by jscher2000 on April 26, 2018 <em>beta</em></p>
 </header>
 
 <article>
@@ -33,9 +33,17 @@
 <p>You can paste CSS into this lightweight editor (<a href="https://ace.c9.io/" target="_blank">Ace</a>) and then generate a userChrome.css file for download. All text entry and file generation is done within the page without sending any code to my server. This page is <strong>not</strong> backed up as you work. <em>The editor may object to some CSS selectors and properties not used on the web. That's normal.</em></p>
 <pre id="editor">/* Replace this SAMPLE CONTENT with your own CSS */
 
-/* No blue swipe on tabs when loaded */
-.tabbrowser-tab .tab-loading-burst {
-  display: none !important;
+/*** Maximize Print Overlay Preview Size ***/
+
+/* Allow panel to be taller */
+.dialogBox.printDialogBox[sizeto="available"]{
+  --box-ideal-height: 888 !important;
+}
+/* Remove side margins in narrower windows */
+@media (max-width: 1280px) {
+  .dialogBox.printDialogBox[sizeto="available"]{
+    max-width: 100vw !important;
+  }
 }
 </pre>
 
@@ -117,4 +125,3 @@ function saveCSS(){
 </script>
 </body>
 </html>
-
