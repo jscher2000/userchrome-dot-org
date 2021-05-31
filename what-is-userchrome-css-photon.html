@@ -3,14 +3,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
-<title>What is userChrome.css? What can it do?</title>
+<title>What is userChrome.css? [Archive for Photon]</title>
 <link rel="stylesheet" href="styles.css" type="text/css">
 </head>
 <body>
 <nav>
 <ul>
 <li id="logo">userChrome.org</li>
-<li><span id="current">WHAT</span></li>
+<li><span id="current">WHAT [Archive for Photon]</span></li>
 <li><a href="how-create-userchrome-css.html" title="How to Create a userChrome.css File">HOW</a></li>
 <li><a href="help-with-userchrome-css.html" title="Resources for Style Recipes and Tools">RESOURCES</a></li>
 </ul>
@@ -20,55 +20,52 @@
 <a href="javascript:void(0);" title="Load Comment Panel" onclick="togComments(this);return false;">FEEDBACK</a>
 <div id="confa2a" class="yesno">Load script from AddToAny to share this page? (<a href="https://www.addtoany.com/privacy" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadShare('1', this);">OK</button>&nbsp;<button onclick="document.getElementById('confa2a').style.display='none';">Cancel</button></span></div>
 <div id="confgt" class="yesno">Load script from Google Translate to select a language? (<a href="https://www.google.com/intl/en/policies/privacy/" rel="noopener" target="_blank">Privacy Policy</a>) <span style="position:absolute; right: 8px"><button onclick="loadTrans('2', this);">OK</button>&nbsp;<button onclick="document.getElementById('confgt').style.display='none';">Cancel</button></span></div>
-<div id="hotnews"><a href="firefox-89-styling-proton-ui.html">Firefox 89 OMG: the Proton UI</a></div>
+<div id="hotnews"><a href="megabar-styling-firefox-address-bar.html">Firefox 75 Address Megabar!</a></div>
 </div>
 </nav>
 <header>
-<h1>What is userChrome.css? What can it do?</h1>
-<p>Updated May 31, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
+<h1>What is userChrome.css? [Archive for Photon, Firefox 57-88]</h1>
+<p>Updated Jan. 24, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
 </header>
 
 <article>
 <div id="main">
-<p><em>For Firefox 57-88, please refer to the <a href="what-is-userchrome-css-photon.html">archived version of this article</a></em>.</p>
-<p>userChrome.css is a <em>style sheet</em> with special importance to Firefox. The rules in userChrome.css are applied to the user interface, and can override nearly every built-in style rule. Unfortunately, you cannot use userChrome.css to change the functional operation of Firefox; that's what extensions are for (or in rare cases, startup scripts).</p>
+<p>userChrome.css is a <em>style sheet</em> with special importance to Firefox. The rules in userChrome.css are applied to the user interface, and can override nearly every built-in style rule. Unfortunately, you cannot use userChrome.css to change the functional operation of Firefox; that's what extensions are for.</p>
 <p>Creating a userChrome.css file and adding style rules allows you to make changes to fonts and colors, hide unnecessary items, adjust spacing, and make other changes to the appearance of Firefox. The following examples illustrate the wide range of effects you can create, either by creating your own style recipes, or building on the work of CSS wizards sharing their talents on the web.</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="hidemenuitem">Hide Unwanted Menu Items</h3>
-<p>Firefox 89 simplified the context menus, but you may find yourself accidentally clicking on items you will never use. Want to hide them? Yes, you can. This example is for the image context menu (the menu items that appear when you right-click an image):</p>
-<p><img src="img/Fx90-menu-item-hide.jpg" style="width:820px; height:389px"></p>
+<p>For Firefox 89+ (Proton UI), please refer to the current version of this article at: <a href="what-is-userchrome-css.html#hidemenuitem">What is userChrome.css and what can it do?</a>.</p>
+<p>Do you have Sync set up, but no mobile bookmarks?</p>
+<p><img src="img/hide-mobile-bookmarks.png" style="width:900px; height:457px"></p>
 </div>
 <p>CSS:</p>
-<pre class="codeblock notranslate">/*** Remove items from image context menu ***/
-
-/* Email Image... */
-#context-sendimage, 
-
-/* Set Image as Desktop Background... (and preceding separator) */
-#context-sep-setbackground, #context-setDesktopBackground,
-
-/* Inspect Accessibility Properties */
-#context-inspect-a11y
-{
+<pre class="codeblock notranslate">/* Hide Mobile Bookmarks from Toolbar Bookmarks Menu */
+#BMB_mobileBookmarks {
   display: none !important;
 }</pre>
-<p><em>Note: if you want to return "View Image Info" to your menu, here's the preference for that (Firefox 89+):</em></p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>browser.menu.showViewImageInfo</strong> and pause while the list is filtered.</li>
-	<li>Double-click the preference to switch the value from false to true.</li>
-</ol>
-<p><strong>Exploring Further:</strong> If you are curious about writing or modifying CSS code, the Mozilla Developer Network (MDN) has extensive resources online: <a href="https://developer.mozilla.org/docs/Web/CSS" rel="noopener" target="_blank">CSS</a>. Unfortunately, the specific CSS <em>selectors</em> (such as the id's used in this example) which identify parts of the user interface are not documented in such a convenient way. You can find the skeleton of the menu system by pasting <code>view-source:chrome://browser/content/browser.xhtml</code> into the address bar and pressing Enter/Return to load it. You can get more help finding what you are looking for on community sites listed in <a href="find-user-style-recipes.html">this article</a>.</p>
+<p>Among other sources, this was discussed in a Mozilla Support thread: <a href="https://support.mozilla.org/questions/1164362">how do I delete the mobile bookmarks folder?</a> If&nbsp;you wanted to hide <em>everything</em> above your own bookmarks, you could use:</p>
+<pre class="codeblock notranslate">/* Hide Top Items on Bookmark Menu Button drop-down */
+#BMB_viewBookmarksSidebar, 
+#BMB_bookmarksShowAllTop, 
+#BMB_bookmarksShowAllTop + menuseparator, 
+#BMB_recentBookmarks, 
+#BMB_recentBookmarks + menuseparator, 
+#BMB_bookmarksToolbar, 
+#BMB_unsortedBookmarks, 
+#BMB_mobileBookmarks, 
+#BMB_mobileBookmarks + menuseparator {
+  display: none !important;
+}</pre>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="colorbookmarkfolder">Color in Gray Bookmark Folder Icons</h3>
-<p><img src="img/Fx90-bookmark-icons.png" style="width:732px; height:447px"></p>
+<p>For Firefox 89+ (Proton UI), please refer to the current version of this article at: <a href="what-is-userchrome-css.html#colorbookmarkfolder">What is userChrome.css and what can it do?</a>.</p>
+<p><img src="img/bookmark-folder-color.png" style="width:833px; height:522px"></p>
 </div>
 <h4>SVG Fill</h4>
-<p>This method applies a color fill to the built-in graphics. In Firefox 89, the folder icon has become merely an outline, and there isn't a simple way to color in the blank area. If you are bothered by the wireframe design, you could consider the "old icons" option.</p>
-<p>CSS (<a href="samples/userChrome-color_bookmark_folders.css">download SVG fill</a>) (updated 17 Sept 2018)</a>:</p>
+<p>CSS (<a href="samples/userChrome-color_bookmark_folders.css">download SVG fill</a>) (updated 17 Sept 2018)</a> (<a href="samples/userChrome-color_bookmark_folders_20180510.css">10 May 2018 version</a>, <a href="samples/userChrome-color_bookmark_folders_20171219.css">19 Dec 2017 version</a>):</p>
 <pre class="codeblock notranslate">/* Colored folders for Bookmarks Menus, Bookmarks Sidebar, Bookmarks Toolbar, Library window, Add/Edit Bookmarks dialog
    Original: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20171219.css
    Updated for Firefox 60: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20180510.css
@@ -198,14 +195,48 @@
 
 <div style="page-break-inside: avoid;">
 <h3 id="movetabbar">Move the Tab Bar Below the Other Toolbars (like Firefox 1.0-3.6)</h3>
-<p>Moving the tab bar has become increasingly complicated over the years. For current advance, please check online sources as suggested in: <a href="find-user-style-recipes.html">Where to Find Style Recipes</a>. <em>For Firefox 57-88, please refer to the <a href="what-is-userchrome-css-photon.html#movetabbar">archived version of this article</a></em>.</p>
+<p><img src="img/tabs-below-bookmarks-toolbar-71.png" style="width:900px; height:380px"></p>
 </div>
+<p><strong>Firefox 65+</strong>: The structure of the toolbar area has changed. You can use the rules from Aris: <a href="https://github.com/Aris-t2/CustomCSSforFx/" rel="noopener" target="_blank">Custom CSS tweaks for Firefox Quantum</a>. I have created extracts, but these may not work on every system:
+<ul>
+	<li><a href="samples/userChrome-tabs_on_bottom_Fx74-80_WindowsLinux.css">Firefox 74+ on Windows and Linux</a> (updated July 17, 2020; checked Jan. 24, 2021)<br>
+		<a href="samples/userChrome-tabs_on_bottom_Fx72-74_WindowsLinux.css">Firefox 72-74 on Windows and Linux</a> (updated Feb. 13, 2020)<br>
+		<a href="samples/userChrome-tabs_on_bottom_Fx68-71_WindowsLinux.css">Firefox 68-71 on Windows and Linux</a> (updated Dec. 22, 2019)</li>
+	<li><a href="samples/userChrome-tabs_on_bottom_Fx74-85_MacOS.css">Firefox 74+ on MacOS</a> (updated Jan. 24, 2021)<br>
+		<a href="samples/userChrome-tabs_on_bottom_Fx68-74_MacOS.css">Firefox 68-74 on MacOS</a> (updated Dec. 7, 2019)</li>
+</ul>
+<p>In case of problems, please visit the source.</p>
+<p>Legacy CSS for Firefox 57-64: <a href="samples/userChrome-tabs_on_bottom.css">download</a> (updated 6 Mar 2018).</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="multirowbookmarks">Expand the Bookmarks Toolbar to Multiple Rows</h3>
-<p>"Wrapping" the Bookmarks toolbar to multiple rows has become increasingly complicated over the years. For current advance, please check online sources as suggested in: <a href="find-user-style-recipes.html">Where to Find Style Recipes</a>. <em>For Firefox 57-88, please refer to the <a href="what-is-userchrome-css-photon.html#multirowbookmarks">archived version of this article</a></em>.</p>
+<p><img src="img/multi-row-bookmarks-toolbar_66.png" style="width:900px; height:372px"></p>
 </div>
+<p><strong><em>Update (3/13/2020):</em></strong> For Firefox 74, please refer to this thread on the Firefox subreddit: <a href="https://www.reddit.com/r/firefox/comments/fgozre/multiple_bookmark_toolbar_rows_in_ff_74/" target="_blank">https://www.reddit.com/r/firefox/comments/fgozre/multiple_bookmark_toolbar_rows_in_ff_74/</a>
+<p>CSS:</p>
+<pre class="codeblock notranslate">/* Wrap Bookmarks Toolbar -- Unlimited Multi-row for Firefox 66-73 */
+/* From https://www.reddit.com/r/FirefoxCSS/comments/b346fz/firefox_66_destroyed_my_more_toolbars_fix/eix109b/ */
+
+#PersonalToolbar {
+  min-height: unset !important;
+  max-height: unset !important;
+}
+
+#PersonalToolbar #PlacesToolbarItems {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  display: inline-block !important;
+}
+/* For Firefox 69 */
+#PersonalToolbar #PlacesToolbarItems toolbarbutton {
+  visibility: visible !important;
+}</pre>
+<p>There are multiple style recipes to "wrap" the bookmarks toolbar, including:</p>
+<ul>
+<li><a href="https://github.com/Aris-t2/CustomCSSforFx/blob/master/classic/css/toolbars/bookmarks_toolbar_multiple_lines.css" rel="noopener" target="_blank">bookmarks_toolbar_multiple_lines.css</a> (by the author of Classic Theme Restorer)</li>
+<li><a href="https://www.reddit.com/r/firefox/comments/75wya9/multiple_row_bookmark_toolbar_for_firefox_5758/" rel="noopener" target="_blank">Multiple row bookmark toolbar for Firefox 57/58?</a> (for Firefox 57-65)</li>
+</ul>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
@@ -218,8 +249,52 @@
 
 <div style="page-break-inside: avoid;">
 <h3 id="curvetabs">Curve the Tabs</h3>
-<p>In Firefox 89+, curved corners on tabs are back! But the tabs now appear to be disconnected buttons. For tips on restyling Proton tabs, see: <a href="firefox-89-styling-proton-ui.html">Firefox 89 &ndash; Styling the New Proton UI</a>. <em>For Firefox 57-88, please refer to the <a href="what-is-userchrome-css-photon.html#curvetabs">archived version of this article</a></em>.</p>
+<p>For many users, squared off tabs are unacceptably ugly. It is not too difficult to introduce some rounded shoulders to the tops of tab, but re-creating the flared lower parts is more challenging.</p>
+<p><img src="img/curved-tabs.png" style="max-height: 522px"></p>
 </div>
+<p>CSS (<a href="samples/userChrome-curved_tabs.css">download</a>):</p>
+<pre class="codeblock notranslate">/* Curve the background tabs at the upper left and right corners
+   May not work on add-on themes. */
+.tabbrowser-tab {
+  border-radius: 10px 10px 0px 0px / 15px 15px 0px 0px !important;
+}
+/* Curve active tab and slightly overlap neighboring tabs */
+.tabbrowser-tab .tab-background[selected="true"] {
+  margin-left: -1px !important;
+  margin-right: -1px !important;
+  border-radius: 10px 10px 0px 0px / 15px 15px 0px 0px !important;
+}
+/* Shorten the tab line along the tops of tabs */
+.tab-line {
+  margin-left: 9px !important;
+  margin-right: 9px !important;
+}
+/* Shorten the vertical lines between background tabs */
+.tabbrowser-tab::before, .tabbrowser-tab::after {
+  margin-top: 9px !important;
+}
+
+/** "Light" Theme (Dark Text) **/
+
+/* Border the background tabs (10% gray) for greater visibility */
+#main-window:not([lwthemetextcolor="bright"]) .tabbrowser-tab:not([selected="true"]) {
+  border: 1px solid rgba(0,0,0,.1) !important;
+  border-bottom-color: transparent !important;
+  margin-right: -1px !important;
+}
+/* Remove short vertical lines between background tabs */
+#main-window:not([lwthemetextcolor="bright"]) .tabbrowser-tab::before, 
+#main-window:not([lwthemetextcolor="bright"]) .tabbrowser-tab::after {
+  border: none !important;
+}</pre>
+<p>The following style recipes aim to restore the Firefox 29-56 tab shapes. They are much more elaborate and are a bit more prone to breakage as Firefox evolves, so check for updates if something goes wrong (or click the author's Issues tab and submit a bug report):</p>
+<ul>
+<li><a href="https://github.com/wilfredwee/photon-australis" rel="noopener" target="_blank">Photon Australis by wilfredwee</a></li>
+<li><a href="https://github.com/axydavid/FirefoxUI" rel="noopener" target="_blank">FirefoxUI hybrid by axydavid</a> (makes several other changes; not working well in Firefox 59)</li>
+<li><a href="https://www.reddit.com/r/FirefoxCSS/comments/7e5k6y/photon_australis_curve_tab_semichrome_style/" rel="noopener" target="_blank">Photon Australis Curve Tab (semi-Chrome style)</a> (makes several other changes; tabs can get very small)</li>
+<li>Or if you like the trapezoid shape of tabs in Google Chrome: <a href="https://github.com/pratyushtewari/firefox-like-chrome" rel="noopener" target="_blank">firefox-like-chrome</a> (some visual glitches in Firefox 59 on Windows)</li>
+<li>And the recent redesign of Chrome's UI inspired this one: <a href="https://github.com/muckSponge/MaterialFox" rel="noopener" target="_blank">MaterialFox</a></li>
+</ul>
 
 <h2>Ready to Give It a Try?</h2>
 <p>If you have a user interface tweak in mind, these pages may help:</p>

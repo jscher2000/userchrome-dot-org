@@ -57,7 +57,7 @@
 </nav>
 <header>
 <h1>Firefox 89 &ndash; Styling the New Proton UI</h1>
-<p>Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated May 31, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -116,7 +116,15 @@ menupopup > menuitem, menupopup > menu {
 
 
 <h2 id="tabstyler">Restyling tab buttons</h2>
-<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. Numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. You can use these controls to generate a rules file to restyle the Firefox 89 tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
+<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. At least for now, there is a preference to roll back the changed tab design but after all the bugs are squashed, that probably will be removed. Looking to the future, numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. So you have option.</p>
+<p>Here are the steps to switch the temporary preference between the Firefox 57-88 ("Photon") appearance and the Firefox 89 ("Proton") appearance:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>browser.proton.enabled</strong> and pause while the list is filtered.</li>
+	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
+</ol>
+
+<p>If you prefer, you can use the following controls to generate a rules file to restyle the Firefox 89 tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
 
 <table id="tbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%">
 	<tbody>
