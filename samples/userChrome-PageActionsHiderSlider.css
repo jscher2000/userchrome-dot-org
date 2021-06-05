@@ -1,0 +1,47 @@
+/**** PageActionsHiderSlider 2021-06-01 for Fx89 Proton UI ****/
+
+/* Hide Buttons and Reveal on Hover */
+#page-action-buttons > #pageActionSeparator ~ .urlbar-page-action,
+#page-action-buttons #star-button {
+  width: 0px !important;
+  min-width: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  transition: all 200ms ease-in-out;
+}
+
+#page-action-buttons:hover > #pageActionSeparator ~ .urlbar-page-action,
+#page-action-buttons:hover #star-button {
+  width: calc(var(--urlbar-min-height) - 2px /* border */ - 2 * var(--urlbar-container-padding)) !important;
+  min-width: unset !important;
+  padding-left: var(--urlbar-icon-padding) !important;
+  padding-right: var(--urlbar-icon-padding) !important;
+  transition: all 200ms ease-in-out;
+}
+
+/* Create page actions hover "button" */
+#pageActionSeparator::after {
+  content: "•••";
+  position: absolute;
+  top: 0.7em;
+  font-size: 0.7em;
+  opacity: 0.5;
+}
+
+/* #pageActionSeparator needs to be unhidden and sized */
+#page-action-buttons > #pageActionSeparator {
+  display: -moz-inline-box !important;
+  width: 0.8em !important;
+  margin-left: -3px !important;
+  transition: all 200ms ease-in-out;
+}
+
+/* Hide the button on hover */
+#page-action-buttons:hover > #pageActionSeparator {
+  width: 0px !important;
+  margin-left: 0px !important;
+  transition: all 200ms ease-in-out;
+}
+#page-action-buttons:hover > #pageActionSeparator::after {
+  display: none !important;
+}
