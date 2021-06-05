@@ -25,7 +25,7 @@
 </nav>
 <header>
 <h1>What is userChrome.css? What can it do?</h1>
-<p>Updated May 31, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
+<p>Updated June 4, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
 </header>
 
 <article>
@@ -64,50 +64,36 @@
 
 <div style="page-break-inside: avoid;">
 <h3 id="colorbookmarkfolder">Color in Gray Bookmark Folder Icons</h3>
-<p><img src="img/Fx90-bookmark-icons.png" style="width:732px; height:447px"></p>
+<p><img src="img/Fx91-bookmark-icons.png" style="width:745px; height:495px"></p>
 </div>
 <h4>SVG Fill</h4>
-<p>This method applies a color fill to the built-in graphics. In Firefox 89, the folder icon has become merely an outline, and there isn't a simple way to color in the blank area. If you are bothered by the wireframe design, you could consider the "old icons" option.</p>
-<p>CSS (<a href="samples/userChrome-color_bookmark_folders.css">download SVG fill</a>) (updated 17 Sept 2018)</a>:</p>
-<pre class="codeblock notranslate">/* Colored folders for Bookmarks Menus, Bookmarks Sidebar, Bookmarks Toolbar, Library window, Add/Edit Bookmarks dialog
-   Original: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20171219.css
-   Updated for Firefox 60: https://www.userchrome.org/samples/userChrome-color_bookmark_folders_20180510.css
-   Uses mods for Firefox 62 from cor-el's Sept. 15, 2018 post:
-   https://support.mozilla.org/questions/1232447#answer-1151074
+<p>This method applies a color fill to the built-in graphics. In Firefox 89, the folder icon has become merely an outline, so the CSS includes an encoded version of the Firefox 57-88 style folder. It also restores the older icon for Other Bookmarks. Unfortunately, supplying the image creates distracting images in the Library window in empty columns. Hope to solve that some day.</p>
+<p>CSS (<a href="samples/userChrome-color_bookmark_folders_Proton89.css">download SVG fill</a>) (updated 4 June 2021)</a>:</p>
+<pre class="codeblock notranslate noprint">/* 
+  Colored folders for Bookmarks Menus, Bookmarks Sidebar, Bookmarks Toolbar, Library window, Add/Edit Bookmarks dialog
+  Substitutes a Firefox 57-style folder icon for the new wireframe folder icon
 */
 
 /* Standard folder -- on Toolbar and Menus */
-#PlacesToolbarItems toolbarbutton[container="true"] .toolbarbutton-icon,
+#PlacesToolbarItems toolbarbutton[container="true"]:not([query="true"]) .toolbarbutton-icon,
 :-moz-any(
 #PlacesToolbarItems,
 #PlacesChevronPopup,
 #BMB_bookmarksPopup,
-#bookmarksMenu) menu[container="true"] > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"]:not([query="true"]) > .menu-iconic-left > .menu-iconic-icon,
 /* Standard folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
 :-moz-any(
 #bookmarks-view, 
 #editBMPanel_folderTree, 
 #placesList, 
-#placeContent) treechildren::-moz-tree-image(container),
+#placeContent) treechildren::-moz-tree-image(container), 
 #editBMPanel_folderMenuList > .menulist-label-box > .menulist-icon,
-#editBMPanel_folderMenuList menupopup menuitem {
+#editBMPanel_folderMenuList menupopup menuitem, 
+#editBMPanel_folderMenuList {
   fill: #e8bb00 !important; /* slightly muted gold */
-}
-
-/* Live Bookmark -- on Toolbar and Menus */
-#PlacesToolbarItems toolbarbutton[container="true"][livemark="true"] .toolbarbutton-icon,
-:-moz-any(
-#PlacesToolbarItems,
-#PlacesChevronPopup,
-#BMB_bookmarksPopup,
-#bookmarksMenu) menu[container="true"][livemark="true"] > .menu-iconic-left > .menu-iconic-icon,
-/* Live Bookmark -- in Sidebar, Library, Add/Edit Bookmark dialog */
-:-moz-any(
-#bookmarks-view, 
-#editBMPanel_folderTree, 
-#placesList, 
-#placeContent) treechildren::-moz-tree-image(container, livemark) {
-  fill: orange !important;
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with gold color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2U4YmIwMCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTQuNSAzSDYuOTE0YS41LjUgMCAwIDEtLjM1NC0uMTQ2TDUuMTQ2IDEuNDM5QTEuNDkxIDEuNDkxIDAgMCAwIDQuMDg2IDFIMS41QTEuNSAxLjUgMCAwIDAgMCAyLjV2MTFBMS41IDEuNSAwIDAgMCAxLjUgMTVoMTNhMS41IDEuNSAwIDAgMCAxLjUtMS41di05QTEuNSAxLjUgMCAwIDAgMTQuNSAzem0uNSAxMC41YS41LjUgMCAwIDEtLjUuNWgtMTNhLjUuNSAwIDAgMS0uNS0uNVY2aDE0ek0xIDVWMi41YS41LjUgMCAwIDEgLjUtLjVoMi41ODZhLjUuNSAwIDAgMSAuMzU0LjE0NmwxLjQxNCAxLjQxNUExLjQ5MSAxLjQ5MSAwIDAgMCA2LjkxNCA0SDE0LjVhLjUuNSAwIDAgMSAuNS41VjV6Ii8+CiAgPHBhdGggZD0iTTE1IDEzLjVhLjUuNSAwIDAgMS0uNS41aC0xM2EuNS41IDAgMCAxLS41LS41VjZoMTR6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+CiAgPHBhdGggZD0iTTEgNVYyLjVhLjUuNSAwIDAgMSAuNS0uNWgyLjU4NmEuNS41IDAgMCAxIC4zNTQuMTQ2bDEuNDE0IDEuNDE1QTEuNDkxIDEuNDkxIDAgMCAwIDYuOTE0IDRIMTQuNWEuNS41IDAgMCAxIC41LjVWNXoiIGZpbGwtb3BhY2l0eT0iLjEiLz4KICA8cGF0aCBkPSJNMTUgMTMuNWEuNS41IDAgMCAxLS41LjVoLTEzYS41LjUgMCAwIDEtLjUtLjVWMTNoMTR6IiBmaWxsLW9wYWNpdHk9Ii4wNSIvPgo8L3N2Zz4=") !important;
 }
 
 /* Smart bookmark folder -- on Toolbar and Menus */
@@ -116,13 +102,16 @@
 #PlacesToolbarItems,
 #PlacesChevronPopup,
 #BMB_bookmarksPopup,
-#bookmarksMenu) menu[container="true"][query="true"] > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"][query="true"] > .menu-iconic-left > .menu-iconic-icon,
 /* Smart bookmark folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
 :-moz-any(
 #bookmarks-view, 
 #editBMPanel_folderTree, 
 #placesList, 
 #placeContent) treechildren::-moz-tree-image(container, query) {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/folder-smart.svg") !important;
   fill: #69c !important; /* similar to blue smart folder color */
 }
 
@@ -139,7 +128,10 @@
 #placesList, 
 #placeContent) treechildren::-moz-tree-image(container, queryFolder_menu________),
 #editBMPanel_bmRootItem > .menu-iconic-left, 
-#editBMPanel_folderMenuList[selectedIndex="1"] > .menulist-label-box > .menulist-icon {
+#editBMPanel_folderMenuList[selectedIndex="1"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="menu________"] {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/bookmarksMenu.svg") !important;
   fill: olive !important;
 }
 
@@ -158,7 +150,10 @@
 #placesList, 
 #placeContent) treechildren::-moz-tree-image(container, queryFolder_toolbar_____),
 #editBMPanel_toolbarFolderItem > .menu-iconic-left, 
-#editBMPanel_folderMenuList[selectedIndex="0"] > .menulist-label-box > .menulist-icon {
+#editBMPanel_folderMenuList[selectedIndex="0"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="toolbar_____"] {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.svg") !important;
   fill: olive !important;
 }
 
@@ -177,8 +172,11 @@
 #placesList, 
 #placeContent) treechildren::-moz-tree-image(container, queryFolder_unfiled_____),
 #editBMPanel_unfiledRootItem > .menu-iconic-left, 
-#editBMPanel_folderMenuList[selectedIndex="2"] > .menulist-label-box > .menulist-icon {
-  fill: olive !important;
+#editBMPanel_folderMenuList[selectedIndex="2"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="unfiled_____"],
+#OtherBookmarksPopup + .toolbarbutton-icon {
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with olive color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ib2xpdmUiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1vcGFjaXR5PSIuMDUiIGQ9Ik0xMi43LDFIMy4zbC0uMi42TC4xLDksMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5bC0zLTcuNEwxMi43LDFaIi8+CiAgPHBhdGggZD0iTTEyLDJsMyw3LjRWMTNhLjk0NS45NDUsMCwwLDEtMSwxSDJhLjk0NS45NDUsMCwwLDEtMS0xVjkuNEw0LDJoOG0uNy0xSDMuM0wuMSw5LjEsMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5LDEyLjcsMVoiLz4KICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii4wNSIgZD0iTTE0Ljk4OCw5LDEyLDJINEwuODUxLDlINS4wMjNBMi45MzEsMi45MzEsMCwwLDAsOCwxMS42LDIuODg5LDIuODg5LDAsMCwwLDExLjAxMiw5WiIvPgogIDxwYXRoIGQ9Ik0xMCw5QTIsMiwwLDAsMSw2LDlIMHYxSDUuMTg0YTIuOTgzLDIuOTgzLDAsMCwwLDUuNjMzLDBIMTZWOVoiLz4KPC9zdmc+") !important;
 }
 
 /* (Older Firefox) Avoid overriding classic Bookmarks Toolbar and Other Bookmarks icons in menus */
@@ -188,10 +186,11 @@
 }
 #BMB_bookmarksPopup #BMB_unsortedBookmarks.menu-iconic-icon, 
 #bookmarksMenu #menu_unsortedBookmarks.menu-iconic-icon {
-  list-style-image: url("chrome://browser/skin/places/unsortedBookmarks.png") !important;
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with olive color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ib2xpdmUiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1vcGFjaXR5PSIuMDUiIGQ9Ik0xMi43LDFIMy4zbC0uMi42TC4xLDksMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5bC0zLTcuNEwxMi43LDFaIi8+CiAgPHBhdGggZD0iTTEyLDJsMyw3LjRWMTNhLjk0NS45NDUsMCwwLDEtMSwxSDJhLjk0NS45NDUsMCwwLDEtMS0xVjkuNEw0LDJoOG0uNy0xSDMuM0wuMSw5LjEsMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5LDEyLjcsMVoiLz4KICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii4wNSIgZD0iTTE0Ljk4OCw5LDEyLDJINEwuODUxLDlINS4wMjNBMi45MzEsMi45MzEsMCwwLDAsOCwxMS42LDIuODg5LDIuODg5LDAsMCwwLDExLjAxMiw5WiIvPgogIDxwYXRoIGQ9Ik0xMCw5QTIsMiwwLDAsMSw2LDlIMHYxSDUuMTg0YTIuOTgzLDIuOTgzLDAsMCwwLDUuNjMzLDBIMTZWOVoiLz4KPC9zdmc+") !important;
 }
 </pre>
-<p>There is a discussion about the original version of this style recipe, and other variations on the theme, on Mozilla's support forum at <a href="https://support.mozilla.org/questions/1178010" rel="noopener" target="_blank">All bookmarks have grey folders-update 56</a>.</p>
+
 <h4>Old Icons Variation</h4>
 <p>To install: (A)&nbsp;download this zip file containing the style sheet and old images from Firefox 56: <a href="samples/Fx56_bookmark_buttons.zip">Fx56_bookmark_buttons.zip</a> (updated Sept. 12, 2019) (older versions: <a href="samples/Fx56_bookmark_buttons_20181013.zip">Oct. 13, 2018</a>, <a href="samples/Fx56_bookmark_buttons_20171219.zip">Dec. 19, 2017</a>); (B)&nbsp;extract all contents into the chrome folder; (C)&nbsp;if you do NOT have a userChrome.css file, rename userChrome-STARTER.css to userChrome.css; (D)&nbsp;if you DO already have a userChrome.css file, copy the line from userChrome-STARTER.css to the top of your userChrome.css file to include the userChrome_Fx56_bookmark_icons.css file; (D)&nbsp;make sure toolkit.legacyUserProfileCustomizations.stylesheets is set to true. Firefox will pick up the change at your next startup.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>

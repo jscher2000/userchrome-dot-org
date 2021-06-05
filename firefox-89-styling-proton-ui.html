@@ -57,7 +57,7 @@
 </nav>
 <header>
 <h1>Firefox 89 &ndash; Styling the New Proton UI</h1>
-<p>Updated May 31, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated June 3, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -94,7 +94,21 @@
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <h3 id="menuspacing">Reducing vertical spacing in menus</h3>
-<p>Most of the menus in Firefox 89 are shorter, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. There is no built-in preference to modify the padding, but you can use custom style rules in a userChrome.css file. For example ():</p>
+<p>Most of the menus in Firefox 89 are shorter, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. There is a temporary preference in Firefox 89 to roll back the changes to some menus, and for more control or in future versions of Firefox, you can use custom style rules in a userChrome.css file.</p>
+
+<p>Here are the steps to switch the temporary preference between the older menu appearance and the Firefox 89 ("Proton") appearance:</p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>browser.proton.contextmenus.enabled</strong> and pause while the list is filtered.</li>
+	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
+</ol>
+<div style="page-break-inside: avoid;">
+<p>This reverts the menus to their previous spacing and color scheme:</p>
+
+<p><img src="img/Fx89-proton-contextmenus.png"></p>
+</div>
+
+<p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 3px; if it's too low, try 5px:</p>
 
 <pre class="codeblock notranslate">
 /*** Tighten up drop-down/context/popup menu spacing ***/
