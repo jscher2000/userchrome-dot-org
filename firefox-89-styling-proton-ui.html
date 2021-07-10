@@ -9,23 +9,19 @@
 #tbarsettings td { vertical-align: top; }
 #tbarsettings td p { margin-top: 0; }
 #tbarsettings select { margin-left: 0.25in; min-width: 200px; }
-.bradius-0px > div { border-radius: 0px 0px 0px 0px; }
-.bradius-4px > div { border-radius: 4px 4px 0px 0px; }
-.bradius-6px > div { border-radius: 6px 6px 0px 0px; }
-.bradius-8px > div { border-radius: 8px 8px 0px 0px; }
-#tabbar-demo { color: #000; background-color: #eee; margin: 1em 0; padding: 4px 0; width: 100%; border-bottom: 2px solid #888; float: left; }
-#tabbar-demo > div { width: 200px; height: 29px; float: left; margin-left: 2px; margin-right: 2px; text-align: center; cursor: default; }
-#tabbar-demo.connected { padding-top: 1px; padding-bottom: 0px; }
+#tabbar-demo { color: #000; background-color: #f4f4f4; margin: 1em 0; padding: 4px 0; width: 100%; border-bottom: 2px solid #888; float: left; font-family: "Segoe UI", sans-serif; font-size: 12px; }
+#tabbar-demo > div { width: 200px; height: 36px; float: left; margin-left: 2px; margin-right: 2px; cursor: default; overflow: hidden; text-overflow: ellipsis; }
+#tabbar-demo > div { background-image: url(favicon.ico); background-size: 16px 16px; background-repeat: no-repeat; background-position: 6px 50%; }
+#tabbar-demo > div > span { line-height: 36px; margin-left: 29px; white-space: nowrap; }
 .backdemo:hover { background-color: rgba(0, 0, 0, 0.11); }
-#tabbar-demo.outline > .backdemo {
-	border: 1px solid rgba(0, 0, 0, .20) !important;
-	border-bottom-color: transparent !important;
-	height: 27px;
-	margin-top: 1px;
-}
-#tabbar-demo.outline > div {
-	margin-left: 0 !important;
-}
+#tabbar-demo.bradius-0px > div { border-radius: 0px; }
+#tabbar-demo.bradius-4px > div { border-radius: 4px; }
+#tabbar-demo.bradius-6px > div { border-radius: 6px; }
+#tabbar-demo.bradius-8px > div { border-radius: 8px; }
+#tabbar-demo.compact > div { height: 29px; }
+#tabbar-demo.compact > div > span { line-height: 29px; }
+#tabbar-demo.connected { padding-top: 1px; padding-bottom: 0px; }
+#tabbar-demo.connected > div {border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; }
 #tabbar-demo.bar > #back1-demo {
 	border-right: 1px solid rgba(0, 0, 0, .20) !important;
 }
@@ -34,6 +30,32 @@
 	margin-left: 0 !important;
 	margin-right: 0 !important;
 }
+#tabbar-demo.outline > .backdemo {
+	border: 1px solid rgba(0, 0, 0, .20) !important;
+	height: 34px;
+}
+#tabbar-demo.outline.compact > .backdemo {
+	height: 27px;
+}
+#tabbar-demo.outline.connected > .backdemo {
+	border-bottom: none !important;
+}
+#tabbar-demo.outline > div:not(:first-of-type) {
+	margin-left: 0 !important;
+}
+#tabbar-demo.shadow > .backdemo {
+	background-color: rgba(0, 0, 0, 0.08); 
+}
+#tabbar-demo.font12px > div > span { font-size: 12px; }
+#tabbar-demo.font13px > div > span { font-size: 13px; }
+#tabbar-demo.font14px > div > span { font-size: 14px; }
+#tabbar-demo.font15px > div > span { font-size: 15px; }
+#tabbar-demo.font16px > div > span { font-size: 16px; }
+#tabbar-demo.weight400 > div > span { font-weight: 400; }
+#tabbar-demo.weight500 > div > span { font-weight: 500; }
+#tabbar-demo.weight600 > div > span { font-weight: 600; }
+#tabbar-demo.weight700 > div > span { font-weight: 700; }
+#tabbar-demo.weight800 > div > span { font-weight: 800; }
 #toc {margin-left: 18px; list-style-type: "▶";}
 #toc li {margin-top: 2px; margin-bottom: 2px; padding-left: 6px;}
 </style>
@@ -57,7 +79,7 @@
 </nav>
 <header>
 <h1>Firefox 89 &ndash; Styling the New Proton UI</h1>
-<p>Updated June 3, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated July 10, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -130,7 +152,7 @@ menupopup > menuitem, menupopup > menu {
 
 
 <h2 id="tabstyler">Restyling tab buttons</h2>
-<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. At least for now, there is a preference to roll back the changed tab design but after all the bugs are squashed, that probably will be removed. Looking to the future, numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. So you have option.</p>
+<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. At least for now, there is a preference to roll back the changed tab design but after all the bugs are squashed, that probably will be removed. Looking to the future, numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. So you have options.</p>
 <p>Here are the steps to switch the temporary preference between the Firefox 57-88 ("Photon") appearance and the Firefox 89 ("Proton") appearance:</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
@@ -140,35 +162,60 @@ menupopup > menuitem, menupopup > menu {
 
 <p>If you prefer, you can use the following controls to generate a rules file to restyle the Firefox 89 tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
 
-<table id="tbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%">
+<div style="background-color:#f6fcf9;border:4px solid #bfd;padding:4px 12px;">
+<table id="tbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%;">
 	<tbody>
-		<tr><td colspan="3"><div id="tabbar-demo" class="connected bradius-4px">
-				<div id="back1-demo" class="backdemo">Tab Title</div>
-				<div id="back2-demo" class="backdemo">Tab Title</div>
-				<div id="bradius-demo" style="background-color: #fff;">Tab Title</div>
+		<tr><td colspan="3"><div id="tabbar-demo" class="connected bradius-6px">
+				<div id="back1-demo" class="backdemo"><span>What is userChrome.css? What can it do?</span></div>
+				<div id="back2-demo" class="backdemo"><span>How to Create a userChrome.css File</span></div>
+				<div id="bradius-demo" style="background-color: #fff; box-shadow: 0 0 1px var(--tab-line-color, rgba(128,128,142,0.9)), 0 0 4px rgba(128,128,142,0.5);"><span>Firefox 89 &ndash; Styling the New Proton UI</span></div>
 			</div></td>
 		</tr>
-		<tr><td><p>Upper corner rounding: <br>
+		<tr><td><p>Tab corner rounding: <br>
 			<select id="bradius" name="bradius" size="4">
 				<option value="0px">None</option>
-				<option value="4px" selected>4 pixels</option>
-				<option value="6px">6 pixels</option>
+				<option value="4px">4 pixels</option>
+				<option value="6px" selected>6 pixels</option>
 				<option value="8px">8 pixels</option>
-			</select></p></td>
-			<td><p>Tabs floating or connected: <br>
-			<select id="floatflush" name="floatflush" size="2">
-				<option value="floating">Let them float (default style)</option>
-				<option value="connected" selected>Connect them to the toolbar</option>
+			</select></p>
+			<p>Tabs floating or connected: <br>
+				<select id="floatflush" name="floatflush" size="2">
+					<option value="floating">Let them float (default style)</option>
+					<option value="connected" selected>Connect them to the toolbar</option>
+				</select></p>
+			<p>Tab height: <br>
+			<select id="tabheight" name="tabheight" size="2">
+				<option value="none" selected>Do not override default</option>
+				<option value="compact">Use Compact height</option>
 			</select></p></td>
 			<td><p>Show inactive tab boundaries: <br>
-			<select id="backtabs" name="backtabs" size="3">
+			<select id="backtabs" name="backtabs" size="4">
 				<option value="none" selected>Only on hover (default style)</option>
 				<option value="bar">Using a vertical bar</option>
+				<option value="shadow">Using a hover-like shadow</option>
 				<option value="outline">Using a tab outline</option>
+			</select></p></td>
+			<td><p>Tab font size: <br>
+			<select id="fontsize" name="fontsize" size="6">
+				<option value="none" selected>Do not override default</option>
+				<option value="12px">12px (default on Windows)</option>
+				<option value="13px">13px</option>
+				<option value="14px">14px</option>
+				<option value="15px">15px</option>
+				<option value="16px">16px</option>
+			</select></p><p>Tab font weight: <br>
+			<select id="fontweight" name="fontweight" size="6">
+				<option value="none" selected>Do not override default</option>
+				<option value="400">400 (normal weight)</option>
+				<option value="500">500</option>
+				<option value="600">600</option>
+				<option value="700">700 (bold)</option>
+				<option value="800">800</option>
 			</select></p></td>
 		</tr>
 	</tbody>
 </table>
+</div>
 
 <h4>CSS based on above options: <button onclick="selectel('currentCSS'); this.blur();" style="margin-left:4em">Select CSS</button> 
 	<button id="savecss" onclick="saveCSS(this);">Save below as .css File</button></h4>
@@ -188,9 +235,12 @@ target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.<
 <script>
 function init(){
 	// reset selects on reload
-	document.getElementById('bradius').selectedIndex = 1;
+	document.getElementById('bradius').selectedIndex = 2;
 	document.getElementById('floatflush').selectedIndex = 1;
+	document.getElementById('tabheight').selectedIndex = 0;
 	document.getElementById('backtabs').selectedIndex = 0;
+	document.getElementById('fontsize').selectedIndex = 0;
+	document.getElementById('fontweight').selectedIndex = 0;
 	// create initial CSS
 	buildCSS();
 }
@@ -211,10 +261,26 @@ function updateDemo(evt){
 			if (tgt.value == 'connected') demobar.classList.add('connected');
 			else demobar.classList.remove('connected');
 			break;
+		case 'tabheight':
+			if (tgt.value == 'compact') demobar.classList.add('compact');
+			else demobar.classList.remove('compact');
+			break;
 		case 'backtabs':
 			for (var i=0; i<tgt.options.length; i++){
 				if (tgt.options[i].selected) demobar.classList.add(tgt.options[i].value);
 				else demobar.classList.remove(tgt.options[i].value);
+			}
+			break;
+		case 'fontsize':
+			for (var i=0; i<tgt.options.length; i++){
+				if (tgt.options[i].selected && tgt.options[i].value != 'none') demobar.classList.add('font' + tgt.options[i].value);
+				else demobar.classList.remove('font' + tgt.options[i].value);
+			}
+			break;
+		case 'fontweight':
+		for (var i=0; i<tgt.options.length; i++){
+				if (tgt.options[i].selected && tgt.options[i].value != 'none') demobar.classList.add('weight' + tgt.options[i].value);
+				else demobar.classList.remove('weight' + tgt.options[i].value);
 			}
 			break;
 		default:
@@ -226,7 +292,7 @@ function updateDemo(evt){
 // CSS div
 function buildCSS(evt){
 	var ctrls = document.querySelectorAll('#tbarsettings select');
-	var cssTemp = '';
+	var cssTemp = '', connected = false;
 	for(var i=0; i<ctrls.length; i++){
 		switch (ctrls[i].id){
 			case 'bradius':
@@ -237,60 +303,138 @@ function buildCSS(evt){
 #tabbrowser-tabs {
     --user-tab-rounding: ${ctrls[i].value};
 }
-@media (-moz-proton) {
-    .tab-background {
-        border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important;`;
+
+.tab-background {`;
 				break;
 			case 'floatflush':
-				if (ctrls[i].value == 'connected') {
+				if (ctrls[i].value == 'connected') { // attached
+					connected = true;
 					cssTemp += `
-        margin-block: 1px 0 !important;`;
+    border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important;
+    margin-block: 1px 0 !important;
+}
+#scrollbutton-up, #scrollbutton-down { /* 6/10/2021 */
+    border-top-width: 1px !important;
+    border-bottom-width: 0 !important;
+}
+/* Container color bar visibility */
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+    margin: 0px max(calc(var(--user-tab-rounding) - 3px), 0px) !important;
+}`;
+				} else { // floating
+					cssTemp += `
+    border-radius: var(--user-tab-rounding) !important;
+}`;
 				}
 				cssTemp += `
-    }
+`;
+				break;
+			case 'tabheight':
+				if (ctrls[i].value == 'compact'){ // override native min-height for tabs
+					cssTemp += `
+/* Override Normal Density height to Compact Density height only for tabs */
+
+#tabbrowser-tabs {
+    --tab-min-height: 29px !important;
+}
+#scrollbutton-up,
+#scrollbutton-down {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
 }
 `;
+					if (connected) cssTemp += `
+    /* [Connected Tabs] Set a max height based on min-height plus margin-block: 1px 0 */
+#TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
+    max-height: 30px !important;
+}
+    /* [Connected Tabs] Adjust padding around icons on buttons to avoid crushed images */
+#TabsToolbar-customization-target toolbarbutton > .toolbarbutton-icon, 
+#TabsToolbar-customization-target .toolbarbutton-text, 
+#TabsToolbar-customization-target .toolbarbutton-badge-stack,
+#scrollbutton-up,#scrollbutton-down {
+    padding-top: 7px !important;
+    padding-bottom: 6px !important;
+}
+`;
+				}
+				break;
+			case 'fontsize':
+				if (ctrls[i].value != 'none'){ // override native font-size for tabs
+					cssTemp += `
+/* Override font-size for tabs */
+
+.tabbrowser-tab {
+    font-size: ${ctrls[i].value} !important;
+}
+`;
+
+				}
+				break;
+			case 'fontweight':
+				if (ctrls[i].value != 'none'){ // override native font-weight for tabs
+					cssTemp += `
+/* Override font-weight for tabs */
+
+.tabbrowser-tab {
+    font-weight: ${ctrls[i].value} !important;
+}
+`;
+				}
 				break;
 			case 'backtabs':
 				if (ctrls[i].value == 'bar'){
 					cssTemp += `
 /* Inactive tabs: Separator line style */
 
-@media (-moz-proton) {
-    .tab-background:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) {
-        border-right: 1px solid rgba(0, 0, 0, .20) !important;
-    }
-    /* For dark backgrounds */
-    [brighttext="true"] .tab-background:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) {
-        border-right: 1px solid var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
-    }
-    .tab-background:not([selected=true]):not([multiselected=true]) {
-        border-radius: 0 !important;
-    }
-    /* Remove padding between tabs */
-    .tabbrowser-tab {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+.tabbrowser-tab:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) .tab-background {
+    border-right: 1px solid var(--lwt-background-tab-separator-color, rgba(0, 0, 0, .20)) !important;
+}
+/* For dark backgrounds */
+[brighttext="true"] .tabbrowser-tab:not([selected=true]):not([multiselected=true]):not([beforeselected-visible="true"]) .tab-background {
+    border-right: 1px solid var(--lwt-background-tab-separator-color, var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20))) !important;
+}
+.tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
+    border-radius: 0 !important;
+}
+/* Remove padding between tabs */
+.tabbrowser-tab {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 `;
 				} else if (ctrls[i].value == 'outline'){
 					cssTemp += `
 /* Inactive tabs: Outline style */
 
-@media (-moz-proton) {
-    .tab-background:not([selected=true]):not([multiselected=true]) {
-        border: 1px solid rgba(0, 0, 0, .20) !important;
-        border-bottom-color: transparent !important;
-    }
+.tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
+    border: 1px solid rgba(0, 0, 0, .20) !important;
+    /* To pick up a theme background tab separator color, un-comment the following line: */
+    /* border: 1px solid var(--lwt-background-tab-separator-color, rgba(0, 0, 0, .20)) !important; */`;
+					if (connected) cssTemp += `
+    border-bottom-color: transparent !important;`
+					cssTemp += `
+}
     /* For dark backgrounds */
-    [brighttext="true"] .tab-background:not([selected=true]):not([multiselected=true]) {
-        border: 1px solid var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
-    }
-    /* Remove extra padding between tabs */
-    .tabbrowser-tab {
-        padding-left: 0 !important;
-    }
+[brighttext="true"] .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
+    border: 1px solid var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20)) !important;
+    /* To pick up a theme background tab separator color, un-comment the following line: */
+    /* border: 1px solid var(--lwt-background-tab-separator-color, var(--lwt-selected-tab-background-color, rgba(255, 255, 255, .20))) !important; */`;
+					if (connected) cssTemp += `
+    border-bottom-color: transparent !important;`
+					cssTemp += `
+}
+/* Remove extra padding between tabs */
+.tabbrowser-tab:not(:first-of-type) {
+    padding-left: 0 !important;
+}
+`;
+				} else if (ctrls[i].value == 'shadow'){
+					cssTemp += `
+/* Inactive tabs: Shadow style */
+
+.tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
+    background-color: color-mix(in srgb, currentColor 8%, transparent);
 }
 `;
 				}
@@ -301,7 +445,7 @@ function buildCSS(evt){
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 5/30/2021; Generated ${d.toString()} */`;
+/* Tweak Options as of 7/10/2021; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){

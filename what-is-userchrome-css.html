@@ -25,7 +25,7 @@
 </nav>
 <header>
 <h1>What is userChrome.css? What can it do?</h1>
-<p>Updated June 4, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
+<p>Updated June 5, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
 </header>
 
 <article>
@@ -58,6 +58,12 @@
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box in the page, type or paste <strong>browser.menu.showViewImageInfo</strong> and pause while the list is filtered.</li>
 	<li>Double-click the preference to switch the value from false to true.</li>
+</ol>
+<p><em>Note: if you are on Mac, you probably need to disable use of native menus:</em></p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>widget.macos.native-context-menus</strong> and pause while the list is filtered.</li>
+	<li>Double-click the preference to switch the value from true to false.</li>
 </ol>
 <p><strong>Exploring Further:</strong> If you are curious about writing or modifying CSS code, the Mozilla Developer Network (MDN) has extensive resources online: <a href="https://developer.mozilla.org/docs/Web/CSS" rel="noopener" target="_blank">CSS</a>. Unfortunately, the specific CSS <em>selectors</em> (such as the id's used in this example) which identify parts of the user interface are not documented in such a convenient way. You can find the skeleton of the menu system by pasting <code>view-source:chrome://browser/content/browser.xhtml</code> into the address bar and pressing Enter/Return to load it. You can get more help finding what you are looking for on community sites listed in <a href="find-user-style-recipes.html">this article</a>.</p>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>

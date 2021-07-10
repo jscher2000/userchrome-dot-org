@@ -25,12 +25,12 @@
 </nav>
 <header>
 <h1>Generate Downloadable userChrome.css File</h1>
-<p>Originally posted by jscher2000 on April 26, 2018 <em>beta</em></p>
+<p>Updated June 13, 2021. Originally posted by jscher2000 on April 26, 2018 <em>beta</em></p>
 </header>
 
 <article>
 <div id="main">
-<p>You can paste CSS into this lightweight editor (<a href="https://ace.c9.io/" target="_blank">Ace</a>) and then generate a userChrome.css file for download. All text entry and file generation is done within the page without sending any code to my server. This page is <strong>not</strong> backed up as you work. <em>The editor may object to some CSS selectors and properties not used on the web. That's normal.</em></p>
+<p>You can paste CSS into this lightweight editor (<a href="https://ace.c9.io/" target="_blank">Ace</a>) and then generate a userChrome.css file for download. All text entry and file generation is done within the page without sending any code to my server. This page is <strong>not</strong> backed up as you work. <em>The editor is not checking your code. (Because the syntax checking is obsolete, I turned it off.)</em></p>
 <pre id="editor">/* Replace this SAMPLE CONTENT with your own CSS */
 
 /*** Maximize Print Overlay Preview Size ***/
@@ -45,6 +45,36 @@
     max-width: 100vw !important;
   }
 }
+
+/*** Reposition the site icon and mute button side-by-side when sound is playing ***/
+
+@media (-moz-proton) {
+  /* Move the mute/unmute button to the right and enlarge it */
+  .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) {
+    margin-left: 12px !important; /* pushes icon to the right */
+    margin-right: 2px !important; /* closes up some space before the text */
+    width: 24px; /* default is 16px */
+    height: 24px; /* default is 16px */
+    padding: 0 !important; /* allows icon to expand to full size */
+  }
+
+  /* Move the site icon to the left a bit and adjust position */
+  .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+  	margin-left: -5px !important; /* pushes icon to the left */
+    margin-top: 4px !important;  /* reduce by 1px for each 2px reduction in mute button height */
+  }
+
+  /* Override the rules for hover/not hover visibility */
+     /* for mute button */
+  .tabbrowser-tab:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]), 
+     /* for site icon */
+  .tabbrowser-tab:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay), 
+     /* for site icon with Compact density */
+  :root[uidensity="compact"] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    opacity: 1 !important; /* overrides full transparency with full opacity */
+  }
+}
+
 </pre>
 
 <form id="filemaker" action="javascript:void(0);">
@@ -60,7 +90,7 @@
 </article>
 
 <footer>
-<p>Copyright &copy; 2019 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a>. Ace (Ajax.org Cloud9 Editor) v1.3.3 &copy; 2018 Ajax.org B.V. (<a href="https://github.com/ajaxorg/ace-builds/blob/master/LICENSE" target="_blank">BSD-3-Clause License</a>). FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
+<p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" target="_blank">BSD-3-Clause License</a>. Ace (Ajax.org Cloud9 Editor) v1.4.12 &copy; 2020 Ajax.org B.V. (<a href="https://github.com/ajaxorg/ace-builds/blob/master/LICENSE" target="_blank">BSD-3-Clause License</a>). FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
 <!-- Ace Editor CSS and Scripts -->
 <style>
@@ -75,6 +105,8 @@ var editor = ace.edit("editor");
 editor.setTheme("ace/theme/cobalt");
 editor.session.setMode("ace/mode/css");
 editor.session.setUseWrapMode(true);
+// disable the CSS linter b/c obsolete
+editor.session.setUseWorker(false);
 </script>
 <!-- Other Scripts -->
 <script type="text/javascript" src="uc.js"></script>
