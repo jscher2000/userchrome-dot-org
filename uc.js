@@ -67,20 +67,27 @@ function togComments(el){
 		commpanel.id = 'ecomm';
 		document.body.appendChild(commpanel);
 		commpanel.style.display = 'block';
+		// Add Github issues link
+		pGit = document.createElement('p');
+		pGit.innerHTML = '<em>Github users: consider adding <a href="https://github.com/jscher2000/userchrome-dot-org/issues" target="_blank">an issue</a> for personal assistance.</em>';
+		commpanel.appendChild(pGit);
 		maindiv.style.width = "65%";
 		var s = document.createElement('script');
 		s.setAttribute('src', 'easy-comment/jquery-3.2.1.min.js');
 		s.addEventListener('load', function(){var s = document.createElement('script'); s.setAttribute('src', 'easy-comment/jquery.easy-comment.js'); s.addEventListener('load', function(){$('#ecomm').EasyComment();}); document.body.appendChild(s);});
 		document.body.appendChild(s);
+		el.classList.add('commopen');
 	} else {
 		if (commpanel.style.display == 'block'){
 			commpanel.style.display = 'none';
-			commpanel.innerHTML = '';
+			commpanel.innerHTML = '<p><em>Github users: consider adding <a href="https://github.com/jscher2000/userchrome-dot-org/issues" target="_blank">an issue</a> for personal assistance.</em></p>';
 			maindiv.style.width = "";
+			el.classList.remove('commopen');
 		} else {
 			commpanel.style.display = 'block';
 			maindiv.style.width = "65%";
 			$('#ecomm').EasyComment();
+			el.classList.add('commopen');
 		}
 	}
 }

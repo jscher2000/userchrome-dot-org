@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="256x256" href="/img/Fxcss_256.png">
-<title>Firefox 89 &ndash; Styling the New Proton UI</title>
+<title>Firefox 89+ &ndash; Styling the New Proton UI</title>
 <link rel="stylesheet" href="styles.css" type="text/css">
 <style>
 #tbarsettings td { vertical-align: top; }
@@ -58,6 +58,26 @@
 #tabbar-demo.weight800 > div > span { font-weight: 800; }
 #toc {margin-left: 18px; list-style-type: "▶";}
 #toc li {margin-top: 2px; margin-bottom: 2px; padding-left: 6px;}
+/* Container/Context Line */
+#back1-demo::before {
+	content: " ";
+	display: block;
+	position: absolute;
+	background-color: #000;
+	height: 2px;
+	width: 196px;
+	border-radius: 2px;
+	margin: -3px 2px 0;
+}
+#tabbar-demo.connected  #back1-demo::before {
+	margin-top: 0;
+}
+#tabbar-demo.movecontext #back1-demo::before {
+	margin-top: 34px;
+}
+#tabbar-demo.compact.movecontext #back1-demo::before {
+	margin-top: 27px;
+}
 </style>
 </head>
 <body>
@@ -78,8 +98,8 @@
 </div>
 </nav>
 <header>
-<h1>Firefox 89 &ndash; Styling the New Proton UI</h1>
-<p>Updated July 10, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
+<p>Updated August 11, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -96,7 +116,7 @@
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box in the page, type or paste <strong>compact</strong> and pause while the list is filtered.</li>
-	<li>Double-click the <strong>browser.compactmode.show</strong> preference to switch the value from false to true.</li>
+	<li>Double-click the <strong>browser.compactmode.show</strong> preference to switch the value from false to true. <em>Now "Compact (not supported)" should appear on the Density popup in the Customize screen.</em></li>
 </ol>
 <p>Alternately, if you don't plan to use the Density selector frequently, you can modify the density preference directly:</p>
 <ol type="A">
@@ -116,19 +136,7 @@
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <h3 id="menuspacing">Reducing vertical spacing in menus</h3>
-<p>Most of the menus in Firefox 89 are shorter, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. There is a temporary preference in Firefox 89 to roll back the changes to some menus, and for more control or in future versions of Firefox, you can use custom style rules in a userChrome.css file.</p>
-
-<p>Here are the steps to switch the temporary preference between the older menu appearance and the Firefox 89 ("Proton") appearance:</p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>browser.proton.contextmenus.enabled</strong> and pause while the list is filtered.</li>
-	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
-</ol>
-<div style="page-break-inside: avoid;">
-<p>This reverts the menus to their previous spacing and color scheme:</p>
-
-<p><img src="img/Fx89-proton-contextmenus.png"></p>
-</div>
+<p>Most of the menus in Firefox 89 have fewer items, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. You can use custom style rules in a userChrome.css file to customize the spacing. For Firefox 89-90, there is a preference to roll back the changes to some menus (next section below).</p>
 
 <p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 3px; if it's too low, try 5px:</p>
 
@@ -148,32 +156,33 @@ menupopup > menuitem, menupopup > menu {
 
 <p><img src="img/Fx90-menu-item-padding.png"></p>
 </div>
-<p style="border-top:1px solid #aaa;">&nbsp;</p>
+<p style="border-top:1px solid #ccc;">&nbsp;</p>
 
-
-<h2 id="tabstyler">Restyling tab buttons</h2>
-<p>One of the more controversial changes in Firefox&nbsp;89 is the new appearance of tabs as floating buttons rather than connected tabs. At least for now, there is a preference to roll back the changed tab design but after all the bugs are squashed, that probably will be removed. Looking to the future, numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. So you have options.</p>
-<p>Here are the steps to switch the temporary preference between the Firefox 57-88 ("Photon") appearance and the Firefox 89 ("Proton") appearance:</p>
+<p>{<em>Firefox 89-90 only</em>} Here are the steps to switch the temporary preference between the older menu appearance and the Firefox 89 ("Proton") appearance:</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>browser.proton.enabled</strong> and pause while the list is filtered.</li>
+	<li>In the search box in the page, type or paste <strong>browser.proton.contextmenus.enabled</strong> and pause while the list is filtered.</li>
 	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
 </ol>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
 
-<p>If you prefer, you can use the following controls to generate a rules file to restyle the Firefox 89 tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
+<h2 id="tabstyler">Restyling tab buttons</h2>
+<p>One of the more controversial changes in Firefox&nbsp;89 was the new appearance of tabs as floating buttons rather than connected tabs. Numerous users have posted solutions to "reconnect" the buttons, to modify their shape and size, and to create more distinct tabs for background/inactive tabs. (For example, <a href="https://github.com/black7375/Firefox-UI-Fix/blob/master/README.org" target="_blank">Lepton</a>.) To adjust the color scheme, I suggest using <a href="https://support.mozilla.org/kb/use-themes-change-look-of-firefox" target="_blank">Themes</a>. For Firefox 89-90, there is a preference to roll back the changed tab design (next section below).</p>
+
+<p>You can use the following controls to generate a personalized rules file to restyle the Firefox 89+ tab bar. The rules can be incorporated directly into a userChrome.css file, or you could include them by reference as described in <a href="adding-style-recipes-userchrome-css.html">Adding Style Recipes to userChrome.css</a>. The buttons to grab the CSS you tweak using the following form controls follow after the form.</p>
 
 <div style="background-color:#f6fcf9;border:4px solid #bfd;padding:4px 12px;">
 <table id="tbarsettings" border="0" cellspacing="0" style="border-collapse:collapse;width:100%;">
 	<tbody>
 		<tr><td colspan="3"><div id="tabbar-demo" class="connected bradius-6px">
-				<div id="back1-demo" class="backdemo"><span>What is userChrome.css? What can it do?</span></div>
-				<div id="back2-demo" class="backdemo"><span>How to Create a userChrome.css File</span></div>
+				<div id="back1-demo" class="backdemo" title="Tab in a Container"><span>What is userChrome.css? What can it do?</span></div>
+				<div id="back2-demo" class="backdemo" title="Normal background tab"><span>How to Create a userChrome.css File</span></div>
 				<div id="bradius-demo" style="background-color: #fff; box-shadow: 0 0 1px var(--tab-line-color, rgba(128,128,142,0.9)), 0 0 4px rgba(128,128,142,0.5);"><span>Firefox 89 &ndash; Styling the New Proton UI</span></div>
 			</div></td>
 		</tr>
 		<tr><td><p>Tab corner rounding: <br>
 			<select id="bradius" name="bradius" size="4">
-				<option value="0px">None</option>
+				<option value="0px">None (square corners)</option>
 				<option value="4px">4 pixels</option>
 				<option value="6px" selected>6 pixels</option>
 				<option value="8px">8 pixels</option>
@@ -194,6 +203,10 @@ menupopup > menuitem, menupopup > menu {
 				<option value="bar">Using a vertical bar</option>
 				<option value="shadow">Using a hover-like shadow</option>
 				<option value="outline">Using a tab outline</option>
+			</select></p><p>Container color line: <br>
+			<select id="contextline" name="contextline" size="2">
+				<option value="none" selected>Do not override default</option>
+				<option value="bottom">Move to bottom of tab</option>
 			</select></p></td>
 			<td><p>Tab font size: <br>
 			<select id="fontsize" name="fontsize" size="6">
@@ -222,6 +235,14 @@ menupopup > menuitem, menupopup > menu {
 <div id="currentCSS" style="width:100%; font-family:monospace; font-size:0.8em; white-space:pre-wrap; border:1px solid #00f; padding:1em; background-color:#f8f8f8; min-height:300px;">
 <p>CSS to be shown here, assuming JavaScript is not disabled.</p>
 </div>
+<p style="border-top:1px solid #ccc;">&nbsp;</p>
+
+<p>{<em>Firefox 89-90 only</em>} If you are not ready for a userChrome.css approach, here are the steps to switch the temporary preference between the Firefox 57-88 ("Photon") appearance and the Firefox 89-90 ("Proton") appearance. <strong>This causes display problems in Firefox 91, so please reset this to true for Firefox 91.</strong></p>
+<ol type="A">
+	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
+	<li>In the search box in the page, type or paste <strong>browser.proton.enabled</strong> and pause while the list is filtered.</li>
+	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
+</ol>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 </div>
 </article>
@@ -239,6 +260,7 @@ function init(){
 	document.getElementById('floatflush').selectedIndex = 1;
 	document.getElementById('tabheight').selectedIndex = 0;
 	document.getElementById('backtabs').selectedIndex = 0;
+	document.getElementById('contextline').selectedIndex = 0;
 	document.getElementById('fontsize').selectedIndex = 0;
 	document.getElementById('fontweight').selectedIndex = 0;
 	// create initial CSS
@@ -270,6 +292,10 @@ function updateDemo(evt){
 				if (tgt.options[i].selected) demobar.classList.add(tgt.options[i].value);
 				else demobar.classList.remove(tgt.options[i].value);
 			}
+			break;
+		case 'contextline':
+			if (tgt.value == 'bottom') demobar.classList.add('movecontext');
+			else demobar.classList.remove('movecontext');
 			break;
 		case 'fontsize':
 			for (var i=0; i<tgt.options.length; i++){
@@ -334,8 +360,13 @@ function buildCSS(evt){
 					cssTemp += `
 /* Override Normal Density height to Compact Density height only for tabs */
 
-#tabbrowser-tabs {
+#TabsToolbar, #tabbrowser-tabs {
     --tab-min-height: 29px !important;
+}
+    /* Tweak for covering a line at the bottom of the active tab on some themes 8/11/2021 */
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar, 
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar #tabbrowser-tabs {
+    --tab-min-height: 30px !important;
 }
 #scrollbutton-up,
 #scrollbutton-down {
@@ -345,8 +376,8 @@ function buildCSS(evt){
 `;
 					if (connected) cssTemp += `
     /* [Connected Tabs] Set a max height based on min-height plus margin-block: 1px 0 */
-#TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
-    max-height: 30px !important;
+#TabsToolbar, #TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
+    max-height: calc(var(--tab-min-height) + 1px) !important;
 }
     /* [Connected Tabs] Adjust padding around icons on buttons to avoid crushed images */
 #TabsToolbar-customization-target toolbarbutton > .toolbarbutton-icon, 
@@ -355,6 +386,17 @@ function buildCSS(evt){
 #scrollbutton-up,#scrollbutton-down {
     padding-top: 7px !important;
     padding-bottom: 6px !important;
+}
+`;
+				}
+				break;
+			case 'contextline':
+				if (ctrls[i].value != 'none'){ // move context line to bottom
+					cssTemp += `
+/* Move container color bar to bottom of tab */
+
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+    margin-top: calc(var(--tab-min-height) - 2px) !important;
 }
 `;
 				}
@@ -368,7 +410,6 @@ function buildCSS(evt){
     font-size: ${ctrls[i].value} !important;
 }
 `;
-
 				}
 				break;
 			case 'fontweight':
@@ -445,7 +486,7 @@ function buildCSS(evt){
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 7/10/2021; Generated ${d.toString()} */`;
+/* Tweak Options as of 8/11/2021; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){
@@ -467,7 +508,7 @@ function saveCSS(btn){
 			  [dummy.textContent.replace(/\x0a/g, "\x0d\x0a")]
 			, {type: 'text/css;charset=UTF-8'}
 		)
-		, 'proton-tab-tweaks.css'
+		, 'userChrome-proton-tab-tweaks.css'
 		, true
 	);
 }

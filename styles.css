@@ -160,6 +160,10 @@ article ul li, article ol[type="A"] li {
 		text-decoration: underline;
 		cursor: unset;
 	}
+	.commopen {
+		color: #bdf;
+		background-color: #000;
+	}
 }
 @media print {
 	nav, .btnpermlink, .noprint {
