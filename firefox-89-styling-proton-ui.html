@@ -63,7 +63,7 @@
 	content: " ";
 	display: block;
 	position: absolute;
-	background-color: #000;
+	background-color: #f8f;
 	height: 2px;
 	width: 196px;
 	border-radius: 2px;
@@ -77,6 +77,46 @@
 }
 #tabbar-demo.compact.movecontext #back1-demo::before {
 	margin-top: 27px;
+}
+#back2-demo {
+	position: relative;
+}
+#back2-demo > span {
+	line-height: revert !important;
+	display: inline-block;
+}
+#back2-demo > span:nth-of-type(1) {
+	margin-top: 4px;
+}
+#tabbar-demo.compact #back2-demo > span:nth-of-type(1) {
+	margin-top: 1px;
+}
+.tab-secondary-label {
+	font-size: 0.75em;
+	vertical-align: super;
+}
+#audiobutton {
+	position: absolute;
+	display: none;
+}
+#tabbar-demo:not(.audiobtn) #back2-demo:hover #audiobutton {
+	display: inline;
+	top: 7px;
+	left: 5px;
+}
+#tabbar-demo.compact:not(.audiobtn) #back2-demo:hover #audiobutton {
+	top: 5px;
+}
+#tabbar-demo.audiobtn #audiobutton {
+	display: inline;
+	top: 7px;
+	left: 22px;
+}
+#tabbar-demo.compact.audiobtn #audiobutton {
+	top: 5px;
+}
+#tabbar-demo.audiobtn #back2-demo span {
+	margin-left: 45px;
 }
 </style>
 </head>
@@ -99,7 +139,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated August 11, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated August 13, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -108,7 +148,7 @@
 <ul id="toc">
 	<li><a href="#compactmode" onclick="window.setTimeout(pgshow, 100);">Restoring Compact mode to the density selector</a></li>
 	<li><a href="#menuspacing" onclick="window.setTimeout(pgshow, 100);">Tightening up the menu spacing</a></li>
-	<li><a href="#tabstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling tab buttons as connected tabs</a></li>
+	<li><a href="#tabstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling tab buttons as connected tabs, dividers, height, font size/boldness, audio icon, etc.</a></li>
 </ul>
 
 <h3 id="compactmode">Enabling "Compact" Toolbar Density</h3>
@@ -176,8 +216,8 @@ menupopup > menuitem, menupopup > menu {
 	<tbody>
 		<tr><td colspan="3"><div id="tabbar-demo" class="connected bradius-6px">
 				<div id="back1-demo" class="backdemo" title="Tab in a Container"><span>What is userChrome.css? What can it do?</span></div>
-				<div id="back2-demo" class="backdemo" title="Normal background tab"><span>How to Create a userChrome.css File</span></div>
-				<div id="bradius-demo" style="background-color: #fff; box-shadow: 0 0 1px var(--tab-line-color, rgba(128,128,142,0.9)), 0 0 4px rgba(128,128,142,0.5);"><span>Firefox 89 &ndash; Styling the New Proton UI</span></div>
+				<div id="back2-demo" class="backdemo" title="Background tab playing audio"><svg id="audiobutton" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" width="20" height="20" fill="context-fill" fill-opacity="context-fill-opacity"><circle fill="context-stroke" cx="6" cy="6" r="6"/><path fill="context-fill" d="M6.7 2.6v6.8c0 .7-.9 1-1.3.5l-1.7-2H2.2c-.4 0-.7-.3-.7-.8V4.9c0-.4.3-.8.7-.8h1.5l1.7-2c.5-.5 1.3-.2 1.3.5zM8.8 6c0-1-.5-1.9-1.3-2.4v4.7C8.3 7.9 8.8 7 8.8 6zm-.7-4.1c-.2-.1-.4 0-.5.2-.1.2 0 .4.2.5 1.3.7 2 2 2 3.4 0 1.4-.8 2.8-2 3.4-.2.1-.3.2-.3.4 0 .2.2.4.4.4.1 0 .1 0 .2 0 1.5-.8 2.5-2.4 2.5-4.1-.1-1.8-1-3.4-2.5-4.2z"/></svg><span>How to Create a userChrome.css File</span><br><span class="tab-secondary-label">PLAYING</span></div>
+				<div id="bradius-demo" style="background-color: #fff; box-shadow: 0 0 1px var(--tab-line-color, rgba(128,128,142,0.9)), 0 0 4px rgba(128,128,142,0.5);" title="Active tab"><span>Firefox 89 &ndash; Styling the New Proton UI</span></div>
 			</div></td>
 		</tr>
 		<tr><td><p>Tab corner rounding: <br>
@@ -207,6 +247,11 @@ menupopup > menuitem, menupopup > menu {
 			<select id="contextline" name="contextline" size="2">
 				<option value="none" selected>Do not override default</option>
 				<option value="bottom">Move to bottom of tab</option>
+			</select></p><p>Audio playing/mute button visibility: <br>
+			<select id="soundbtn" name="soundbtn" size="3">
+				<option value="none" selected>Only on hover (default style)</option>
+				<option value="regular">While playing (regular tabs only)</option>
+				<option value="regpinned">While playing (regular and pinned tabs)</option>
 			</select></p></td>
 			<td><p>Tab font size: <br>
 			<select id="fontsize" name="fontsize" size="6">
@@ -261,6 +306,7 @@ function init(){
 	document.getElementById('tabheight').selectedIndex = 0;
 	document.getElementById('backtabs').selectedIndex = 0;
 	document.getElementById('contextline').selectedIndex = 0;
+	document.getElementById('soundbtn').selectedIndex = 0;
 	document.getElementById('fontsize').selectedIndex = 0;
 	document.getElementById('fontweight').selectedIndex = 0;
 	// create initial CSS
@@ -270,7 +316,6 @@ function init(){
 // update demo bar and call buildCSS()
 function updateDemo(evt){
 	var tgt = evt.target;
-	console.log(tgt);
 	var demobar = document.getElementById('tabbar-demo');
 	switch (tgt.id){
 		case 'bradius':
@@ -304,10 +349,14 @@ function updateDemo(evt){
 			}
 			break;
 		case 'fontweight':
-		for (var i=0; i<tgt.options.length; i++){
+			for (var i=0; i<tgt.options.length; i++){
 				if (tgt.options[i].selected && tgt.options[i].value != 'none') demobar.classList.add('weight' + tgt.options[i].value);
 				else demobar.classList.remove('weight' + tgt.options[i].value);
 			}
+			break;
+		case 'soundbtn':
+			if (tgt.value != 'none') demobar.classList.add('audiobtn');
+			else demobar.classList.remove('audiobtn');
 			break;
 		default:
 			// no action
@@ -480,13 +529,87 @@ function buildCSS(evt){
 `;
 				}
 				break;
+			case 'soundbtn':
+				if (ctrls[i].value != 'none'){ // show audio playing/mute button on regular tabs
+					cssTemp += `
+/*** Audio Playing / Mute Button side-by-side when sound is playing ***/
+
+#TabsToolbar {
+    --user-mute-button-height: 20px;  /* default size is 12px, site icon is 16px */
+}
+
+/* Move the mute/unmute button to the right and enlarge it */
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) {
+    width: var(--user-mute-button-height) !important;
+    height: var(--user-mute-button-height) !important;
+    margin-left: calc(var(--user-mute-button-height) / 2 + 2px) !important; /* pushes icon to the right */
+    margin-right: 2px !important; /* closes up some space before the text */
+    padding: 0 !important; /* allows icon to expand to full size */
+}
+
+/* Move the site icon to the left a bit and adjust position */
+.tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    margin-left: -4px !important; /* pushes icon to the left */
+    margin-top: calc((var(--user-mute-button-height) - 16px) / 2) !important;  /* keep site icon reasonably positioned */
+}
+
+/* Override the rules for hover/not hover visibility */
+   /* for mute button */
+.tabbrowser-tab:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]), 
+   /* for site icon */
+.tabbrowser-tab:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay), 
+   /* for site icon with Compact density */
+:root[uidensity="compact"] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    opacity: 1 !important; /* overrides full transparency with full opacity */
+}
+
+/* Color the icon on hover for confirmation or avoidance */
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]):hover {
+    fill: green !important;
+}
+[lwthemetextcolor="bright"] .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]):hover {
+    fill: lightgreen !important; /* for dark themes */
+}
+`;
+				}
+				if (ctrls[i].value == 'regpinned'){ // also show audio playing/mute button on pinned tabs
+					cssTemp += `
+/* Tweaked Audio playing/Mute button rules for pinned tabs */
+.tab-icon-overlay:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]) {
+    width: var(--user-mute-button-height) !important;
+    height: var(--user-mute-button-height) !important;
+    margin-left: 2px !important; /* allow some overlap to reduce expanded width */
+    margin-right: -2px !important; /* reduce empty space on the right */
+    padding: 0 !important; /* allows icon to expand to full size */
+    top: 0 !important; /* align button with site icon */
+}
+.tab-icon-stack:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    margin-left: -6px !important; /* reduce empty space on the left */
+    margin-top: calc((var(--user-mute-button-height) - 16px) / 2) !important;  /* keep site icon reasonably positioned */
+}
+.tabbrowser-tab:not(:hover) .tab-icon-overlay:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]), 
+   /* for site icon */
+.tabbrowser-tab:hover .tab-icon-stack:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]) > :not(.tab-icon-overlay), 
+   /* for site icon with Compact density */
+:root[uidensity="compact"] .tab-icon-stack:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    opacity: 1 !important; /* overrides full transparency with full opacity */
+}
+.tab-icon-overlay:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]):hover {
+    fill: green !important;
+}
+[lwthemetextcolor="bright"] .tab-icon-overlay:not([crashed]):is([pinned], [sharing]):is([soundplaying], [muted]):hover {
+    fill: lightgreen !important; /* for dark themes */
+}
+`;
+				}
+				break;
 			default:
 				// ?
 		}
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 8/11/2021; Generated ${d.toString()} */`;
+/* Tweak Options as of 8/13/2021; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){
