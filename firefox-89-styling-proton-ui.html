@@ -139,7 +139,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated August 13, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated August 15, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -178,7 +178,7 @@
 <h3 id="menuspacing">Reducing vertical spacing in menus</h3>
 <p>Most of the menus in Firefox 89 have fewer items, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. You can use custom style rules in a userChrome.css file to customize the spacing. For Firefox 89-90, there is a preference to roll back the changes to some menus (next section below).</p>
 
-<p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 3px; if it's too low, try 5px:</p>
+<p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 2px to try to match Firefox 57-88 (at least on Windows). If it's too low, try 5px. (Comparison screenshots below the code)</p>
 
 <pre class="codeblock notranslate">
 /*** Tighten up drop-down/context/popup menu spacing ***/
@@ -195,6 +195,12 @@ menupopup > menuitem, menupopup > menu {
 <p>This makes the spacing similar to Firefox 88:</p>
 
 <p><img src="img/Fx90-menu-item-padding.png"></p>
+</div>
+
+<div style="page-break-inside: avoid;">
+<p>Here are padding-block variations for comparison:</p>
+
+<p><img src="img/Fx91-menu-spacing-4px-3px-2px.png"></p>
 </div>
 <p style="border-top:1px solid #ccc;">&nbsp;</p>
 
