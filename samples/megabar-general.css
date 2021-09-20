@@ -1,4 +1,4 @@
-/*** Megabar Styler General - version 2020-04-19 ***/
+/*** Megabar Styler General - version 2021-09-09 ***/
 
   /*** General Preferences ***/
   :root {
@@ -17,7 +17,10 @@
 
     /* Bottom border for each result row */
     --mbarstyler-bottom-border-width: /*[[borderwidth]]*/; /* [0px or 1px] */
-    
+
+    /* Height adjustment for labels (Proton) */
+    --mbarstyler-label-height-adjustment: /*[[labelheight]]*/; /* [0px or 35px] */
+   
     /* Match display style */
     --mbarstyler-match-weight: /*[[matchweight]]*/; /* [400,700] */
     --mbarstyler-match-background-opacity: /*[[matchbg]]*/; /* [0.0,0.05,0.1] */
@@ -78,7 +81,7 @@
   /* Set max-height for items visible without scrolling */
   #urlbarView-results, #urlbar-results {
     height: unset !important;
-    max-height: calc(2.5 * (var(--mbarstyler-title-font-size) + var(--mbarstyler-bottom-border-width)) * var(--mbarstyler-max-rows-without-scrolling)) !important;
+    max-height: calc(2.5 * (var(--mbarstyler-title-font-size) + var(--mbarstyler-bottom-border-width)) * var(--mbarstyler-max-rows-without-scrolling) + var(--mbarstyler-label-height-adjustment)) !important;
   }
   #urlbar-results {
     overflow-y: auto !important; 
@@ -110,5 +113,5 @@
     background-color: rgba(255, 255, 255, var(--mbarstyler-match-background-opacity));
     border-radius: 2px;
   }
-
+  /*[[labelhider]]*/
 /*** End of: Megabar Styler General ***/

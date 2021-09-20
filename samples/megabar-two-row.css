@@ -1,4 +1,4 @@
-/*** Megabar Styler Two-Row Flex Layout - version 2020-06-03 ***/
+/*** Megabar Styler Two-Row Flex Layout - version 2021-09-09 ***/
 
   /* !!! Requires variables from Megabar Styler General !!! */
 
@@ -9,18 +9,21 @@
     /* Wrap the url (adapted from Fx75 narrow bar design) */
   .urlbarView-row-inner {
     flex-wrap: wrap !important;
-    padding-top: 0 !important;
-    padding-bottom: 2px !important;
+    padding-block: 2px !important;
   }
   .urlbarView-no-wrap {
     max-width: 100% !important;
     flex-basis: 100% !important;
     position: relative;
   }
+    /* Remove Proton excess height from search suggestions */
+  :root:not([uidensity="compact"]) .urlbarView-row[type="search"]{
+    min-height: unset !important;
+  }
 
   /* Adjust horizontal and vertical URL position */
   .urlbarView-row[has-url] > .urlbarView-row-inner > .urlbarView-url {
-    padding-inline-start: calc(6px + 2px + /* favicon */ 16px) !important;
+    padding-inline-start: calc(6px + 4px + /* favicon */ 16px) !important;
     margin-top: calc(2px + (var(--mbarstyler-url-font-size) - var(--mbarstyler-title-font-size)));
   }
 
