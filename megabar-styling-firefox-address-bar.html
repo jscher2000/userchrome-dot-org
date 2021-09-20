@@ -41,7 +41,7 @@
 </nav>
 <header>
 <h1>Megabar &ndash; Configuring and Styling the Firefox 75+ Address Bar</h1>
-<p>Updated November 17, 2020; Originally posted by jscher2000 on April 11, 2020.</p>
+<p>Updated September 9, 2021; Originally posted by jscher2000 on April 11, 2020.</p>
 </header>
 
 <article>
@@ -50,65 +50,45 @@
 down automatically when you click in the bar, while others object to the way it bulges and casts a shadow over the Bookmarks Toolbar. This page provides information and tools for 
 managing the behavior and appearance of the bar and its drop-down.</p>
 <ul id="toc">
-	<li><a href="#topsites" onclick="window.setTimeout(pgshow, 100);">Turn off the automatically dropping Top Sites list</a></li>
+	<li><a href="#topsites" onclick="window.setTimeout(pgshow, 100);">Turn off the automatically dropping Shortcuts (Top Sites) list</a></li>
 	<li><a href="#showhistory" onclick="window.setTimeout(pgshow, 100);">The Show History button is gone!</a></li>
 	<li><a href="#standardfeatures" onclick="window.setTimeout(pgshow, 100);">Change the types of suggested matches Firefox shows as you type</a></li>
 	<li><a href="#enlargement" onclick="window.setTimeout(pgshow, 100);">Reduce automatic address bar enlargement (Firefox 78+)</a></li>
 	<li><a href="#mbarstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling the bar to reduce the bulging, URL on its own row, other modifications (userChrome.css rules)</a></li>
-	<li><a href="#update1" onclick="window.setTimeout(pgshow, 100);">Firefox 75-76 roll back option</a></li>
+	<li><a href="megabar-styling-firefox-address-bar-pre-proton.html">[Archived] Firefox 75-76 roll back option</a></li>
 </ul>
 
 <div style="page-break-inside: avoid;">
-<h3 id="topsites">Top Sites versus Frequently Visited URLs</h3>
-<p><img src="img/Fx82-megabar-top-sites.png" style="width:800px"></p>
-<p>The Firefox Home page (internal address <strong>about:home</strong>) and New Tab page (internal address <strong>about:newtab</strong>) share a Top Sites section containing 
-a combination of pre-pinned search shortcuts, popular sites, and URLs from your history. In Firefox&nbsp;75+, the first eight Top Sites appears on the drop-down (in recent versions, 
-this may be up to 10 if you show more than one row of Top Sites on your new tab page). If 
-you have been ignoring this section, it's probably confusing to see this list. For information on how to add, remove, and rearrange those sites, see the Mozilla Support article: 
-<a href="https://support.mozilla.org//kb/customize-new-tab-page" target="_blank">Customize the New Tab page</a>.</p>
+<h3 id="topsites">Shortcuts (Top Sites) versus Frequently Visited URLs</h3>
+<p><img src="img/Fx92-megabar-shortcuts.png" style="width:800px"></p>
+<p>The Firefox Home page (internal address <strong>about:home</strong>) and New Tab page (internal address <strong>about:newtab</strong>) share a Shortcuts section containing 
+a combination of pre-pinned search shortcuts, popular sites, and URLs from your history (previously known as Top Sites). In Firefox&nbsp;75+, the first eight to ten shortcuts appears on the drop-down when you click the address bar, before you type any text for Firefox to match. If you have been ignoring this section, it's probably confusing to see this list. For information on how to add, remove, and rearrange those sites, see the Mozilla Support article: 
+<a href="https://support.mozilla.org/kb/customize-items-on-firefox-new-tab-page" target="_blank">Customize items on your Firefox New Tab page</a>.</p>
 </div>
-<p>If you don't find this useful, here are some options:</p>
-<p>(1) <em>Don't open the drop-down at all when first clicking in the address bar:</em></p>
-<p>There is a checkbox for this in the "Address Bar" section of the Privacy &amp; Security panel on the Options/Preferences page (in Firefox 78+). Alternately,  you can make the change using about:config:</p>
-<p><img src="img/Fx78-options-privacy-security-address-bar-top-sites.png" style="width:584px"></p>
+<p>If you don't find an automatic list useful, you can set Firefox not to open the drop-down at all when you first click in the address bar. There is a checkbox for this in the "Address Bar" section of the Privacy &amp; Security panel on the Settings page (formerly known as the Options or Preferences page). Alternately,  you can make the change using about:config:</p>
+<p><img src="img/Fx92-options-privacy-security-address-bar-shortcuts.png" style="width:584px"></p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
-	<li>(Firefox 78+) Double-click the <strong>browser.urlbar.suggest.topsites</strong> preference to switch the value from true to false.</li>
-	<li>(Firefox 75-77 only) Double-click the <strong>browser.urlbar.openViewOnFocus</strong> preference to switch the value from true to false.</li>
+	<li>Double-click the <strong>browser.urlbar.suggest.topsites</strong> preference to switch the value from true to false.</li>
 </ol>
 <p>With that change, you can type a space in the address bar to display the classic "Show History" list.</p>
-<p dtlhdr>(2) (Firefox 75-77 only) <em>Switch back to showing frequently visited URLs from history when clicking in the address bar:</em></p>
-<div>
-<p>You can switch the automatic dropping list by disabling the Top Sites section on the Firefox Home / new tab page, as described in the Mozilla Support article <a 
-href="https://support.mozilla.org/kb/hide-or-display-content-new-tab" target="_blank">Hide or display content in New Tab</a>. On the 
-Options/Preferences page, Home panel, uncheck the box for Top Sites:</p>
-<p><img src="img/Fx75-options-home-top-sites.png" style="width:440px"></p>
-<p>Alternately, you can toggle a preference using about:config:</p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>topsi</strong> and pause while the list is filtered.</li>
-	<li>Double-click the <strong>browser.newtabpage.activity-stream.feeds.topsites</strong> preference to switch the value from true to false.</li>
-</ol>
-<p>But this has no effect in Firefox 78.</p>
-</div>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <div style="page-break-inside: avoid;">
 <h3 id="showhistory">Where is my "Show History" arrow/triangle button?</h3>
-<p>You can access the classic frequent sites list by typing a space in the address bar. Firefox 83 adds a new button to the bottom of the Top Sites drop-down to call up the list without any typing (this assumes you did not turn off the display of Top Sites when clicking in the address bar.</p>
-<p><img src="img/Fx83-megabar-top-sites-history-button.png" style="width:800px"></p>
-<p><img src="img/Fx83-megabar-drop-down-history-button-results.png" style="width:800px"></p>
+<p>You can access the classic frequent sites list in two ways. First, if you did not disable the Shortcuts list, after the drop-down opens, you can click the History button on the row of search engine icons along the bottom of the drop-down. Second, you can type a space in the address bar.</p>
+<p><img src="img/Fx92-megabar-drop-down-history-button-results.png" style="width:800px"></p>
 </div>
 
 <div style="page-break-inside: avoid;">
-<p>If you turned off the display of Top Sites when clicking in the address bar, or want to consider another purely mouse-based method to access your frequently visited URLs list, I created an extension called <a href="https://addons.mozilla.org/en-US/firefox/addon/show-history-top-sites-button/" target="_blank">Show History Frequent Sites Button</a>. Its list looks like the following. You can configure the number of items and how the URLs open (for example, in a new tab, in a background tab, etc.), but it has some limitations noted in the description on the Mozilla Add-ons site.</p>
+<p>If you turned off the display of Shortcuts when clicking in the address bar and want to consider another purely mouse-based method to access your frequently visited URLs list, I created an extension called <a href="https://addons.mozilla.org/firefox/addon/show-history-top-sites-button/" target="_blank">Show History Frequent Sites Button</a>. Its list looks like the following. You can configure the number of items and how the URLs open (for example, in a new tab, in a background tab, etc.), but it has some limitations noted in the description on the Mozilla Add-ons site.</p>
 <p><img src="img/popup-v1.2.png" style="width:800px"></p>
 </div>
 
 <div style="page-break-inside: avoid;">
 <h3 id="standardfeatures">Managing Standard Address Bar / Drop-down Features</h3>
-<p><img src="img/Fx75-standard-address-bar-features.png" style="width:800px"></p>
+<p><img src="img/Fx92-standard-address-bar-features.png" style="width:825px"></p>
 <p>You can disable many of the features of the drop-down to see the matches you find most useful. Many of these changes can be made on the Options/Preferences page, 
 while some require a visit to the <a href="https://support.mozilla.org//kb/about-config-editor-firefox" target="_blank">Advanced Configuration Editor</a> (about:config).<p>
 </div>
@@ -116,27 +96,25 @@ while some require a visit to the <a href="https://support.mozilla.org//kb/about
 <h4>Four Types of Suggestions</h4>
 <p><em>Search Engine Suggestions</em> are retrieved dynamically from your current default search engine site. You can move these before or after other kinds of suggestions, 
 or disable them completely using checkboxes on the search panel of the Options/Preferences page. For more information, see the Mozilla Support article: 
-<a href="https://support.mozilla.org//kb/search-suggestions-firefox" target="_blank">Search suggestions in Firefox</a>.</p>
+<a href="https://support.mozilla.org/kb/search-suggestions-firefox" target="_blank">Search suggestions in Firefox</a>.</p>
 <p><em>Bookmark Suggestions</em> show matches among your bookmarked sites, <em>Open Tab Suggestions</em> show matches to currently open pages, and 
 <em>History Suggestions</em> show matches among sites you have visited. Want to hide some of those? To learn how to turn various of those categories
 on and off, see the Mozilla Support article: <a href="https://support.mozilla.org//kb/address-bar-autocomplete-firefox" target="_blank">Address bar autocomplete in Firefox - 
 Search your bookmarks, history and tabs</a>.</p>
 
-<h4>In-URL-bar Autofill and One-Click Search Buttons</h4>
-<p>These features can be disabled as follows:</p>
+<h4>In-URL-bar Autofill</h4>
+<p>This feature can be disabled as follows:</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
 	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
 	<li><em>To stop showing autofill suggestions in the address bar:</em> Double-click the <strong>browser.urlbar.autoFill</strong> preference to 
 	switch the value from true to false. (To re-enable this feature, double-click again, or use the reset arrow icon at the far right of the row.)</li>
-	<li>(Firefox 75-77 only) <em>To stop showing the one-off search buttons at the bottom of the drop-down:</em> Double-click the <strong>browser.urlbar.oneOffSearches</strong> 
-	preference to switch the value from true to false. (To re-enable this feature, double-click again, or use the reset arrow icon at the far right of the row.)</li>
 </ol>
 
-<h4>What about the informational "blue bar"?</h4>
+<h4>What about the informational bar (formerly the "blue bar")?</h4>
 <p>The top row always provides information about what Firefox will do if you press the Enter/Return key, or click the Go arrow, right now. When there 
 is an autofill match, the bar shows what URL will be loaded. If there isn't an autofill match but instead one or more search terms, Firefox will inform you what search 
-engine it will use. If you are using a search engine keyword or bookmark keyword, the top row should indicate where that leads. Here's what those look like:</p>
+engine it will use. If you are using a search engine keyword or bookmark keyword, the top row should indicate where that leads. Here's what those look like (screenshot from Firefox 75):</p>
 <p><img src="img/Fx75-blue-bar-2.png" style="width:800px"></p>
 <p>It's handy, but some people prefer not to see it. There is no checkbox or preference to hide the top row, but you can do it with a custom style rule 
 in a userChrome.css file. More on that below.</p>
@@ -171,8 +149,8 @@ The buttons to grab the CSS you tweak using the following form controls follow a
 	<tbody>
 		<tr><td colspan="2"><p>Amount of URL bar enlargement: <br>
 			<select id="popout" name="popout" size="5">
-				<option value="0px">None</option>
-				<option value="1px" selected>1 pixel</option>
+				<option value="0px" selected>None</option>
+				<option value="1px">1 pixel</option>
 				<option value="2px">2 pixels</option>
 				<option value="3px">3 pixels</option>
 				<option value="4px">4 pixels</option>
@@ -181,7 +159,7 @@ The buttons to grab the CSS you tweak using the following form controls follow a
 				<option value="7px">7 pixels (default)</option>
 			</select><br>
 			<em style="font-size:0.9em">Animation effect and shadow are removed in all cases.</em></p></td>
-			<td><div id="popout-sprite" style="background-image: url(img/popout-sprite.png);" class="popout-1px"></div></td>
+			<td><div id="popout-sprite" style="background-image: url(img/popout-sprite.png);" class="popout-0px"></div></td>
 		</tr>
 		<tr><td colspan="2"><p>Show the Visit / Search top row? <br>
 			<select id="bluebar" name="bluebar" size="2">
@@ -197,6 +175,11 @@ The buttons to grab the CSS you tweak using the following form controls follow a
 			<select id="borderwidth" name="borderwidth" size="2">
 				<option value="0px">No thanks (default)</option>
 				<option value="1px" selected>Sure, good idea</option>
+			</select></p>
+			<p>Remove "Firefox Suggest" and other labels? <br>
+			<select id="sectionlabels" name="sectionlabels" size="2">
+				<option value="35px"selected>No thanks (default)</option>
+				<option value="0px">Yes, they're distracting</option>
 			</select></p>
 			<p>Show a scroll bar when there are more than X rows on the drop-down:<br>
 			<select id="maxrows" name="maxrows" size="6">
@@ -216,7 +199,8 @@ The buttons to grab the CSS you tweak using the following form controls follow a
 				<option value="none">Hide the row (down/up arrows still go in)</option>
 			</select>
 			</p></td>
-			<td><div id="top-rows" style="background-image: url(img/topyes-1row.png); width: 540px; height: 480px; background-size: contain; margin-bottom: 1em"></div></td>
+			<td><div id="top-rows" style="background-image: url(img/topyes-1row.png); width: 540px; height: 480px; background-size: contain; margin-bottom: 1em"></div>
+			</td>
 		</tr>
 		<tr>
 			<td><p>Title font size: <br>
@@ -254,21 +238,11 @@ The buttons to grab the CSS you tweak using the following form controls follow a
 <div id="currentCSS" style="width:100%; font-family:monospace; font-size:0.8em; white-space:pre-wrap; border:1px solid #00f; padding:1em; background-color:#f8f8f8; min-height:300px;">
 <p>CSS to be shown here, assuming JavaScript is not disabled.</p>
 </div>
-
-<h3 id="update1">Temporary Preference to Disable Enlargement Feature</h3>
-<p>If you're not ready for all that, Firefox&nbsp;75 and 76 include a preference to disable the new "enlarging" design and revert to the Firefox&nbsp;74 design. You can use it temporarily and return to this page for additional styling-related suggestions in the future.</p>
-<ol type="A">
-	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
-	<li>In the search box in the page, type or paste <strong>URLB</strong> and pause while the list is filtered.</li>
-	<li>Double-click the <strong>browser.urlbar.update1</strong> preference to switch the value from true to false.</li>
-</ol>
-<p>This change doesn't take effect in currently open windows, but you will see the old bar in new windows or after exiting/quitting out of Firefox and starting it up again.</p>
-<p style="border-top:1px solid #aaa;">&nbsp;</p>
 </div>
 </article>
 
 <footer>
-<p>Copyright &copy; 2020 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or 
+<p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or 
 <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" 
 target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
@@ -276,7 +250,7 @@ target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.<
 <script>
 var cssGeneral = '', cssTwoRow = '', cssOneOffs = '', d = new Date(), ms = d.getTime();
 function init(){
-	document.getElementById('popout').selectedIndex = 1;
+	document.getElementById('popout').selectedIndex = 0;
 	// fetch CSS files; bypass caching by adding time
 	var myRequest = new Request('samples/megabar-general.css?' + ms);
 	fetch(myRequest)
@@ -354,6 +328,26 @@ function buildCSS(evt){
 	var cssTemp = cssGeneral;
 	for(var i=0; i<ctrls.length; i++){
 		switch (ctrls[i].id){
+			case 'sectionlabels':
+				cssTemp = cssTemp.replace('/*[[labelheight]]*/', ctrls[i].value);
+				if (ctrls[i].value == '0px'){
+					cssTemp = cssTemp.replace('/*[[labelhider]]*/', 
+`
+  /* Hide "Firefox Suggest", "Google Suggestions" and other labels */
+  .urlbarView-row[label]::before {
+    /* Suppress the text */
+    display: none !important;
+  }
+  .urlbarView-row[label] {
+    /* Remove the empty space */
+    margin-block-start: 0 !important;
+  }
+`
+					);
+				} else {
+					cssTemp = cssTemp.replace('/*[[labelhider]]*/', '');
+				}
+				break;
 			case 'match':
 				var matchParts = ctrls[i].value.split('.');
 				cssTemp = cssTemp.replace('/*[[matchweight]]*/', matchParts[0]);
@@ -361,12 +355,14 @@ function buildCSS(evt){
 				break;
 			case 'rows':
 				if (ctrls[i].value == '2row') cssTemp += '\n\n' + cssTwoRow;
+				break;
 			case 'oneoffs':
 				if (ctrls[i].value == 'flex' || ctrls[i].value == 'none'){
 					cssTemp += '\n\n' + cssOneOffs;
 					// Apply user selection
 					cssTemp = cssTemp.replace('/*[[' + ctrls[i].id + ']]*/', ctrls[i].value);
 				}
+				break;
 			default:
 				cssTemp = cssTemp.replace('/*[[' + ctrls[i].id + ']]*/', ctrls[i].value);
 		}

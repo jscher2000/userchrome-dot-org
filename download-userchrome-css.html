@@ -25,13 +25,13 @@
 </nav>
 <header>
 <h1>Generate Downloadable userChrome.css File</h1>
-<p>Updated June 13, 2021. Originally posted by jscher2000 on April 26, 2018 <em>beta</em></p>
+<p>Updated August 19, 2021. Originally posted by jscher2000 on April 26, 2018 <em>beta</em></p>
 </header>
 
 <article>
 <div id="main">
 <p>You can paste CSS into this lightweight editor (<a href="https://ace.c9.io/" target="_blank">Ace</a>) and then generate a userChrome.css file for download. All text entry and file generation is done within the page without sending any code to my server. This page is <strong>not</strong> backed up as you work. <em>The editor is not checking your code. (Because the syntax checking is obsolete, I turned it off.)</em></p>
-<pre id="editor">/* Replace this SAMPLE CONTENT with your own CSS */
+<pre id="editor">/***** START of Sample Rules (delete and replace with your your own rules) *****/
 
 /*** Maximize Print Overlay Preview Size ***/
 
@@ -46,34 +46,46 @@
   }
 }
 
-/*** Reposition the site icon and mute button side-by-side when sound is playing ***/
+/*** Audio Playing / Mute Button side-by-side when sound is playing ***/
 
-@media (-moz-proton) {
-  /* Move the mute/unmute button to the right and enlarge it */
-  .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) {
-    margin-left: 12px !important; /* pushes icon to the right */
-    margin-right: 2px !important; /* closes up some space before the text */
-    width: 24px; /* default is 16px */
-    height: 24px; /* default is 16px */
-    padding: 0 !important; /* allows icon to expand to full size */
-  }
-
-  /* Move the site icon to the left a bit and adjust position */
-  .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
-  	margin-left: -5px !important; /* pushes icon to the left */
-    margin-top: 4px !important;  /* reduce by 1px for each 2px reduction in mute button height */
-  }
-
-  /* Override the rules for hover/not hover visibility */
-     /* for mute button */
-  .tabbrowser-tab:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]), 
-     /* for site icon */
-  .tabbrowser-tab:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay), 
-     /* for site icon with Compact density */
-  :root[uidensity="compact"] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
-    opacity: 1 !important; /* overrides full transparency with full opacity */
-  }
+#TabsToolbar {
+    --user-mute-button-height: 20px;  /* default size is 12px, site icon is 16px */
 }
+
+/* Move the mute/unmute button to the right and enlarge it */
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) {
+    width: var(--user-mute-button-height) !important;
+    height: var(--user-mute-button-height) !important;
+    margin-left: calc(var(--user-mute-button-height) / 2 + 2px) !important; /* pushes icon to the right */
+    margin-right: 2px !important; /* closes up some space before the text */
+    padding: 0 !important; /* allows icon to expand to full size */
+}
+
+/* Move the site icon to the left a bit and adjust position */
+.tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    margin-left: -4px !important; /* pushes icon to the left */
+    margin-top: calc((var(--user-mute-button-height) - 16px) / 2) !important;  /* keep site icon reasonably positioned */
+}
+
+/* Override the rules for hover/not hover visibility */
+   /* for mute button */
+.tabbrowser-tab:not(:hover) .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]), 
+   /* for site icon */
+.tabbrowser-tab:hover .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay), 
+   /* for site icon with Compact density */
+:root[uidensity="compact"] .tab-icon-stack:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]) > :not(.tab-icon-overlay) {
+    opacity: 1 !important; /* overrides full transparency with full opacity */
+}
+
+/* Color the icon on hover for confirmation or avoidance */
+.tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]):hover {
+    fill: green !important;
+}
+[lwthemetextcolor="bright"] .tab-icon-overlay:not([pinned], [sharing], [crashed]):is([soundplaying], [muted]):hover {
+    fill: lightgreen !important; /* for dark themes */
+}
+
+/***** END of Sample Rules *****/
 
 </pre>
 

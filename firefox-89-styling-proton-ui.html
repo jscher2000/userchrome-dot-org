@@ -139,7 +139,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated August 15, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated September 19, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -148,10 +148,11 @@
 <ul id="toc">
 	<li><a href="#compactmode" onclick="window.setTimeout(pgshow, 100);">Restoring Compact mode to the density selector</a></li>
 	<li><a href="#menuspacing" onclick="window.setTimeout(pgshow, 100);">Tightening up the menu spacing</a></li>
+	<li><a href="#menucolors" onclick="window.setTimeout(pgshow, 100);">Modifying menu colors</a></li>
 	<li><a href="#tabstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling tab buttons as connected tabs, dividers, height, font size/boldness, audio icon, etc.</a></li>
 </ul>
 
-<h3 id="compactmode">Enabling "Compact" Toolbar Density</h3>
+<h2 id="compactmode">Enabling "Compact" Toolbar Density</h2>
 <p>Do you miss having "compact" toolbars? The developers have reduced support for Compact mode so if you would like to select it from the Density popup on the Customize screen, you need to change a preference so it appears there:</p>
 <ol type="A">
 	<li>In a new tab, type or paste <strong>about:config</strong> in the address bar and press Enter/Return. Click the button accepting the risk.</li>
@@ -175,16 +176,18 @@
 </div>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
-<h3 id="menuspacing">Reducing vertical spacing in menus</h3>
+<h2 id="menuspacing">Reducing vertical spacing in menus</h2>
 <p>Most of the menus in Firefox 89 have fewer items, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. You can use custom style rules in a userChrome.css file to customize the spacing. For Firefox 89-90, there is a preference to roll back the changes to some menus (next section below).</p>
 
 <p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 2px to try to match Firefox 57-88 (at least on Windows). If it's too low, try 5px. (Comparison screenshots below the code)</p>
 
 <pre class="codeblock notranslate">
-/*** Tighten up drop-down/context/popup menu spacing ***/
+/*** Tighten up drop-down/context/popup menu spacing (8 Sep 2021) ***/
 
-menupopup > menuitem, menupopup > menu {
-  padding-block: 4px !important;
+menupopup:not(.in-menulist) > menuitem, 
+menupopup:not(.in-menulist) > menu {
+  padding-block: 4px !important; /* reduce to 3px, 2px, 1px or 0px as needed */ 
+  min-height: unset !important; /* v92.0 - for padding below 4px */
 }
 :root {
   --arrowpanel-menuitem-padding: 4px 8px !important;
@@ -202,6 +205,8 @@ menupopup > menuitem, menupopup > menu {
 
 <p><img src="img/Fx91-menu-spacing-4px-3px-2px.png"></p>
 </div>
+
+<p><em>Why did I add</em> <code>:not(.in-menulist)</code> <em>to the rule on Sept. 3, 2021?</em> Users mentioned that the original rule had the side effect of increasing the spacing between items in &lt;select&gt; control drop-downs on websites. Using menupopup:not(.in-menulist) excludes those drop-downs from the rule.</p>
 <p style="border-top:1px solid #ccc;">&nbsp;</p>
 
 <p>{<em>Firefox 89-90 only</em>} Here are the steps to switch the temporary preference between the older menu appearance and the Firefox 89 ("Proton") appearance:</p>
@@ -210,6 +215,47 @@ menupopup > menuitem, menupopup > menu {
 	<li>In the search box in the page, type or paste <strong>browser.proton.contextmenus.enabled</strong> and pause while the list is filtered.</li>
 	<li>Double-click the preference to switch the value between <strong>true</strong> (Proton style) and <strong>false</strong> (Photon style).</li>
 </ol>
+<p style="border-top:1px solid #aaa;">&nbsp;</p>
+
+<h2 id="menucolors">Modifying Menu Colors</h2>
+<p>Proton-style drop-down menus generally follow your theme, either light (dark text on a bright background) or dark (bright text on a dark background). Some users find these high contrast menus unappealing. While it's not possible for me to suggest colors to suit all tastes, the following example substitutes colors similar to the Photon design of Firefox 57-88, which had a universal black-on-off-white appearance. You can edit the colors to suit your tastes.</p>
+
+<pre class="codeblock notranslate">
+/*** Photon-like Menu Colors (19 Sept 2021) ***/
+
+/* Bookmarks Toolbar folders */
+#PersonalToolbar menupopup,
+/* Right-click context menus */
+#mainPopupSet menupopup,
+/* Top menu bar on Windows (not sure about others) */
+#toolbar-menubar menupopup,
+/* Sidebar/Library bookmark/history context menus */
+#placesContext {
+  /* Text color */
+  --menu-color: #000 !important;
+  --arrowpanel-color: #000 !important;
+  --panel-color: #000 !important;
+  /* Background color */
+  --menu-background-color:  #f0f0f0 !important;
+  --arrowpanel-background: #f0f0f0 !important;
+  --panel-background: #f0f0f0 !important;
+  /* Border color (if any) */
+  --menu-border-color: threedshadow !important;
+  --arrowpanel-border-color: threedshadow !important;
+  --panel-border-color: threedshadow !important;
+  /* Hovered/expanded item background color */
+  --menuitem-hover-background-color: #e0e0e6 !important;
+  /* Disabled items text color and hovered background */
+  --menu-disabled-color: rgba(21, 20, 26, 0.4) !important;
+  --menuitem-disabled-hover-background-color: rgba(224, 224, 230, 0.4) !important;
+}
+</pre>
+
+<div style="page-break-inside: avoid;">
+<p>Here's a comparison (with the <a href="https://addons.mozilla.org/firefox/addon/photon-colors/" target="_blank">Photon Colors</a> theme installed):</p>
+
+<p><img src="img/Fx92-photon-menu-colors.png"></p>
+</div>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <h2 id="tabstyler">Restyling tab buttons</h2>
