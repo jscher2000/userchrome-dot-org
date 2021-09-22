@@ -65,7 +65,7 @@
 	position: absolute;
 	background-color: #f8f;
 	height: 2px;
-	width: 196px;
+	width: 200px;
 	border-radius: 2px;
 	margin: -3px 2px 0;
 }
@@ -78,6 +78,34 @@
 #tabbar-demo.compact.movecontext #back1-demo::before {
 	margin-top: 27px;
 }
+/* Blue Active Tab Line */
+#bradius-demo::before {
+	content: " ";
+	display: block;
+	position: absolute;
+	height: 3px;
+	width: 188px;
+	margin: -1px 6px 0;
+}
+#tabbar-demo.bradius-0px #bradius-demo::before {
+	width: 200px;
+	margin: -1px 0 0;
+}
+#tabbar-demo.bradius-4px #bradius-demo::before {
+	width: 192px;
+	margin: -1px 4px 0;
+}
+#tabbar-demo.bradius-8px #bradius-demo::before {
+	width: 184px;
+	margin: -1px 8px 0;
+}
+#tabbar-demo.movecontext.bluetopline #bradius-demo::before {
+	background-color: #0a84ff;
+}
+#tabbar-demo.compact.movecontext.bluetopline #bradius-demo::before {
+	background-color: #0a84ff;
+}
+
 #back2-demo {
 	position: relative;
 }
@@ -103,6 +131,9 @@
 	display: inline;
 	top: 7px;
 	left: 5px;
+}
+#tabbar-demo:not(.audiobtn) #back2-demo:hover {
+	background-image: none;
 }
 #tabbar-demo.compact:not(.audiobtn) #back2-demo:hover #audiobutton {
 	top: 5px;
@@ -139,7 +170,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated September 19, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated September 21, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -295,10 +326,11 @@ menupopup:not(.in-menulist) > menu {
 				<option value="bar">Using a vertical bar</option>
 				<option value="shadow">Using a hover-like shadow</option>
 				<option value="outline">Using a tab outline</option>
-			</select></p><p>Container color line: <br>
-			<select id="contextline" name="contextline" size="2">
+			</select></p><p>Container/Active Tab color line: <br>
+			<select id="contextline" name="contextline" size="3">
 				<option value="none" selected>Do not override default</option>
-				<option value="bottom">Move to bottom of tab</option>
+				<option value="bottom">Container line at bottom</option>
+				<option value="bothlines">+ Blue line on active tab</option>
 			</select></p><p>Audio playing/mute button visibility: <br>
 			<select id="soundbtn" name="soundbtn" size="3">
 				<option value="none" selected>Only on hover (default style)</option>
@@ -391,8 +423,18 @@ function updateDemo(evt){
 			}
 			break;
 		case 'contextline':
-			if (tgt.value == 'bottom') demobar.classList.add('movecontext');
-			else demobar.classList.remove('movecontext');
+			if (tgt.value == 'bottom'){
+				demobar.classList.add('movecontext');
+				demobar.classList.remove('bluetopline');
+			}
+			else if (tgt.value == 'bothlines'){
+				demobar.classList.add('movecontext');
+				demobar.classList.add('bluetopline');
+			}
+			else {
+				demobar.classList.remove('movecontext');
+				demobar.classList.remove('bluetopline');
+			}
 			break;
 		case 'fontsize':
 			for (var i=0; i<tgt.options.length; i++){
@@ -419,7 +461,7 @@ function updateDemo(evt){
 // CSS div
 function buildCSS(evt){
 	var ctrls = document.querySelectorAll('#tbarsettings select');
-	var cssTemp = '', connected = false;
+	var cssTemp = '', connected = false, blueline = false, squarebg = false;
 	for(var i=0; i<ctrls.length; i++){
 		switch (ctrls[i].id){
 			case 'bradius':
@@ -501,6 +543,48 @@ function buildCSS(evt){
 }
 `;
 				}
+				if (ctrls[i].value == 'bothlines'){ // add blue line to the top
+					blueline = true;
+					cssTemp += `
+/* Emulate blue tab line from Photon 57-88 UI */
+
+/* Set size and position of the bar relative to background */
+.tab-background::before {
+  content: "";
+  display: block;
+  height: 3px;
+  margin: -1px var(--user-tab-rounding) 0;
+}
+/* Set color for active tab */
+.tabbrowser-tab[selected] .tab-background::before {
+  background-color: #0a84ff;
+}
+/* Set color for other selected tabs */
+.tabbrowser-tab[multiselected]:not([selected]) .tab-background::before {
+  background-color: color-mix(in srgb, #0a84ff 66%, transparent);
+}
+/* Set color for hovering on non-active/non-selected tabs */
+.tabbrowser-tab:not([selected], [multiselected]):hover .tab-background::before {
+  background-color: color-mix(in srgb, currentColor 33%, transparent);
+  transform: none;
+}
+/* [Optional] Animation when hovering non-active/non-selected tabs */
+/*
+.tabbrowser-tab:not([selected], [multiselected]) .tab-background::before {
+  transform: scaleX(.8);
+  transition: transform 100ms linear;
+}
+*/
+`;
+					if (squarebg){
+						cssTemp += `
+/* Adjust margin on blue tab line for squared background tabs */
+.tabbrowser-tab:not([selected], [multiselected]) .tab-background::before {
+  margin: -1px 0 0 !important;
+}
+`;
+					}
+				}
 				break;
 			case 'fontsize':
 				if (ctrls[i].value != 'none'){ // override native font-size for tabs
@@ -526,6 +610,7 @@ function buildCSS(evt){
 				break;
 			case 'backtabs':
 				if (ctrls[i].value == 'bar'){
+					squarebg = true;
 					cssTemp += `
 /* Inactive tabs: Separator line style */
 
@@ -545,6 +630,15 @@ function buildCSS(evt){
     padding-right: 0 !important;
 }
 `;
+					if (blueline){
+						cssTemp += `
+/* Adjust margin on blue tab line for squared background tabs */
+.tabbrowser-tab:not([selected], [multiselected]) .tab-background::before {
+  margin: -1px 0 0 !important;
+}
+`;
+					}
+
 				} else if (ctrls[i].value == 'outline'){
 					cssTemp += `
 /* Inactive tabs: Outline style */
@@ -661,7 +755,7 @@ function buildCSS(evt){
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 8/13/2021; Generated ${d.toString()} */`;
+/* Tweak Options as of 9/21/2021; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){
