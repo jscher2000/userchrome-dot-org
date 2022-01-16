@@ -20,6 +20,8 @@
 #tabbar-demo.bradius-8px > div { border-radius: 8px; }
 #tabbar-demo.compact > div { height: 29px; }
 #tabbar-demo.compact > div > span { line-height: 29px; }
+#tabbar-demo.compactcontain > div { height: 31px; }
+#tabbar-demo.compactcontain > div > span { line-height: 31px; }
 #tabbar-demo.connected { padding-top: 1px; padding-bottom: 0px; }
 #tabbar-demo.connected > div {border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; }
 #tabbar-demo.bar > #back1-demo {
@@ -36,6 +38,9 @@
 }
 #tabbar-demo.outline.compact > .backdemo {
 	height: 27px;
+}
+#tabbar-demo.outline.compactcontain > .backdemo {
+	height: 29px;
 }
 #tabbar-demo.outline.connected > .backdemo {
 	border-bottom: none !important;
@@ -78,6 +83,9 @@
 #tabbar-demo.compact.movecontext #back1-demo::before {
 	margin-top: 27px;
 }
+#tabbar-demo.compactcontain.movecontext #back1-demo::before {
+	margin-top: 29px;
+}
 /* Blue Active Tab Line */
 #bradius-demo::before {
 	content: " ";
@@ -105,6 +113,9 @@
 #tabbar-demo.compact.movecontext.bluetopline #bradius-demo::before {
 	background-color: #0a84ff;
 }
+#tabbar-demo.compactcontain.movecontext.bluetopline #bradius-demo::before {
+	background-color: #0a84ff;
+}
 
 #back2-demo {
 	position: relative;
@@ -117,6 +128,9 @@
 	margin-top: 4px;
 }
 #tabbar-demo.compact #back2-demo > span:nth-of-type(1) {
+	margin-top: 1px;
+}
+#tabbar-demo.compactcontain #back2-demo > span:nth-of-type(1) {
 	margin-top: 1px;
 }
 .tab-secondary-label {
@@ -138,12 +152,18 @@
 #tabbar-demo.compact:not(.audiobtn) #back2-demo:hover #audiobutton {
 	top: 5px;
 }
+#tabbar-demo.compactcontain:not(.audiobtn) #back2-demo:hover #audiobutton {
+	top: 5px;
+}
 #tabbar-demo.audiobtn #audiobutton {
 	display: inline;
 	top: 7px;
 	left: 22px;
 }
 #tabbar-demo.compact.audiobtn #audiobutton {
+	top: 5px;
+}
+#tabbar-demo.compactcontain.audiobtn #audiobutton {
 	top: 5px;
 }
 #tabbar-demo.audiobtn #back2-demo span {
@@ -170,7 +190,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated September 22, 2021; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated January 16, 2022; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -179,7 +199,7 @@
 <ul id="toc">
 	<li><a href="#compactmode" onclick="window.setTimeout(pgshow, 100);">Restoring Compact mode to the density selector</a></li>
 	<li><a href="#menuspacing" onclick="window.setTimeout(pgshow, 100);">Tightening up the menu spacing</a></li>
-	<li><a href="#menucolors" onclick="window.setTimeout(pgshow, 100);">Modifying menu colors</a></li>
+	<li><a href="#menucolors" onclick="window.setTimeout(pgshow, 100);">Modifying menu and toolbar drop-down colors</a></li>
 	<li><a href="#tabstyler" onclick="window.setTimeout(pgshow, 100);">Re-styling tab buttons as connected tabs, dividers, height, font size/boldness, audio icon, etc.</a></li>
 </ul>
 
@@ -205,10 +225,16 @@
 <p>This screenshot illustrates the difference in heights:</p>
 <p><img src="img/Fx90-about-config-browser-uidensity.png"></p>
 </div>
+<div style="page-break-inside: avoid;">
+<p><strong><em>Firefox 93 Change:</em></strong> Users who select Compact Mode will have tighter menu spacing in the menus that drop from the toolbars. This screenshot illustrates the difference. If you still need to tighten up other menus, see the next section.</p>
+<p><img src="img/Fx93-normal-vs-compact-density-bookmarks-menu-button.png"></p>
+</div>
 <p style="border-top:1px solid #aaa;">&nbsp;</p>
 
 <h2 id="menuspacing">Reducing vertical spacing in menus</h2>
 <p>Most of the menus in Firefox 89 have fewer items, but you still may prefer smaller gaps between the items, especially with long lists like Bookmarks. The main reason items are more widely spaced is the <em>padding</em> along the top and bottom of each item. You can use custom style rules in a userChrome.css file to customize the spacing. For Firefox 89-90, there is a preference to roll back the changes to some menus (next section below).</p>
+
+<p><strong><em>Firefox 93 Change:</em></strong> Users who select <a href="#compactmode" onclick="window.setTimeout(pgshow, 100);">Compact Mode</a> will have tighter spacing automatically in the menus that drop from the toolbars. However, this change does not change the spacing for right-click context menus, or the menus that drop from the classic top menu bar, so you may still want to use the following CSS workaround.</p>
 
 <p>To take direct control of the padding, you can use CSS code such as the following. If 4 pixels of padding is too high, you could try 2px to try to match Firefox 57-88 (at least on Windows). If it's too low, try 5px. (Comparison screenshots below the code)</p>
 
@@ -252,7 +278,7 @@ menupopup:not(.in-menulist) > menu {
 <p>Proton-style drop-down menus generally follow your theme, either light (dark text on a bright background) or dark (bright text on a dark background). Some users find these high contrast menus unappealing. While it's not possible for me to suggest colors to suit all tastes, the following example substitutes colors similar to the Photon design of Firefox 57-88, which had a universal black-on-off-white appearance. You can edit the colors to suit your tastes.</p>
 
 <pre class="codeblock notranslate">
-/*** Photon-like Menu Colors (22 Sept 2021) ***/
+/*** Photon-like Menu Colors (14 Jan 2022) ***/
 
 /* Bookmarks Toolbar folders */
 #PersonalToolbar menupopup,
@@ -261,7 +287,12 @@ menupopup:not(.in-menulist) > menu {
 /* Top menu bar on Windows (not sure about others) */
 #toolbar-menubar menupopup,
 /* Sidebar/Library bookmark/history context menus */
-#placesContext {
+#placesContext,
+/* Address bar context menu (2021-10-25) */
+#urlbar-input-container menupopup,
+/* Various toolbar drop-down panels (Fx96) */
+#back-button menupopup, #forward-button menupopup,
+#identity-popup, #appMenu-popup, #downloadsPanel, #BMB_bookmarksPopup {
   /* Text color */
   --menu-color: #000 !important;
   --arrowpanel-color: #000 !important;
@@ -317,9 +348,10 @@ menupopup:not(.in-menulist) > menu {
 					<option value="connected" selected>Connect them to the toolbar</option>
 				</select></p>
 			<p>Tab height: <br>
-			<select id="tabheight" name="tabheight" size="2">
+			<select id="tabheight" name="tabheight" size="3">
 				<option value="none" selected>Do not override default</option>
 				<option value="compact">Use Compact height</option>
+				<option value="contain">Compact Containers (+2px)</option>
 			</select></p></td>
 			<td><p>Show inactive tab boundaries: <br>
 			<select id="backtabs" name="backtabs" size="4">
@@ -378,7 +410,7 @@ menupopup:not(.in-menulist) > menu {
 </article>
 
 <footer>
-<p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or 
+<p>Copyright &copy; 2022 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or 
 <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. FileSaver.js v1.3.3 &copy; 2016 Eli Grey (<a href="https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md" 
 target="_blank">MIT License</a>). <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
@@ -416,6 +448,8 @@ function updateDemo(evt){
 		case 'tabheight':
 			if (tgt.value == 'compact') demobar.classList.add('compact');
 			else demobar.classList.remove('compact');
+			if (tgt.value == 'contain') demobar.classList.add('compactcontain');
+			else demobar.classList.remove('compactcontain');
 			break;
 		case 'backtabs':
 			for (var i=0; i<tgt.options.length; i++){
@@ -480,13 +514,24 @@ function buildCSS(evt){
 				if (ctrls[i].value == 'connected') { // attached
 					connected = true;
 					cssTemp += `
-    border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important;
-    margin-block: 1px 0 !important;
+    border-radius: var(--user-tab-rounding) var(--user-tab-rounding) 0px 0px !important; /* Connected */
+    margin-block: 1px 0 !important; /* Connected */
 }
 #scrollbutton-up, #scrollbutton-down { /* 6/10/2021 */
     border-top-width: 1px !important;
     border-bottom-width: 0 !important;
 }
+
+/* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations */
+.tab-background:is([selected], [multiselected]):-moz-lwtheme {
+    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
+    border-bottom-color: transparent !important;
+}
+[brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
+    --lwt-tabs-border-color: rgba(255, 255, 255, 0.5) !important;
+    border-bottom-color: transparent !important;
+}
+
 /* Container color bar visibility */
 .tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
     margin: 0px max(calc(var(--user-tab-rounding) - 3px), 0px) !important;
@@ -494,6 +539,14 @@ function buildCSS(evt){
 				} else { // floating
 					cssTemp += `
     border-radius: var(--user-tab-rounding) !important;
+}
+
+/* 1/16/2022 Tone down the Fx96 tab border with add-on themes in certain fallback situations */
+.tab-background:is([selected], [multiselected]):-moz-lwtheme {
+    --lwt-tabs-border-color: rgba(0, 0, 0, 0.5) !important;
+}
+[brighttext="true"] .tab-background:is([selected], [multiselected]):-moz-lwtheme {
+    --lwt-tabs-border-color: rgba(255, 255, 255, 0.5) !important;
 }`;
 				}
 				cssTemp += `
@@ -533,20 +586,74 @@ function buildCSS(evt){
 }
 `;
 				}
+				if (ctrls[i].value == 'contain'){ // override native min-height for tabs
+					cssTemp += `
+/* Override Normal Density height to Compact Density height (plus room for context-line) only for tabs 1/16/2022 */
+
+#TabsToolbar, #tabbrowser-tabs {
+    --tab-min-height: 31px !important;
+}
+    /* Tweak for covering a line at the bottom of the active tab on some themes 8/11/2021 */
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar, 
+#main-window[sizemode="normal"] #toolbar-menubar[autohide="true"] + #TabsToolbar #tabbrowser-tabs {
+    --tab-min-height: 32px !important;
+}
+#scrollbutton-up,
+#scrollbutton-down {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
+}
+`;
+					if (connected) cssTemp += `
+    /* [Connected Tabs] Set a max height based on min-height plus margin-block: 1px 0 */
+#TabsToolbar, #TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
+    max-height: calc(var(--tab-min-height) + 1px) !important;
+}
+    /* [Connected Tabs] Adjust padding around icons on buttons to avoid crushed images */
+#TabsToolbar-customization-target toolbarbutton > .toolbarbutton-icon, 
+#TabsToolbar-customization-target .toolbarbutton-text, 
+#TabsToolbar-customization-target .toolbarbutton-badge-stack,
+#scrollbutton-up,#scrollbutton-down {
+    padding-top: 8px !important;
+    padding-bottom: 7px !important;
+}
+`;
+				}
 				break;
 			case 'contextline':
 				if (ctrls[i].value != 'none'){ // move context line to bottom
 					cssTemp += `
-/* Move container color bar to bottom of tab */
+/* Move container color bar to bottom of tab - updated 1/16/2022 */
 
-.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
-    margin-top: calc(var(--tab-min-height) - 2px) !important;
+.tab-background {
+    --context-line-margin-adjust: 3px; /* 1/16/2022 */
+    --context-line-active-adjust: 1px; /* 1/16/2022 */
+}
+.tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected]) .tab-background {
+    border-top: 1px solid transparent; /* 1/16/2022 Default border for consistency */
 }
 `;
 				}
-				if (ctrls[i].value == 'bothlines'){ // add blue line to the top
+				if (ctrls[i].value == 'bottom'){ // set position
+					cssTemp += `
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+    margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust)) !important;
+}
+.tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected])  > .tab-stack > .tab-background > .tab-context-line {
+    margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust) - var(--context-line-active-adjust)) !important;
+}
+`;
+				}
+				if (ctrls[i].value == 'bothlines'){ // set position and add blue line to the top
 					blueline = true;
 					cssTemp += `
+.tabbrowser-tab[usercontextid] > .tab-stack > .tab-background > .tab-context-line {
+    margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust) - 2px) !important;
+}
+.tabbrowser-tab[usercontextid]:is([selected=true], [visuallyselected="true"], [multiselected])  > .tab-stack > .tab-background > .tab-context-line {
+    margin-top: calc(var(--tab-min-height) - var(--context-line-margin-adjust) - var(--context-line-active-adjust) - 2px) !important;
+}
+
 /* Emulate blue tab line from Photon 57-88 UI */
 
 /* Set size and position of the bar relative to background */
@@ -644,6 +751,10 @@ function buildCSS(evt){
 					cssTemp += `
 /* Inactive tabs: Outline style */
 
+.tab-background {
+    --context-line-margin-adjust: 4px; /* 1/16/2022 */
+    --context-line-active-adjust: 0px; /* 1/16/2022 */
+}
 .tabbrowser-tab:not([selected=true]):not([multiselected=true]) .tab-background {
     border: 1px solid rgba(0, 0, 0, .20) !important;
     /* To pick up a theme background tab separator color, un-comment the following line: */
@@ -756,7 +867,7 @@ function buildCSS(evt){
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 9/21/2021; Generated ${d.toString()} */`;
+/* Tweak Options as of 1/12/2022; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){

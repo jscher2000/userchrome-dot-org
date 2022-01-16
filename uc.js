@@ -74,7 +74,7 @@ function togComments(el){
 		maindiv.style.width = "65%";
 		var s = document.createElement('script');
 		s.setAttribute('src', 'easy-comment/jquery-3.2.1.min.js');
-		s.addEventListener('load', function(){var s = document.createElement('script'); s.setAttribute('src', 'easy-comment/jquery.easy-comment.js'); s.addEventListener('load', function(){$('#ecomm').EasyComment();}); document.body.appendChild(s);});
+		s.addEventListener('load', function(){var s = document.createElement('script'); s.setAttribute('src', 'easy-comment/jquery.easy-comment.js?20210930'); s.addEventListener('load', function(){$('#ecomm').EasyComment();}); document.body.appendChild(s);});
 		document.body.appendChild(s);
 		el.classList.add('commopen');
 	} else {
