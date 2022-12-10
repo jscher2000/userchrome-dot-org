@@ -25,7 +25,7 @@
 </nav>
 <header>
 <h1>How to Create a userChrome.css File</h1>
-<p>Updated May 30, 2021; Originally posted by jscher2000 on November 5, 2017.</p>
+<p>Updated October 30, 2022; Originally posted by jscher2000 on November 5, 2017.</p>
 </header>
 
 <article>
@@ -60,6 +60,7 @@
 <li>Type or paste <code>about:support</code> in the address bar and press Enter/Return to load it.</li>
 </ul>
 <p>In the first table on the page, find the <strong>Profile Folder</strong> row and click the button to the right, which will say "Open Folder", "Show in Finder" or "Open Directory" on Windows, Mac or Linux, respectively. This should launch a new window with your system's file browser (e.g., Windows Explorer). You should see numerous files and folders. On Mac, if Finder shows you a semi-randomly-named folder, double-click that folder to view its contents.</p>
+<p><strong>Exception:</strong> If you installed Firefox from the Microsoft Windows Store, the profile folder is in an obscure location and the button mentioned above doesn't find it yet. As a starting point, you can type or paste <strong>%LOCALAPPDATA%\Packages</strong> into the Windows search box (or the File Explorer address bar) and press Enter to launch into the Packages folder. Look for an entry starting with Mozilla.Firefox and click into that folder, then LocalCache, then Roaming, then Mozilla, then Firefox, then Profiles. If you have multiple profiles, you'll need to compare the name on the Troubleshooting Information page to select the relevant one.</p>
 
 <h3>(2) Create a new folder named chrome</h3>
 <p>Normally, your profile does not contain a chrome folder unless you've been running Firefox for a very, very long time. To create a chrome folder, you can use the standard method provided by your file browser. For example, on Windows:</p>
@@ -109,7 +110,7 @@
 </article>
 
 <footer>
-<p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+<p>Copyright &copy; 2022 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
 </footer>
 <script type="text/javascript" src="uc.js"></script>
 </body>

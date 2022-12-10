@@ -190,7 +190,7 @@
 </nav>
 <header>
 <h1>Firefox 89+ &ndash; Styling the New Proton UI</h1>
-<p>Updated January 16, 2022; Originally posted by jscher2000 on May 30, 2021.</p>
+<p>Updated December 10, 2022; Originally posted by jscher2000 on May 30, 2021.</p>
 </header>
 
 <article>
@@ -571,7 +571,8 @@ function buildCSS(evt){
     border-bottom-width: 0 !important;
 }
 `;
-					if (connected) cssTemp += `
+					if (connected){
+						cssTemp += `
     /* [Connected Tabs] Set a max height based on min-height plus margin-block: 1px 0 */
 #TabsToolbar, #TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
     max-height: calc(var(--tab-min-height) + 1px) !important;
@@ -584,9 +585,24 @@ function buildCSS(evt){
     padding-top: 7px !important;
     padding-bottom: 6px !important;
 }
+    /* [Connected Tabs] Make sure tab attention dot isn't too high - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+  background-position-y: bottom 2px !important;
+}
 `;
-				}
-				if (ctrls[i].value == 'contain'){ // override native min-height for tabs
+					} else {
+						cssTemp += `
+    /* Make sure tab attention dot isn't too high - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+  background-position-y: bottom 5px !important;
+}
+`;
+					}
+				} else if (ctrls[i].value == 'contain'){ // override native min-height for tabs
 					cssTemp += `
 /* Override Normal Density height to Compact Density height (plus room for context-line) only for tabs 1/16/2022 */
 
@@ -604,7 +620,8 @@ function buildCSS(evt){
     border-bottom-width: 0 !important;
 }
 `;
-					if (connected) cssTemp += `
+					if (connected){
+						cssTemp += `
     /* [Connected Tabs] Set a max height based on min-height plus margin-block: 1px 0 */
 #TabsToolbar, #TabsToolbar > hbox, #TabsToolbar-customization-target, #tabbrowser-arrowscrollbox  {
     max-height: calc(var(--tab-min-height) + 1px) !important;
@@ -616,6 +633,31 @@ function buildCSS(evt){
 #scrollbutton-up,#scrollbutton-down {
     padding-top: 8px !important;
     padding-bottom: 7px !important;
+}
+    /* [Connected Tabs] Make sure tab attention dot isn't too low - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+  background-position-y: bottom 5px !important;
+}
+`;
+					} else {
+						cssTemp += `
+    /* Make sure tab attention dot isn't too low - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+  background-position-y: bottom 8px !important;
+}
+`;
+					}
+				} else if (connected){
+					cssTemp += `
+    /* Make sure tab attention dot isn't too high - 10 Dec 2022 */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]),
+.tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]),
+#firefox-view-button[attention], .webextension-browser-action[attention="true"] {
+  background-position-y: bottom 5px !important;
 }
 `;
 				}
@@ -867,7 +909,7 @@ function buildCSS(evt){
 	}
 	var d = new Date();
 	document.getElementById('currentCSS').textContent = cssTemp + `
-/* Tweak Options as of 1/12/2022; Generated ${d.toString()} */`;
+/* Tweak Options as of 12/10/2022; Generated ${d.toString()} */`;
 }
 
 function selectel(elid){

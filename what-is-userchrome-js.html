@@ -25,7 +25,7 @@
 </nav>
 <header>
   <h1>What is Autoconfig Startup Scripting (AKA userChrome.js)?</h1>
-  <p>Updated May 30, 2020; Originally posted by jscher2000 on November 25, 2017.</p>
+  <p>Updated April 19, 2022; Originally posted by jscher2000 on November 25, 2017.</p>
 </header>
 
 <article>
@@ -35,7 +35,7 @@
   <h3>How it Works</h3>
   <p>At startup, Firefox checks for JavaScript files in the program folder under /defaults/pref. An Autoconfig file &mdash; which may be named config-prefs.js, local-settings.js, or whatever.js &mdash; directs Firefox to load a JavaScript file (placed at the top level of the program folder) that contains the actual script code. That second file can contain script code, and also can load and run other scripts, which load and run other scripts, and so on. This Autoconfig mechanism is most often used by companies to preconfigure or lock down Firefox, but it has wide ranging applications. Mozilla Support has some documentation here: <a href="https://support.mozilla.org/kb/customizing-firefox-using-autoconfig" rel="noopener" target="_blank">Customizing Firefox Using AutoConfig</a>.</p>
   
-  <p><strong><em>Note:</em></strong> Like userChrome.css, your Autoconfig files are read only at startup. To make sure that edits to scripts are reflected after startup, it may be best to restart Firefox using the button on the right side of the <a href="https://support.mozilla.org/kb/use-troubleshooting-information-page-fix-firefox" rel="noopener" target="_blank">Troubleshooting Information page</a> under "Try clearing the startup cache."</p>
+  <p><strong><em>Note:</em></strong> Like userChrome.css, Firefox only reads your Autoconfig files at startup. To make sure that edits to scripts are reflected after startup, it may be best to restart Firefox using the button on the right side of the <a href="https://support.mozilla.org/kb/use-troubleshooting-information-page-fix-firefox" rel="noopener" target="_blank">Troubleshooting Information page</a> under "Try clearing the startup cache."</p>
   
   <h3>userChrome.js</h3>
   <p>Autoconfig allows users to run powerful code that extensions are no longer allowed to run in Firefox 57+. The scripts the community is sharing have inherited code and terminology from the userChrome.js legacy extension. Just like userChrome.js would load and run individual scripts, the Autoconfig-based loaders can run a variety of individual scripts directed toward specific changes you would like to make to Firefox. After installing a main "loader" script, you can add a wide variety of task-specific script files (<em>somefunction.uc.js</em>) to your chrome folder where the loader will find and run them.</p>
@@ -82,6 +82,7 @@
     <li><a href="https://github.com/aminomancer/uc.css.js/" rel="noopener" target="_blank">https://github.com/aminomancer/uc.css.js/</a> &mdash; compatible with the MrOtherGuy/fx-autoconfig loader and many may be compatible with the alice0775/userChrome.js loader</li>
     <li><a href="https://github.com/xiaoxiaoflood/firefox-scripts" rel="noopener" target="_blank">https://github.com/xiaoxiaoflood/firefox-scripts</a> &mdash; compatible with the xiaoxiaoflood/firefox-scripts loader, others unknown</li>
     <li><a href="https://github.com/Endor8/userChrome.js" rel="noopener" target="_blank">https://github.com/Endor8/userChrome.js</a> &mdash; compatibility unknown</li>
+    <li><a href="https://github.com/Merci-chao/userChrome.js" rel="noopener" target="_blank">https://github.com/Merci-chao/userChrome.js</a> &mdash; compatibility unknown (<a href="https://www.reddit.com/r/firefox/comments/u6w19z/userchromejs_version_of_several_tiny_legacy/" rel="noopener" target="_blank">Reddit thread 2022-04-18</a>)</li>
   </ul>
   
   <p>As with custom style rules, an extra burden of modifying Firefox this way is that scripts are not updated automatically to keep up with changes in Firefox. It's a good practice to bookmark the specific page where you found a script in case it stops working correctly and you need to find the author's latest update.</p>
@@ -95,7 +96,7 @@
   // ==UserScript==
   // @name           Copy Link Location
   // @version        1.0
-  // @description	   Restore old label and accelerator key
+  // @description    Restore old label and accelerator key
   // ==/UserScript==
   
   /* 
@@ -202,7 +203,7 @@
   </article>
   
   <footer>
-  <p>Copyright &copy; 2021 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" rel="noopener">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
+  <p>Copyright &copy; 2022 Jefferson Scher. All Rights Reserved. CSS examples available under <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a> or <a href="https://opensource.org/licenses/BSD-3-Clause" rel="noopener">BSD-3-Clause License</a>. <a href="privacy.html">Privacy statement</a>.</p>
   </footer>
   <script type="text/javascript" src="uc.js"></script>
   </body>
