@@ -1,0 +1,170 @@
+/*  Updated: Sept 17, 2025 (for Firefox 143; folder icons still missing in the Library on the right side)
+    Classic bookmark folder, smart folder, and live mark icons for Quantum
+    Incorporate this file into userChrome.css by adding this on the top line:
+
+    @import url(userChrome_Fx56_bookmark_icons.css);
+*/
+
+/* Standard folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"] > .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"] .menu-iconic-left,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu) menu[container="true"]:not([tagContainer="true"]) > :-moz-any(.menu-iconic-left > .menu-iconic-icon, .menu-iconic-left, .menu-icon),
+/* Standard folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList) treechildren::-moz-tree-image(container), 
+#editBMPanel_folderMenuList > .menulist-label-box > .menulist-icon,
+#editBMPanel_folderMenuList menupopup menuitem img.menu-icon {
+  list-style-image: url(Fx56-yellow-folder.png) !important;
+  /* For Fx143 */
+  content: url(Fx56-yellow-folder.png) !important;
+}
+/* Backwards compatibility */
+#editBMPanel_folderMenuList menupopup menuitem {
+  list-style-image: url(Fx56-yellow-folder.png) !important;
+}
+
+/* THIS WAS REMOVED BECAUSE IT CAUSES YELLOW FOLDER ICONS FOR BLANK 
+   COLUMNS. AS A RESULT, FOLDERS ON THE RIGHT SIDE REMAIN GRAY.
+  #placeContent treechildren::-moz-tree-image(container) {
+    list-style-image: url(Fx56-yellow-folder.png) !important;
+  }
+*/
+
+/* Live Bookmark -- on Toolbar and Menus */ /* REMOVED */
+
+/* Smart bookmark folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"][query="true"] > .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"][query="true"] .menu-iconic-left,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"][query="true"]:not([tagContainer="true"]) > :-moz-any(.menu-iconic-left > .menu-iconic-icon, .menu-icon),
+/* Smart bookmark folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, query) {
+  list-style-image: url(Fx56-query.png) !important;
+  /* For Fx143 */
+  content: url(Fx56-query.png) !important;
+}
+
+/* Tag containers (preserve the built-in icon) */
+#PlacesToolbarItems toolbarbutton[container="true"][tagContainer="true"] > .toolbarbutton-icon,
+#PlacesToolbarItems menu[container="true"][tagContainer="true"] .menu-iconic-left,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"][tagContainer="true"] > .menu-iconic-left > .menu-iconic-icon,
+/* Smart bookmark folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, query, tagContainer) {
+  list-style-image: url(chrome://browser/skin/places/tag.svg) !important;
+}
+
+/*** Top-level "container" icons (otherwise would be Standard folder color) ***/
+/* Bookmarks Menu -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksMenu),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_menu________),
+#editBMPanel_bmRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList menupopup menuitem#editBMPanel_bmRootItem img.menu-icon, 
+#editBMPanel_folderMenuList[selectedIndex="1"] > .menulist-label-box > .menulist-icon {
+  list-style-image: url(Fx56-bookmarksMenu.png) !important;
+  /* For Fx143 */
+  content: url(Fx56-bookmarksMenu.png) !important;
+}
+
+/* Bookmarks Toolbar -- on Menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #bookmarksToolbarFolderMenu  > .menu-iconic-left > .menu-iconic-icon,
+  /* For Fx143 */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar > img.menu-icon,
+#bookmarksMenuPopup #bookmarksToolbarFolderMenu  > img.menu-icon,
+/* Bookmarks Toolbar -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksToolbar),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_toolbar_____),
+#editBMPanel_toolbarFolderItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList menupopup menuitem#editBMPanel_toolbarFolderItem img.menu-icon, 
+#editBMPanel_folderMenuList[selectedIndex="0"] > .menulist-label-box > .menulist-icon {
+  list-style-image: url(Fx56-bookmarksToolbar.png) !important;
+  /* For Fx143 */
+  content: url(Fx56-bookmarksToolbar.png) !important;
+}
+
+/* Other Bookmarks -- on Menus */
+#BMB_bookmarksPopup #BMB_unsortedBookmarks > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #menu_unsortedBookmarks  > .menu-iconic-left > .menu-iconic-icon,
+  /* For Fx143 */
+#BMB_bookmarksPopup #BMB_unsortedBookmarks > img.menu-icon,
+#bookmarksMenuPopup #menu_unsortedBookmarks  > img.menu-icon,
+/* Other Bookmarks -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_UnfiledBookmarks),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_unfiled_____),
+#editBMPanel_unfiledRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList menupopup menuitem#editBMPanel_unfiledRootItem img.menu-icon, 
+#editBMPanel_folderMenuList[selectedIndex="2"] > .menulist-label-box > .menulist-icon  {
+  list-style-image: url(Fx56-unsortedBookmarks.png) !important;
+  /* For Fx143 */
+  content: url(Fx56-unsortedBookmarks.png) !important;
+}  
+
+/* Preserve Built-in History/Tags/All Bookmarks Icons in Library */
+:-moz-any(
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(query, OrganizerQuery_history____v), 
+:-moz-any(
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(title, query, dayContainer) {
+  list-style-image: url("chrome://browser/skin/places/history.svg") !important;
+}
+:-moz-any(
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(title, query, tagContainer),
+:-moz-any(
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(query, OrganizerQuery_tags_______v) {
+  list-style-image: url("chrome://browser/skin/places/tag.svg") !important;
+}
+:-moz-any(
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(query, OrganizerQuery_allbms_____v) {
+  list-style-image: url(Fx56-allBookmarks.png) !important;
+}
