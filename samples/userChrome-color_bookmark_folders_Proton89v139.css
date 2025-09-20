@@ -1,0 +1,120 @@
+/* 
+  Colored folders for Bookmarks Menus, Bookmarks Sidebar, Bookmarks Toolbar, Library window, Add/Edit Bookmarks dialog
+  Substitutes a Firefox 57-style folder icon for the new wireframe folder icon
+*/
+
+/* Standard folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"]:not([query="true"]) .toolbarbutton-icon,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"]:not([query="true"]) > :-moz-any(.menu-iconic-left > .menu-iconic-icon, .menu-icon),
+/* Standard folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container), 
+#editBMPanel_folderMenuList > .menulist-label-box > .menulist-icon,
+#editBMPanel_folderMenuList menupopup menuitem, 
+#editBMPanel_folderMenuList {
+  fill: #e8bb00 !important; /* slightly muted gold */
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with gold color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0iI2U4YmIwMCIgZmlsbC1vcGFjaXR5PSJjb250ZXh0LWZpbGwtb3BhY2l0eSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBkPSJNMTQuNSAzSDYuOTE0YS41LjUgMCAwIDEtLjM1NC0uMTQ2TDUuMTQ2IDEuNDM5QTEuNDkxIDEuNDkxIDAgMCAwIDQuMDg2IDFIMS41QTEuNSAxLjUgMCAwIDAgMCAyLjV2MTFBMS41IDEuNSAwIDAgMCAxLjUgMTVoMTNhMS41IDEuNSAwIDAgMCAxLjUtMS41di05QTEuNSAxLjUgMCAwIDAgMTQuNSAzem0uNSAxMC41YS41LjUgMCAwIDEtLjUuNWgtMTNhLjUuNSAwIDAgMS0uNS0uNVY2aDE0ek0xIDVWMi41YS41LjUgMCAwIDEgLjUtLjVoMi41ODZhLjUuNSAwIDAgMSAuMzU0LjE0NmwxLjQxNCAxLjQxNUExLjQ5MSAxLjQ5MSAwIDAgMCA2LjkxNCA0SDE0LjVhLjUuNSAwIDAgMSAuNS41VjV6Ii8+CiAgPHBhdGggZD0iTTE1IDEzLjVhLjUuNSAwIDAgMS0uNS41aC0xM2EuNS41IDAgMCAxLS41LS41VjZoMTR6IiBmaWxsLW9wYWNpdHk9Ii4yIi8+CiAgPHBhdGggZD0iTTEgNVYyLjVhLjUuNSAwIDAgMSAuNS0uNWgyLjU4NmEuNS41IDAgMCAxIC4zNTQuMTQ2bDEuNDE0IDEuNDE1QTEuNDkxIDEuNDkxIDAgMCAwIDYuOTE0IDRIMTQuNWEuNS41IDAgMCAxIC41LjVWNXoiIGZpbGwtb3BhY2l0eT0iLjEiLz4KICA8cGF0aCBkPSJNMTUgMTMuNWEuNS41IDAgMCAxLS41LjVoLTEzYS41LjUgMCAwIDEtLjUtLjVWMTNoMTR6IiBmaWxsLW9wYWNpdHk9Ii4wNSIvPgo8L3N2Zz4=") !important;
+}
+
+/* Smart bookmark folder -- on Toolbar and Menus */
+#PlacesToolbarItems toolbarbutton[container="true"][query="true"] .toolbarbutton-icon,
+:-moz-any(
+#PlacesToolbarItems,
+#PlacesChevronPopup,
+#BMB_bookmarksPopup,
+#bookmarksMenu,
+#OtherBookmarksPopup) menu[container="true"][query="true"] > :-moz-any(.menu-iconic-left > .menu-iconic-icon, .menu-icon),
+/* Smart bookmark folder -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, query) {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/folder-smart.svg") !important;
+  fill: #69c !important; /* similar to blue smart folder color */
+}
+
+/*** Top-level "container" icons (otherwise would be Standard folder color) ***/
+/* Bookmarks Menu -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksMenu),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_menu________),
+#editBMPanel_bmRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="1"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="menu________"] {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/bookmarksMenu.svg") !important;
+  fill: olive !important;
+}
+
+/* Bookmarks Toolbar -- on Menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #bookmarksToolbarFolderMenu  > .menu-iconic-left > .menu-iconic-icon,
+/* Bookmarks Toolbar -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_BookmarksToolbar),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_toolbar_____),
+#editBMPanel_toolbarFolderItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="0"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="toolbar_____"] {
+  /* Specify icon for Firefox 89 Proton to override basic folder */
+  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.svg") !important;
+  fill: olive !important;
+}
+
+/* Other Bookmarks -- on Menus */
+#BMB_bookmarksPopup #BMB_unsortedBookmarks > .menu-iconic-left > .menu-iconic-icon,
+#bookmarksMenuPopup #menu_unsortedBookmarks  > .menu-iconic-left > .menu-iconic-icon,
+/* Other Bookmarks -- in Sidebar, Library, Add/Edit Bookmark dialog */
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, OrganizerQuery_UnfiledBookmarks),
+:-moz-any(
+#bookmarks-view, 
+#editBMPanel_folderTree, 
+#placesList, 
+#placeContent) treechildren::-moz-tree-image(container, queryFolder_unfiled_____),
+#editBMPanel_unfiledRootItem > .menu-iconic-left, 
+#editBMPanel_folderMenuList[selectedIndex="2"] > .menulist-label-box > .menulist-icon, 
+#editBMPanel_folderMenuList[selectedGuid="unfiled_____"],
+#OtherBookmarksPopup + .toolbarbutton-icon {
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with olive color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ib2xpdmUiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1vcGFjaXR5PSIuMDUiIGQ9Ik0xMi43LDFIMy4zbC0uMi42TC4xLDksMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5bC0zLTcuNEwxMi43LDFaIi8+CiAgPHBhdGggZD0iTTEyLDJsMyw3LjRWMTNhLjk0NS45NDUsMCwwLDEtMSwxSDJhLjk0NS45NDUsMCwwLDEtMS0xVjkuNEw0LDJoOG0uNy0xSDMuM0wuMSw5LjEsMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5LDEyLjcsMVoiLz4KICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii4wNSIgZD0iTTE0Ljk4OCw5LDEyLDJINEwuODUxLDlINS4wMjNBMi45MzEsMi45MzEsMCwwLDAsOCwxMS42LDIuODg5LDIuODg5LDAsMCwwLDExLjAxMiw5WiIvPgogIDxwYXRoIGQ9Ik0xMCw5QTIsMiwwLDAsMSw2LDlIMHYxSDUuMTg0YTIuOTgzLDIuOTgzLDAsMCwwLDUuNjMzLDBIMTZWOVoiLz4KPC9zdmc+") !important;
+}
+
+/* (Older Firefox) Avoid overriding classic Bookmarks Toolbar and Other Bookmarks icons in menus */
+#BMB_bookmarksPopup #BMB_bookmarksToolbar.menu-iconic-icon, 
+#bookmarksMenu #bookmarksToolbarFolderMenu.menu-iconic-icon {
+  list-style-image: url("chrome://browser/skin/places/bookmarksToolbar.png") !important;
+}
+#BMB_bookmarksPopup #BMB_unsortedBookmarks.menu-iconic-icon, 
+#bookmarksMenu #menu_unsortedBookmarks.menu-iconic-icon {
+  /* Specify icon for Firefox 89 Proton (base 64 conversion from old SVG with olive color) */
+  list-style-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ib2xpdmUiIGZpbGwtb3BhY2l0eT0iY29udGV4dC1maWxsLW9wYWNpdHkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHBhdGggZmlsbC1vcGFjaXR5PSIuMDUiIGQ9Ik0xMi43LDFIMy4zbC0uMi42TC4xLDksMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5bC0zLTcuNEwxMi43LDFaIi8+CiAgPHBhdGggZD0iTTEyLDJsMyw3LjRWMTNhLjk0NS45NDUsMCwwLDEtMSwxSDJhLjk0NS45NDUsMCwwLDEtMS0xVjkuNEw0LDJoOG0uNy0xSDMuM0wuMSw5LjEsMCw5LjJWMTNhMi4wMDYsMi4wMDYsMCwwLDAsMiwySDE0YTIuMDA2LDIuMDA2LDAsMCwwLDItMlY5LjJMMTUuOSw5LDEyLjcsMVoiLz4KICA8cGF0aCBmaWxsLW9wYWNpdHk9Ii4wNSIgZD0iTTE0Ljk4OCw5LDEyLDJINEwuODUxLDlINS4wMjNBMi45MzEsMi45MzEsMCwwLDAsOCwxMS42LDIuODg5LDIuODg5LDAsMCwwLDExLjAxMiw5WiIvPgogIDxwYXRoIGQ9Ik0xMCw5QTIsMiwwLDAsMSw2LDlIMHYxSDUuMTg0YTIuOTgzLDIuOTgzLDAsMCwwLDUuNjMzLDBIMTZWOVoiLz4KPC9zdmc+") !important;
+}
